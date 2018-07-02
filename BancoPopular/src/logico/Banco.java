@@ -8,7 +8,7 @@ public class Banco {
 	private ArrayList<Cuenta> misCuentas;
 	private String hola; 
 
-	public Banco() {
+	public Banco() {//jjaja
 		super();
 		misClientes = new ArrayList<>();
 		misCuentas = new ArrayList<>();
