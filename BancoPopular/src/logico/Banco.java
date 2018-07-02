@@ -6,6 +6,7 @@ public class Banco {
 	
 	private ArrayList<Cliente> misClientes;
 	private ArrayList<Cuenta> misCuentas;
+	private String hola; 
 
 	public Banco() {
 		super();
