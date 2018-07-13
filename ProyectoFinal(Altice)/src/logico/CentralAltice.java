@@ -76,4 +76,11 @@ public class CentralAltice {
 		
 		return buscado;
 	}
+	
+	public void mostrarPlanes()
+	{
+		for (Plan aux : planesDisponibles) {
+			System.out.println(aux.getClass.getSimpleName);
+		}
+	}
 }
