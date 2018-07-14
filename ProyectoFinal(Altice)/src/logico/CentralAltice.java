@@ -64,7 +64,7 @@ public class CentralAltice {
 		PersonalAuto buscado = null;
 		int i = 0;
 		
-		while(!encontrado && i<miPersonal.size)
+		while( i<miPersonal.size && !encontrado)
 		{
 			if(miPersonal.get(i).getCedula.equalsIgnoreCase(cedula))
 			{
@@ -83,4 +83,52 @@ public class CentralAltice {
 			System.out.println(aux.getClass.getSimpleName);
 		}
 	}
+	
+	public Plan buscarPlan(String nombre)
+	{
+		int i = 0;
+		boolean encontrado = false;
+		Plan aux = null;
+		
+		while(i<misPlanesDisponibles.size() && !encontrado)
+		{
+			if(misPlanesDisponibles.get(i).getCodigo().equalsIgnoreCase(nombre))
+			{
+				encontrado = true;
+				aux = misPlanesDisponibles.get(i);
+			}
+			i++;
+		}
+		return aux;
+	}
+	
+	
+	public Factura buscarFactura(String codfactura)
+	{
+		int i = 0;
+		boolean encontrado = false;
+		Factura aux = null;
+		
+		while(i<misFacturas.size() && !encontrado)
+		{
+			if(misFacturas.get(i).getNombre().equalsIgnoreCase(codfactura))
+			{
+				encontrado = true;
+				aux = misFacturas.get(i);
+			}
+			i++;
+		}
+		return aux;
+	}
+	
+	
+	public void IngresarDinero(String codfactura, float monto)
+	{
+		
+		Factura aux = buscarFactura,add(codfactura);
+		
+		aux.IngresarMonto(monto);
+		
+	}
+	
 }

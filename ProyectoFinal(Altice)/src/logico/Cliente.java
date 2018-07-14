@@ -3,7 +3,7 @@ package logico;
 public class Cliente extends Persona {
 	
 	;
-	private Plan[] planesDisponibles;
+	private Plan planesDisponibles;
 	private ArrayList<Factura>misFacturas;
 	private String estado;
 	
@@ -17,7 +17,7 @@ public class Cliente extends Persona {
 	 * @param misFacturas
 	 * @param estado
 	 */
-	public Cliente(String cedula, String nombre, String direccion, String telefono, Plan[] planesDisponibles,
+	public Cliente(String cedula, String nombre, String direccion, String telefono, Plan planesDisponibles,
 			ArrayList<Factura> misFacturas, String estado) {
 		super(cedula, nombre, direccion, telefono);
 		
@@ -29,7 +29,7 @@ public class Cliente extends Persona {
 	
 	
 	
-	public Plan[] getMisPlames() {
+	public Plan getMisPlames() {
 		return planesDisponibles;
 	}
 
@@ -46,58 +46,13 @@ public class Cliente extends Persona {
 		planesDisponibles.add(aux);
 	}
 	
-	public Plan buscarPlan(String nombre)
-	{
-		int i = 0;
-		boolean encontrado = false;
-		Plan aux = null;
-		
-		while(i<misPlanesDisponibles.size() && !encontrado)
-		{
-			if(misPlanesDisponibles.get(i).getCodigo().equalsIgnoreCase(nombre))
-			{
-				encontrado = true;
-				aux = misPlanesDisponibles.get(i);
-			}
-			i++;
-		}
-		return aux;
-	}
 	
 	
-	public Factura buscarFactura(String codfactura)
-	{
-		int i = 0;
-		boolean encontrado = false;
-		Cuenta aux = null;
-		
-		while(i<misFacturas.size() && !encontrado)
-		{
-			if(misFacturas.get(i).getNombre().equalsIgnoreCase(codfactura))
-			{
-				encontrado = true;
-				aux = misFacturas.get(i);
-			}
-			i++;
-		}
-		return aux;
-	}
-	
-	
-	public void IngresarDinero(String codfactura, float monto)
-	{
-		
-		Factura aux = buscarFactura,add(codfactura);
-		
-		aux.IngresarMonto(monto);
-		
-	}
-	
-	
-	public static float mora(String[]arg){
+	public static float mora(){
 		Factura ffactura=null;
 		float retor=0;
 		int x;
+		float monto=0;
 		
 		int num[]=new int[2];
 		while(retor!=0){
@@ -110,15 +65,15 @@ public class Cliente extends Persona {
 					 boolean estado=false;
 					 
 					 if(x==1){
-						 monto1=(montototal*5)/100;
+						 monto=(montoTotal()*5)/100;
 					 }
 					 
 					 if(x==2){
-						 monto2=((montototal*2)*5)/100;
+						 monto=((montoTotal*2)*5)/100;
 					 }
 					 
 					 if(x==3){
-						 monto3=((montototal*3)*5)/100;
+						 monto=((montoTotal*3)*5)/100;
 						 
 						 int elemento,i,j;
 						 boolean resultado = false;
@@ -131,14 +86,30 @@ public class Cliente extends Persona {
 					                resultado = true;
 					            }
 					        }
-					        return 0;
+					        
 					    }
 					 }
 				}
 			}
+		 return mora();
 		}
+	 
+	public  float DeudaTotal(){
+		float DineroaDeber=0;
+		 Factura u;
+		u.getMontoTotal();
+		
+		DineroaDeber=(u.getMontoTotal()*mora());
+		
+		return DeudaTotal();
+	}
 	
 	
+
+
+
+
+		
 	
 	}
 	
