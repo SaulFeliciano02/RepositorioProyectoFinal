@@ -12,6 +12,10 @@ public class CentralAltice {
 	
 	public CentralAltice() {
 		super();
+		
+		this.misClientes = new ArrayList<>();
+		this.miPersonal = new ArrayList<>();
+		this.planesDisponibles = new ArrayList<>();
 	}
 	
 	public void agregarCliente(Cliente aux)
@@ -109,6 +113,22 @@ public class CentralAltice {
 		
 		aux.saldarmontopendiente(monto);
 		
+	}
+	
+	public void agregarFacturaDelMes()
+	{
+		Factura nuevaFac= null;
+		
+		for (Cliente aux : misClientes) {
+			
+			nuevaFac = new Factura(aux, aux.getPlanesDisponibles());
+			
+			nuevaFac.calcularMontoTotal();
+			
+			aux.getMisFacturas().add(nuevaFac);
+			
+			aux.CalcularDeudaTotal();
+		}
 	}
 	
 }

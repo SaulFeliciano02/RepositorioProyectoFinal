@@ -22,11 +22,12 @@ public class Cliente extends Persona {
 	 * @param estado
 	 * @param pagar
 	 */
-	public Cliente(String cedula, String nombre, String direccion, String telefono, 
-			float deudaTotal) {
+	public Cliente(String cedula, String nombre, String direccion, String telefono) {
 		super(cedula, nombre, direccion, telefono);
 		this.estado = true;
 		this.deudaTotal=0;
+		this.misFacturas = new ArrayList<>();
+		this.planesDisponibles = null;
 	}
 
 
@@ -34,6 +35,13 @@ public class Cliente extends Persona {
 
 	public Plan getPlanesDisponibles() {
 		return planesDisponibles;
+	}
+
+
+
+
+	public void setPlanesDisponibles(Plan planesDisponibles) {
+		this.planesDisponibles = planesDisponibles;
 	}
 
 
@@ -88,7 +96,7 @@ public class Cliente extends Persona {
 		
 		if(cantFacPendientes>=3)
 		{
-			planesDisponibles = null;
+			setPlanesDisponibles(null);
 			setEstado(false);
 		}
 		
@@ -98,13 +106,13 @@ public class Cliente extends Persona {
 	 
 	public  void CalcularDeudaTotal(){
 		
+		deudaTotal = 0;
 		
 		for(Factura aux: misFacturas)
 			 if(!aux.isEstado())
 			 {
 				deudaTotal += aux.getMontoTotal();
-			 }
-		     
+			 }    
 	}
 		
 		
