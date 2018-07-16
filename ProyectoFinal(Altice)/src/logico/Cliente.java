@@ -1,12 +1,16 @@
 package logico;
 
+import java.util.ArrayList;
+
+import planes.Plan;
+
 public class Cliente extends Persona {
 	
-	;
-	private Plan planesDisponibles;
-	private ArrayList<Factura>misFacturas;
-	private String estado;
 	
+	private Plan planesDisponibles;
+	private ArrayList<Factura> misFacturas;
+	private boolean estado;
+	private float deudaTotal;
 	
 	/**
 	 * @param cedula
@@ -16,92 +20,113 @@ public class Cliente extends Persona {
 	 * @param planesDisponibles
 	 * @param misFacturas
 	 * @param estado
+	 * @param pagar
 	 */
-	public Cliente(String cedula, String nombre, String direccion, String telefono, Plan planesDisponibles,
-			ArrayList<Factura> misFacturas, String estado) {
+	public Cliente(String cedula, String nombre, String direccion, String telefono, 
+			float deudaTotal) {
 		super(cedula, nombre, direccion, telefono);
-		
-		this.planesDisponibles = planesDisponibles;
-		this.misFacturas = misFacturas;
-		this.estado = estado;
+		this.estado = true;
+		this.deudaTotal=0;
 	}
 
-	
-	
-	
-	public Plan getMisPlames() {
+
+
+
+	public Plan getPlanesDisponibles() {
 		return planesDisponibles;
 	}
+
+
+
 
 	public ArrayList<Factura> getMisFacturas() {
 		return misFacturas;
 	}
 
-	public String getEstado() {
+
+
+
+	public boolean isEstado() {
 		return estado;
 	}
-	
+
+
+
+	public float getDeudaTotal() {
+		return deudaTotal;
+	}
+
+
+
+
 	public void agregarPlan(Plan aux)
 	{
-		planesDisponibles.add(aux);
+		planesDisponibles = aux;
 	}
 	
 	
 	
-	public static float mora(){
-		Factura ffactura=null;
-		float retor=0;
-		int x;
-		float monto=0;
+	
+	public float calcularMora(){
 		
-		int num[]=new int[2];
-		while(retor!=0){
-			if(misFacturas.size()==0){
-				return 0;
-			}
-			else{
-				if(retor==num[x]){
-					 ffacturas = misFacturas.get(x);
-					 boolean estado=false;
-					 
-					 if(x==1){
-						 monto=(montoTotal()*5)/100;
-					 }
-					 
-					 if(x==2){
-						 monto=((montoTotal*2)*5)/100;
-					 }
-					 
-					 if(x==3){
-						 monto=((montoTotal*3)*5)/100;
-						 
-						 int elemento,i,j;
-						 boolean resultado = false;
-					        for (int x = 0; x < Plan.length; i++) {
-					            if (Plan[i] == elemento) {
-					                for (int j = i; j < arreglo.length - 1; j++) {
-					                    Plan[j] = plan[j+1];
-					                }
-					                plan[plan.length - 1] = 0;
-					                resultado = true;
-					            }
-					        }
-					        
-					    }
-					 }
+		float mora = 0;
+		float montosAPagar = 0;
+		int cantFacPendientes = 0;
+		
+		if(misFacturas.size()!=0)
+		{
+			for (Factura factura : misFacturas) {
+				if(factura.isEstado()==false)
+				{
+					montosAPagar = getDeudaTotal();
+					cantFacPendientes++;
 				}
 			}
-		 return mora();
+			
+			mora = (montosAPagar*5)/100;
+		}
+		
+		if(cantFacPendientes>=3)
+		{
+			planesDisponibles = null;
+			setEstado(false);
+		}
+		
+		return mora;
+		
 		}
 	 
-	public  float DeudaTotal(){
-		float DineroaDeber=0;
-		 Factura u;
-		u.getMontoTotal();
+	public  void CalcularDeudaTotal(){
 		
-		DineroaDeber=(u.getMontoTotal()*mora());
 		
-		return DeudaTotal();
+		for(Factura aux: misFacturas)
+			 if(!aux.isEstado())
+			 {
+				deudaTotal += aux.calcularMontoTotal();
+			 }
+		     
+			}
+		
+		
+	
+	
+	public void saldarmontopendiente(float pagar)
+	{
+		
+		if(deudaTotal!=0 && pagar<=deudaTotal)
+		{
+			deudaTotal-=pagar;
+			
+			if(deudaTotal==0){
+				
+				setEstado(true);;
+			}
+		}
+	}
+	
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 	
 	

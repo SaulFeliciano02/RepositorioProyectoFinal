@@ -35,9 +35,7 @@ public class CentralAltice {
 		return miPersonal;
 	}
 
-	public ArrayList<Plan> getPlanesDisponibles() {
-		return planesDisponibles;
-	}
+	
 	
 	public Cliente buscarCliente(String cedula)
 	{
@@ -45,9 +43,9 @@ public class CentralAltice {
 		Cliente buscado = null;
 		int i = 0;
 		
-		while(!encontrado && i<misClientes.size)
+		while(!encontrado && i<misClientes.size())
 		{
-			if(misClientes.get(i).getCedula.equalsIgnoreCase(cedula))
+			if(misClientes.get(i).getCedula().equalsIgnoreCase(cedula))
 			{
 				encontrado = true;
 				buscado = misClientes.get(i);
@@ -64,9 +62,9 @@ public class CentralAltice {
 		PersonalAuto buscado = null;
 		int i = 0;
 		
-		while( i<miPersonal.size && !encontrado)
+		while( i<miPersonal.size() && !encontrado)
 		{
-			if(miPersonal.get(i).getCedula.equalsIgnoreCase(cedula))
+			if(miPersonal.get(i).getCedula().equalsIgnoreCase(cedula))
 			{
 				encontrado = true;
 				buscado = miPersonal.get(i);
@@ -92,7 +90,7 @@ public class CentralAltice {
 		
 		while(i<misPlanesDisponibles.size() && !encontrado)
 		{
-			if(misPlanesDisponibles.get(i).getCodigo().equalsIgnoreCase(nombre))
+			if(misPlanesDisponibles.get(i).getClass.getSimpleName.equalsIgnoreCase(nombre))
 			{
 				encontrado = true;
 				aux = misPlanesDisponibles.get(i);
@@ -102,32 +100,12 @@ public class CentralAltice {
 		return aux;
 	}
 	
-	
-	public Factura buscarFactura(String codfactura)
-	{
-		int i = 0;
-		boolean encontrado = false;
-		Factura aux = null;
-		
-		while(i<misFacturas.size() && !encontrado)
-		{
-			if(misFacturas.get(i).getNombre().equalsIgnoreCase(codfactura))
-			{
-				encontrado = true;
-				aux = misFacturas.get(i);
-			}
-			i++;
-		}
-		return aux;
-	}
-	
-	
-	public void IngresarDinero(String codfactura, float monto)
+	public void IngresarDinero(String cedula, float monto)
 	{
 		
-		Factura aux = buscarFactura,add(codfactura);
+		Cliente aux = buscarCliente(cedula);
 		
-		aux.IngresarMonto(monto);
+		aux.saldarmontopendiente(monto);
 		
 	}
 	

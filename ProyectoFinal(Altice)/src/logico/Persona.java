@@ -40,11 +40,5 @@ public class Persona {
 		this.direccion = direccion;
 		this.telefono = telefono;
 	}
-	float CalcularSalario() {
-		// TODO Auto-generated method stub
-		
-		
-		return 0;
-		
-	}
+	
 }
