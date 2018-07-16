@@ -2,6 +2,8 @@ package logico;
 
 import java.util.ArrayList;
 
+import planes.Plan;
+
 public class CentralAltice {
 	
 	private ArrayList<Cliente> misClientes;
@@ -78,7 +80,7 @@ public class CentralAltice {
 	public void mostrarPlanes()
 	{
 		for (Plan aux : planesDisponibles) {
-			System.out.println(aux.getClass.getSimpleName);
+			System.out.println(aux.getClass().getSimpleName());
 		}
 	}
 	
@@ -88,12 +90,12 @@ public class CentralAltice {
 		boolean encontrado = false;
 		Plan aux = null;
 		
-		while(i<misPlanesDisponibles.size() && !encontrado)
+		while(i<planesDisponibles.size() && !encontrado)
 		{
-			if(misPlanesDisponibles.get(i).getClass.getSimpleName.equalsIgnoreCase(nombre))
+			if(planesDisponibles.get(i).getClass().getSimpleName().equalsIgnoreCase(nombre))
 			{
 				encontrado = true;
-				aux = misPlanesDisponibles.get(i);
+				aux = planesDisponibles.get(i);
 			}
 			i++;
 		}

@@ -1,5 +1,7 @@
 package logico;
 
+import planes.Plan;
+
 public class Factura {
 	
 	private Cliente miCliente;
@@ -30,16 +32,16 @@ public class Factura {
 		return estado;
 	}
 	
-	public float calcularMontoTotal()
+	public void calcularMontoTotal()
 	{
-		montoTotal = planSeleccionado.getPrecio() + itbis() + miCliente.calcularMora();
+		montoTotal = planSeleccionado.getPrecioPlan() + itbis() + miCliente.calcularMora();
 	}
 
 	private float itbis() {
 		
 		float itbis = 0;
 		
-		itbis = (planSeleccionado.getPrecio() * 18) / 100;
+		itbis = (planSeleccionado.getPrecioPlan() * 18) / 100;
 		
 		return itbis;
 	}

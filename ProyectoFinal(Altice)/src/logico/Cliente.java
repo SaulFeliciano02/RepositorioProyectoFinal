@@ -102,10 +102,10 @@ public class Cliente extends Persona {
 		for(Factura aux: misFacturas)
 			 if(!aux.isEstado())
 			 {
-				deudaTotal += aux.calcularMontoTotal();
+				deudaTotal += aux.getMontoTotal();
 			 }
 		     
-			}
+	}
 		
 		
 	
