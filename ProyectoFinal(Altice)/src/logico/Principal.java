@@ -8,7 +8,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 		
-		CentralAltice central = new CentralAltice();
+		/*CentralAltice central = new CentralAltice();
 		
 		Cliente elMoreno = new Cliente("429-9540345", "Pablo" , "La Venecia #22", "809-999-9914");
 		
