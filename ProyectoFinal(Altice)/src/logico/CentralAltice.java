@@ -8,14 +8,26 @@ public class CentralAltice {
 	
 	private ArrayList<Cliente> misClientes;
 	private ArrayList<PersonalAuto> miPersonal;
+	private ArrayList<Plan> planesNoDisponibles;
 	private ArrayList<Plan> planesDisponibles;
+	private static CentralAltice central = null;
 	
-	public CentralAltice() {
+	private CentralAltice() {
 		super();
-		
 		this.misClientes = new ArrayList<>();
 		this.miPersonal = new ArrayList<>();
 		this.planesDisponibles = new ArrayList<>();
+		this.planesNoDisponibles = new ArrayList<>();
+	}
+	
+	public static CentralAltice getInstance()
+	{
+		if (central == null)
+		{
+			central = new CentralAltice();
+		}
+		
+		return central;
 	}
 	
 	public void agregarCliente(Cliente aux)
@@ -30,7 +42,7 @@ public class CentralAltice {
 	
 	public void agregarPlan(Plan aux)
 	{
-		planesDisponibles.add(aux);
+		planesNoDisponibles.add(aux);
 	}
 
 	public ArrayList<Cliente> getMisClientes() {
