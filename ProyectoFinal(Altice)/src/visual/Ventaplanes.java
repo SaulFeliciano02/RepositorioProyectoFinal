@@ -17,6 +17,9 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.JTextPane;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class Ventaplanes extends JDialog {
 
@@ -44,7 +47,7 @@ public class Ventaplanes extends JDialog {
 		setTitle("Venta de Planes Altice");
 		setResizable(false);
 		setModal(true);
-		setBounds(100, 100, 740, 505);
+		setBounds(100, 100, 740, 520);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -55,46 +58,47 @@ public class Ventaplanes extends JDialog {
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblCedula = new JLabel("Cedula:");
-		lblCedula.setFont(new Font("Arial", Font.BOLD, 11));
-		lblCedula.setBounds(10, 27, 46, 14);
+		JLabel lblCedula = new JLabel("C\u00E9dula:");
+		lblCedula.setFont(new Font("Arial", Font.BOLD, 13));
+		lblCedula.setBounds(10, 27, 123, 14);
 		panel.add(lblCedula);
 		
 		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(10, 52, 142, 20);
+		formattedTextField.setBounds(10, 45, 142, 27);
 		panel.add(formattedTextField);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(155, 51, 40, 23);
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(Ventaplanes.class.getResource("/ImagenesVentanaP/Lupa21x21.png")));
+		btnNewButton.setBounds(155, 45, 40, 29);
 		panel.add(btnNewButton);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setFont(new Font("Arial", Font.BOLD, 11));
-		lblNombre.setBounds(10, 96, 57, 14);
+		lblNombre.setFont(new Font("Arial", Font.BOLD, 13));
+		lblNombre.setBounds(10, 96, 123, 14);
 		panel.add(lblNombre);
 		
 		textField = new JTextField();
-		textField.setBounds(10, 121, 185, 20);
+		textField.setBounds(10, 121, 185, 27);
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblTelefono = new JLabel("Telefono:");
-		lblTelefono.setFont(new Font("Arial", Font.BOLD, 11));
-		lblTelefono.setBounds(10, 180, 72, 14);
+		JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
+		lblTelefono.setFont(new Font("Arial", Font.BOLD, 13));
+		lblTelefono.setBounds(10, 180, 123, 14);
 		panel.add(lblTelefono);
 		
 		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
 		formattedTextField_1.setText("###-###-####");
-		formattedTextField_1.setBounds(10, 205, 123, 20);
+		formattedTextField_1.setBounds(10, 205, 185, 27);
 		panel.add(formattedTextField_1);
 		
-		JLabel lblDireccion = new JLabel("Direccion:");
-		lblDireccion.setFont(new Font("Arial", Font.BOLD, 11));
-		lblDireccion.setBounds(10, 254, 104, 14);
+		JLabel lblDireccion = new JLabel("Direcci\u00F3n:");
+		lblDireccion.setFont(new Font("Arial", Font.BOLD, 13));
+		lblDireccion.setBounds(10, 254, 123, 14);
 		panel.add(lblDireccion);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(10, 278, 185, 20);
+		textField_1.setBounds(10, 278, 185, 27);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -117,22 +121,22 @@ public class Ventaplanes extends JDialog {
 						node_2 = new DefaultMutableTreeNode("Planes Ilimitados");
 							node_2.add(new DefaultMutableTreeNode(""));
 						node_1.add(node_2);
-					add(node_1);
+						add(node_1);
 					node_1 = new DefaultMutableTreeNode("Planes Internet");
 						node_2 = new DefaultMutableTreeNode("Plan Ilimitado");
-							node_2.add(new DefaultMutableTreeNode("Ilimitado1"));
-							node_2.add(new DefaultMutableTreeNode("Ilimitado2"));
-							node_2.add(new DefaultMutableTreeNode("Ilimitado3"));
-							node_2.add(new DefaultMutableTreeNode("Ilimitado4"));
-						node_1.add(node_2);
-					add(node_1);
+					add(new DefaultMutableTreeNode("Ilimitado1"));
+					add(new DefaultMutableTreeNode("Ilimitado2"));
+							add(new DefaultMutableTreeNode("Ilimitado3"));
+						add(new DefaultMutableTreeNode("Ilimitado4"));
+					add(node_2);
+				add(node_1);
 					node_1 = new DefaultMutableTreeNode("Planes por Capacidad");
-						node_1.add(new DefaultMutableTreeNode(""));
+					add(new DefaultMutableTreeNode(""));
 					add(node_1);
 					node_1 = new DefaultMutableTreeNode("Planes combo");
-						node_1.add(new DefaultMutableTreeNode(""));
-						node_1.add(new DefaultMutableTreeNode(""));
-					add(node_1);
+						add(new DefaultMutableTreeNode(""));
+					add(new DefaultMutableTreeNode(""));
+				add(node_1);
 				}
 			}
 		));
@@ -145,7 +149,7 @@ public class Ventaplanes extends JDialog {
 		contentPanel.add(panelInformacion);
 		panelInformacion.setLayout(null);
 		
-		JLabel lblInformacionDelPlan = new JLabel("Informacion del Plan");
+		JLabel lblInformacionDelPlan = new JLabel("Informaci\u00F3n del plan");
 		lblInformacionDelPlan.setFont(new Font("Arial", Font.BOLD, 13));
 		lblInformacionDelPlan.setBounds(63, 11, 208, 14);
 		panelInformacion.add(lblInformacionDelPlan);
@@ -160,12 +164,24 @@ public class Ventaplanes extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Adquirir");
+				okButton.setBackground(Color.BLACK);
+				okButton.setForeground(Color.WHITE);
+				okButton.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Salir");
+				cancelButton.setBackground(Color.BLACK);
+				cancelButton.setForeground(Color.WHITE);
+				cancelButton.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+						
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

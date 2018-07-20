@@ -207,10 +207,10 @@ public class ManejoDePlanes extends JDialog {
 					});
 					btnGuardar.setForeground(Color.WHITE);
 					btnGuardar.setBackground(Color.BLACK);
-					btnGuardar.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
+					btnGuardar.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 					buttonPane.add(btnGuardar);
 				}
-				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
+				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				btnSalir.setForeground(Color.WHITE);
 				btnSalir.setBackground(Color.BLACK);
 				btnSalir.setActionCommand("Cancel");

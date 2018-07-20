@@ -16,6 +16,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ListadoPersonal extends JDialog {
 
@@ -57,7 +60,7 @@ public class ListadoPersonal extends JDialog {
 			new Object[][] {
 			},
 			new String[] {
-				"Cedula", "Nombres y apellidos", "Telefono", "Direccion"
+				"Cédula", "Nombre(s) y/o apellido(s)", "Teléfono", "Dirección"
 			}
 		));
 		table.getColumnModel().getColumn(0).setPreferredWidth(94);
@@ -67,6 +70,14 @@ public class ListadoPersonal extends JDialog {
 		scrollPane.setViewportView(table);
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+				
+			}
+		});
+		btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 		btnSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -81,8 +92,9 @@ public class ListadoPersonal extends JDialog {
 		contentPanel.add(btnSalir);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Arial", Font.PLAIN, 13));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Comercial", "Administrativo"}));
-		comboBox.setBounds(540, 21, 77, 23);
+		comboBox.setBounds(612, 23, 112, 23);
 		contentPanel.add(comboBox);
 		{
 			JPanel buttonPane = new JPanel();

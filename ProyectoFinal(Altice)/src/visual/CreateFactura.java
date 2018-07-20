@@ -76,25 +76,25 @@ public class CreateFactura extends JDialog {
 			panel.setLayout(null);
 			
 			JLabel lblCdula = new JLabel("C\u00E9dula:");
-			lblCdula.setFont(new Font("Arial", Font.PLAIN, 11));
-			lblCdula.setBounds(74, 72, 85, 29);
+			lblCdula.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblCdula.setBounds(39, 39, 85, 29);
 			panel.add(lblCdula);
 			{
 				JLabel lblNombre = new JLabel("Nombre:");
-				lblNombre.setFont(new Font("Arial", Font.PLAIN, 11));
-				lblNombre.setBounds(74, 39, 85, 29);
+				lblNombre.setFont(new Font("Arial", Font.PLAIN, 13));
+				lblNombre.setBounds(39, 72, 85, 29);
 				panel.add(lblNombre);
 			}
 			{
 				JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
-				lblTelefono.setFont(new Font("Arial", Font.PLAIN, 11));
-				lblTelefono.setBounds(74, 135, 85, 29);
+				lblTelefono.setFont(new Font("Arial", Font.PLAIN, 13));
+				lblTelefono.setBounds(39, 135, 85, 29);
 				panel.add(lblTelefono);
 			}
 			{
 				JLabel lblDireccion = new JLabel("Direcci\u00F3n:");
-				lblDireccion.setFont(new Font("Arial", Font.PLAIN, 11));
-				lblDireccion.setBounds(74, 101, 104, 29);
+				lblDireccion.setFont(new Font("Arial", Font.PLAIN, 13));
+				lblDireccion.setBounds(39, 100, 104, 29);
 				panel.add(lblDireccion);
 			}
 			{
@@ -112,7 +112,7 @@ public class CreateFactura extends JDialog {
 						}
 					});
 					btnPagar.setBounds(307, 5, 95, 29);
-					btnPagar.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
+					btnPagar.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 					btnPagar.setForeground(Color.WHITE);
 					btnPagar.setBackground(Color.BLACK);
 					btnPagar.addActionListener(new ActionListener() {
@@ -136,7 +136,7 @@ public class CreateFactura extends JDialog {
 						}
 					});
 					btnSalir.setBounds(412, 5, 77, 29);
-					btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
+					btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 					btnSalir.setForeground(Color.WHITE);
 					btnSalir.setBackground(Color.BLACK);
 					btnSalir.setActionCommand("Cancel");
@@ -148,33 +148,34 @@ public class CreateFactura extends JDialog {
 			separator.setBounds(0, 194, 584, 7);
 			panel.add(separator);
 			
-			JLabel lblResuemenDeFacturacion = new JLabel("Resuemen de facturacion:");
-			lblResuemenDeFacturacion.setBounds(211, 175, 134, 14);
+			JLabel lblResuemenDeFacturacion = new JLabel("Resumen de facturaci\u00F3n:");
+			lblResuemenDeFacturacion.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblResuemenDeFacturacion.setBounds(211, 175, 145, 14);
 			panel.add(lblResuemenDeFacturacion);
 			
 			JLabel lblNombreDelPlan = new JLabel("Nombre del plan:");
-			lblNombreDelPlan.setFont(new Font("Arial", Font.PLAIN, 11));
-			lblNombreDelPlan.setBounds(74, 212, 85, 14);
+			lblNombreDelPlan.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblNombreDelPlan.setBounds(39, 212, 104, 14);
 			panel.add(lblNombreDelPlan);
 			
 			JLabel lblMora = new JLabel("Mora:");
-			lblMora.setFont(new Font("Arial", Font.PLAIN, 11));
-			lblMora.setBounds(74, 237, 46, 14);
+			lblMora.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblMora.setBounds(39, 237, 36, 14);
 			panel.add(lblMora);
 			
 			JLabel lblItbis = new JLabel("Itbis:");
-			lblItbis.setFont(new Font("Arial", Font.PLAIN, 11));
-			lblItbis.setBounds(74, 262, 46, 14);
+			lblItbis.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblItbis.setBounds(39, 270, 36, 14);
 			panel.add(lblItbis);
 			
 			JLabel lblMontoDelPlan = new JLabel("Monto del plan:");
-			lblMontoDelPlan.setFont(new Font("Arial", Font.PLAIN, 11));
-			lblMontoDelPlan.setBounds(74, 295, 74, 14);
+			lblMontoDelPlan.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblMontoDelPlan.setBounds(39, 295, 97, 14);
 			panel.add(lblMontoDelPlan);
 			
 			JLabel lblCantidadDeFacturas = new JLabel("Cantidad de facturas pendientes:");
-			lblCantidadDeFacturas.setFont(new Font("Arial", Font.PLAIN, 11));
-			lblCantidadDeFacturas.setBounds(74, 330, 172, 14);
+			lblCantidadDeFacturas.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblCantidadDeFacturas.setBounds(39, 320, 195, 14);
 			panel.add(lblCantidadDeFacturas);
 			
 			JSeparator separator_1 = new JSeparator();
@@ -182,8 +183,8 @@ public class CreateFactura extends JDialog {
 			panel.add(separator_1);
 			
 			JLabel lblMontoAPagar = new JLabel("Monto a pagar:");
-			lblMontoAPagar.setFont(new Font("Arial", Font.PLAIN, 12));
-			lblMontoAPagar.setBounds(113, 398, 85, 14);
+			lblMontoAPagar.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblMontoAPagar.setBounds(113, 398, 104, 14);
 			panel.add(lblMontoAPagar);
 			
 			textNombre = new JTextField();

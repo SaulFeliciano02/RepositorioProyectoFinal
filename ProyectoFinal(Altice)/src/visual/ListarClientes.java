@@ -97,7 +97,7 @@ public class ListarClientes extends JDialog {
 			}
 			
 			txtCedula = new JTextField();
-			txtCedula.setBounds(323, 46, 218, 31);
+			txtCedula.setBounds(333, 46, 218, 31);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);
 			

@@ -60,7 +60,7 @@ public class RegistroCliente extends JDialog {
 			panel.add(lblCdula);
 			
 			txtCedula = new JTextField();
-			txtCedula.setBackground(Color.LIGHT_GRAY);
+			txtCedula.setBackground(Color.BLACK);
 			txtCedula.setBounds(74, 90, 166, 22);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);
@@ -76,7 +76,7 @@ public class RegistroCliente extends JDialog {
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBackground(Color.LIGHT_GRAY);
+			txtNombre.setBackground(Color.BLACK);
 			txtNombre.setBounds(393, 90, 166, 22);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
@@ -91,7 +91,7 @@ public class RegistroCliente extends JDialog {
 			panel.add(lblTelfono);
 			
 			txtTelefono = new JTextField();
-			txtTelefono.setBackground(Color.LIGHT_GRAY);
+			txtTelefono.setBackground(Color.BLACK);
 			txtTelefono.setBounds(74, 217, 166, 22);
 			panel.add(txtTelefono);
 			txtTelefono.setColumns(10);
@@ -106,7 +106,7 @@ public class RegistroCliente extends JDialog {
 			panel.add(lblDireccin);
 			
 			txtDireccion = new JTextField();
-			txtDireccion.setBackground(Color.LIGHT_GRAY);
+			txtDireccion.setBackground(Color.BLACK);
 			txtDireccion.setBounds(393, 217, 166, 22);
 			panel.add(txtDireccion);
 			txtDireccion.setColumns(10);
@@ -121,6 +121,7 @@ public class RegistroCliente extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnRegistrar = new JButton("");
+				btnRegistrar.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				if(miCliente!=null)
 				{
 					btnRegistrar.setText("Modificar");
@@ -171,6 +172,7 @@ public class RegistroCliente extends JDialog {
 			}
 			{
 				JButton btnSalir = new JButton("Salir");
+				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				btnSalir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

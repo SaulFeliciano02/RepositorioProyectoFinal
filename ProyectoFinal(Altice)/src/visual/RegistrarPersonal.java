@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegistrarPersonal extends JDialog {
 
@@ -31,15 +33,7 @@ public class RegistrarPersonal extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			RegistrarPersonal dialog = new RegistrarPersonal();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
@@ -64,8 +58,8 @@ public class RegistrarPersonal extends JDialog {
 			}
 			{
 				JLabel lblElegirSuRango = new JLabel("Elegir su rango:");
-				lblElegirSuRango.setFont(new Font("Arial", Font.BOLD, 11));
-				lblElegirSuRango.setBounds(172, 24, 106, 14);
+				lblElegirSuRango.setFont(new Font("Arial", Font.BOLD, 13));
+				lblElegirSuRango.setBounds(20, 26, 106, 14);
 				panel.add(lblElegirSuRango);
 			}
 			{
@@ -75,15 +69,18 @@ public class RegistrarPersonal extends JDialog {
 			}
 			
 			JRadioButton rdbtnAministrativo = new JRadioButton("Aministrativo");
+			rdbtnAministrativo.setFont(new Font("Arial", Font.PLAIN, 13));
 			rdbtnAministrativo.setBounds(27, 63, 109, 23);
 			panel.add(rdbtnAministrativo);
 			
 			JRadioButton rdbtnComercial = new JRadioButton("Comercial");
-			rdbtnComercial.setBounds(271, 63, 109, 23);
+			rdbtnComercial.setFont(new Font("Arial", Font.PLAIN, 13));
+			rdbtnComercial.setBounds(152, 63, 109, 23);
 			panel.add(rdbtnComercial);
 			
-			JLabel lblCedula = new JLabel("Cedula:");
-			lblCedula.setBounds(33, 126, 46, 14);
+			JLabel lblCedula = new JLabel("C\u00E9dula:");
+			lblCedula.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblCedula.setBounds(27, 126, 46, 14);
 			panel.add(lblCedula);
 			
 			textField = new JTextField();
@@ -93,8 +90,9 @@ public class RegistrarPersonal extends JDialog {
 			panel.add(textField);
 			textField.setColumns(10);
 			
-			JLabel lblNombreYApellido = new JLabel("Nombre y apellido");
-			lblNombreYApellido.setBounds(224, 126, 106, 14);
+			JLabel lblNombreYApellido = new JLabel("Nombre(s) y/ apellido(s):");
+			lblNombreYApellido.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblNombreYApellido.setBounds(224, 126, 152, 14);
 			panel.add(lblNombreYApellido);
 			
 			textField_1 = new JTextField();
@@ -104,8 +102,9 @@ public class RegistrarPersonal extends JDialog {
 			panel.add(textField_1);
 			textField_1.setColumns(10);
 			
-			JLabel lblTelefono = new JLabel("Telefono");
-			lblTelefono.setBounds(433, 126, 46, 14);
+			JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
+			lblTelefono.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblTelefono.setBounds(433, 126, 65, 14);
 			panel.add(lblTelefono);
 			
 			textField_2 = new JTextField();
@@ -115,8 +114,9 @@ public class RegistrarPersonal extends JDialog {
 			panel.add(textField_2);
 			textField_2.setColumns(10);
 			
-			JLabel lblDireccion = new JLabel("Direccion");
-			lblDireccion.setBounds(27, 200, 46, 14);
+			JLabel lblDireccion = new JLabel("Direcci\u00F3n:");
+			lblDireccion.setFont(new Font("Arial", Font.PLAIN, 13));
+			lblDireccion.setBounds(27, 200, 83, 14);
 			panel.add(lblDireccion);
 			
 			txtHola = new JTextField();
@@ -126,7 +126,8 @@ public class RegistrarPersonal extends JDialog {
 			panel.add(txtHola);
 			txtHola.setColumns(10);
 			
-			JLabel lblSueldo = new JLabel("Sueldo");
+			JLabel lblSueldo = new JLabel("Sueldo:");
+			lblSueldo.setFont(new Font("Arial", Font.PLAIN, 13));
 			lblSueldo.setBounds(224, 198, 46, 14);
 			panel.add(lblSueldo);
 			
@@ -137,7 +138,8 @@ public class RegistrarPersonal extends JDialog {
 			panel.add(textField_4);
 			textField_4.setColumns(10);
 			
-			JLabel lblContrasena = new JLabel("Contrasena");
+			JLabel lblContrasena = new JLabel("Contrase\u00F1a:");
+			lblContrasena.setFont(new Font("Arial", Font.PLAIN, 13));
 			lblContrasena.setBounds(317, 198, 83, 14);
 			panel.add(lblContrasena);
 			
@@ -148,7 +150,8 @@ public class RegistrarPersonal extends JDialog {
 			panel.add(textField_5);
 			textField_5.setColumns(10);
 			
-			JLabel lblConfirmarContrasena = new JLabel("Confirmar contrasena");
+			JLabel lblConfirmarContrasena = new JLabel("Confirmar contrase\u00F1a:");
+			lblConfirmarContrasena.setFont(new Font("Arial", Font.PLAIN, 13));
 			lblConfirmarContrasena.setBounds(448, 198, 142, 14);
 			panel.add(lblConfirmarContrasena);
 			
@@ -165,6 +168,7 @@ public class RegistrarPersonal extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton RegistarButton = new JButton("Registrar");
+				RegistarButton.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				RegistarButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -181,6 +185,13 @@ public class RegistrarPersonal extends JDialog {
 			}
 			{
 				JButton SalirButton = new JButton("Salir");
+				SalirButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						dispose();
+					}
+				});
+				SalirButton.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				SalirButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
