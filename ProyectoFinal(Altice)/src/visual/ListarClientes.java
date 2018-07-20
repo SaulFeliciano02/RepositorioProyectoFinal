@@ -48,13 +48,8 @@ public class ListarClientes extends JDialog {
 
 	/**
 	 * Create the dialog.
-	 * @throws UnsupportedLookAndFeelException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws ClassNotFoundException 
 	 */
-	public ListarClientes() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+	public ListarClientes() {
 		setFont(new Font("Futura Bk BT", Font.PLAIN, 12));
 		setTitle("Listado de Clientes");
 		setResizable(false);
@@ -149,7 +144,7 @@ public class ListarClientes extends JDialog {
 						if (!cedula.equalsIgnoreCase(""))
 						{
 							Cliente aux = CentralAltice.getInstance().buscarCliente(cedula);
-							RegisCliente reg = new RegisCliente("Modificación de Cliente", aux); 
+							RegistroCliente reg = new RegistroCliente("Modificar Cliente", aux);
 							reg.setModal(true);
 							reg.setVisible(true);
 							btnModificar.setEnabled(false);
