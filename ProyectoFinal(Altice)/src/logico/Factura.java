@@ -1,5 +1,7 @@
 package logico;
 
+import java.util.Date;
+
 import planes.Plan;
 
 public class Factura {
@@ -8,12 +10,14 @@ public class Factura {
 	private Plan planSeleccionado;
 	private float montoTotal;
 	private boolean estado;
+	private Date fecha;
 	
 	public Factura(Cliente miCliente, Plan planSeleccionado) {
 		super();
 		this.miCliente = miCliente;
 		this.planSeleccionado = planSeleccionado;
 		this.estado = false; //False = adeudado, True = saldado
+		this.fecha = new Date();
 	}
 
 	public Cliente getMiCliente() {

@@ -1,33 +1,34 @@
 package visual;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.Font;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
 
-public class LoginAdministrativo extends JDialog {
+public class LoginComercial extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCedula;
 	private JTextField txtContraseña;
-
+	
 	/**
 	 * Launch the application.
 	 */
-
+	
 	/**
 	 * Create the dialog.
 	 */
-	public LoginAdministrativo() {
+	public LoginComercial() {
 		setUndecorated(true);
 		setResizable(false);
 		setModal(true);
@@ -76,21 +77,13 @@ public class LoginAdministrativo extends JDialog {
 		contentPanel.add(btnSalir);
 		
 		JButton btnIniciarSesin = new JButton("Iniciar Sesi\u00F3n");
-		btnIniciarSesin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String cedula = txtCedula.getText();
-				String contraseña = txtContraseña.getText();
-				
-				
-			}
-		});
 		btnIniciarSesin.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
 		btnIniciarSesin.setBounds(202, 523, 135, 25);
 		contentPanel.add(btnIniciarSesin);
 		
-		JLabel lbladministrador = new JLabel("*Administrador*");
-		lbladministrador.setBounds(171, 13, 96, 16);
-		contentPanel.add(lbladministrador);
+		JLabel lblComercial = new JLabel("*Comercial*");
+		lblComercial.setBounds(179, 13, 96, 16);
+		contentPanel.add(lblComercial);
 		{
 			JLabel lblFondo = new JLabel("");
 			lblFondo.setIcon(new ImageIcon(LoginAdministrativo.class.getResource("/ImagenesVentanaP/Altice m\u00E1s clara.png")));

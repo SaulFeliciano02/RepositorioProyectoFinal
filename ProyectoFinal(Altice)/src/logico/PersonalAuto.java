@@ -9,6 +9,7 @@ public abstract class PersonalAuto extends Persona {
 	protected int hrstrabajadas=0;
 	protected double sueldo=0;
 	protected double sueldofinal=0;
+	protected String contraseña;
 
 	/**
 	 * @param cedula
@@ -39,11 +40,16 @@ public abstract class PersonalAuto extends Persona {
 	 */
 	
 	public PersonalAuto(String cedula, String nombre, String direccion, String telefono,
-			int horasextras, double impuestos, int hrstrabajadas) {
+			int horasextras, double impuestos, int hrstrabajadas, String contraseña) {
 		super(cedula, nombre, direccion, telefono);
 		this.horasextras = horasextras;
 		this.impuestos = impuestos;
 		this.hrstrabajadas = hrstrabajadas;
+		this.contraseña = contraseña;
+	}
+
+	public String getContraseña() {
+		return contraseña;
 	}
 
 	public double getSueldohora() {

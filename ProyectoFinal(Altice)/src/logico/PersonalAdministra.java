@@ -15,8 +15,8 @@ public class PersonalAdministra extends PersonalAuto {
 	 */
 	
 	public PersonalAdministra(String cedula, String nombre, String direccion, String telefono, int horasextras,
-			double impuestos, int hrstrabajadas) {
-		super(cedula, nombre, direccion, telefono, horasextras, impuestos, hrstrabajadas);
+			double impuestos, int hrstrabajadas, String contraseña) {
+		super(cedula, nombre, direccion, telefono, horasextras, impuestos, hrstrabajadas, contraseña);
 		
 		this.sueldo = 20000;
 	}
