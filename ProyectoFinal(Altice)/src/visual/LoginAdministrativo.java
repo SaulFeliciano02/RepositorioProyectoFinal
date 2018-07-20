@@ -76,21 +76,9 @@ public class LoginAdministrativo extends JDialog {
 		contentPanel.add(btnSalir);
 		
 		JButton btnIniciarSesin = new JButton("Iniciar Sesi\u00F3n");
-		btnIniciarSesin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String cedula = txtCedula.getText();
-				String contraseña = txtContraseña.getText();
-				
-				
-			}
-		});
 		btnIniciarSesin.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
 		btnIniciarSesin.setBounds(202, 523, 135, 25);
 		contentPanel.add(btnIniciarSesin);
-		
-		JLabel lbladministrador = new JLabel("*Administrador*");
-		lbladministrador.setBounds(171, 13, 96, 16);
-		contentPanel.add(lbladministrador);
 		{
 			JLabel lblFondo = new JLabel("");
 			lblFondo.setIcon(new ImageIcon(LoginAdministrativo.class.getResource("/ImagenesVentanaP/Altice m\u00E1s clara.png")));
