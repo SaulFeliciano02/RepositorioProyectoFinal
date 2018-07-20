@@ -39,7 +39,7 @@ public class LoginComercial extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel lblIcono = new JLabel("");
-		lblIcono.setIcon(new ImageIcon(LoginAdministrativo.class.getResource("/ImagenesVentanaP/icons8-grupo-de-usuarios-hombre-y-mujer-90.png")));
+		lblIcono.setIcon(new ImageIcon(LoginComercial.class.getResource("/ImagenesVentanaP/icons8-grupo-de-usuarios-hombre-y-mujer-90.png")));
 		lblIcono.setBounds(171, 46, 121, 99);
 		contentPanel.add(lblIcono);
 		
@@ -86,7 +86,7 @@ public class LoginComercial extends JDialog {
 		contentPanel.add(lblComercial);
 		{
 			JLabel lblFondo = new JLabel("");
-			lblFondo.setIcon(new ImageIcon(LoginAdministrativo.class.getResource("/ImagenesVentanaP/Altice m\u00E1s clara.png")));
+			lblFondo.setIcon(new ImageIcon(LoginComercial.class.getResource("/ImagenesVentanaP/Altice m\u00E1s clara.png")));
 			lblFondo.setBounds(65, 0, 360, 646);
 			contentPanel.add(lblFondo);
 		}
