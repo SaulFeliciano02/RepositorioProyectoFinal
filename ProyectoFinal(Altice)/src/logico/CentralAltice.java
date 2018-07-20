@@ -53,8 +53,22 @@ public class CentralAltice {
 		return miPersonal;
 	}
 
-	
-	
+	public ArrayList<Plan> getPlanesNoDisponibles() {
+		return planesNoDisponibles;
+	}
+
+	public void setPlanesNoDisponibles(ArrayList<Plan> planesNoDisponibles) {
+		this.planesNoDisponibles = planesNoDisponibles;
+	}
+
+	public ArrayList<Plan> getPlanesDisponibles() {
+		return planesDisponibles;
+	}
+
+	public void setPlanesDisponibles(ArrayList<Plan> planesDisponibles) {
+		this.planesDisponibles = planesDisponibles;
+	}
+
 	public Cliente buscarCliente(String cedula)
 	{
 		boolean encontrado = false;
@@ -115,6 +129,20 @@ public class CentralAltice {
 			}
 			i++;
 		}
+		
+		if(aux == null)
+		{
+			while(i<planesNoDisponibles.size() && !encontrado)
+			{
+				if(planesNoDisponibles.get(i).getClass().getSimpleName().equalsIgnoreCase(nombre))
+				{
+					encontrado = true;
+					aux = planesNoDisponibles.get(i);
+				}
+				i++;
+			}
+		}
+		
 		return aux;
 	}
 	

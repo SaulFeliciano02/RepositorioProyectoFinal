@@ -11,13 +11,20 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+
+import logico.CentralAltice;
+
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -42,6 +49,13 @@ public class ManejoDePlanes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ManejoDePlanes() {
+		try {
+			UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		setFont(new Font("Futura Bk BT", Font.PLAIN, 12));
 		setTitle("Manejo de Planes Altice");
 		setResizable(false);
@@ -187,6 +201,15 @@ public class ManejoDePlanes extends JDialog {
 					btnGuardar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							
+							CentralAltice.getInstance().getPlanesNoDisponibles().removeAll(CentralAltice.getInstance().getPlanesNoDisponibles());
+							CentralAltice.getInstance().getPlanesDisponibles().removeAll(CentralAltice.getInstance().getPlanesDisponibles());
+							for (int i = 0; i < modelPlanes.size(); i++) {
+								CentralAltice.getInstance().getPlanesNoDisponibles().add(i, (CentralAltice.getInstance().buscarPlan(modelPlanes.getElementAt(i))));
+							}
+							for (int i = 0; i < modelDisponibles.size(); i++) {
+								CentralAltice.getInstance().getPlanesDisponibles().add(i, (CentralAltice.getInstance().buscarPlan(modelDisponibles.getElementAt(i))));
+							}
+							JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
 						}
 					});
 					btnGuardar.setForeground(Color.WHITE);

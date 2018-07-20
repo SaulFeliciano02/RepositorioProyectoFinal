@@ -29,6 +29,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.ListSelectionModel;
+import javax.swing.ImageIcon;
 
 
 public class ListarClientes extends JDialog {
@@ -101,13 +102,28 @@ public class ListarClientes extends JDialog {
 			}
 			
 			txtCedula = new JTextField();
-			txtCedula.setBounds(323, 46, 218, 29);
+			txtCedula.setBounds(323, 46, 218, 31);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);
 			
-			JButton button = new JButton("...");
-			button.setBounds(553, 46, 45, 29);
-			panel.add(button);
+			JButton btnSearch = new JButton("");
+			btnSearch.setIcon(new ImageIcon(ListarClientes.class.getResource("/ImagenesVentanaP/icons8-b\u00FAsqueda-27.png")));
+			btnSearch.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String cedula = txtCedula.getText();
+					Cliente elBuscado = CentralAltice.getInstance().buscarCliente(cedula);
+					model.setRowCount(0);
+					fila[0] = elBuscado.getCedula();
+					fila[1] = elBuscado.getNombre();
+					fila[2] = elBuscado.getTelefono();
+					fila[3] = elBuscado.getDireccion();
+					fila[4] = elBuscado.isEstado();
+					model.addRow(fila);
+					table.setModel(model);
+				}
+			});
+			btnSearch.setBounds(558, 46, 40, 31);
+			panel.add(btnSearch);
 			
 			JLabel lblCdula = new JLabel("C\u00E9dula:");
 			lblCdula.setFont(new Font("Arial", Font.BOLD, 14));
@@ -133,14 +149,7 @@ public class ListarClientes extends JDialog {
 						if (!cedula.equalsIgnoreCase(""))
 						{
 							Cliente aux = CentralAltice.getInstance().buscarCliente(cedula);
-							RegistrarCliente2 reg = null;
-							try {
-								reg = new RegistrarCliente2("Modificación de Cliente", aux);
-							} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-									| UnsupportedLookAndFeelException | ParseException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
+							RegisCliente reg = new RegisCliente("Modificación de Cliente", aux); 
 							reg.setModal(true);
 							reg.setVisible(true);
 							btnModificar.setEnabled(false);
@@ -188,5 +197,9 @@ public class ListarClientes extends JDialog {
 			}
 		));
 		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.getColumnModel().getColumn(4).setResizable(false);
 	}
 }
