@@ -49,13 +49,6 @@ public class ManejoDePlanes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ManejoDePlanes() {
-		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		setFont(new Font("Futura Bk BT", Font.PLAIN, 12));
 		setTitle("Manejo de Planes Altice");
 		setResizable(false);
