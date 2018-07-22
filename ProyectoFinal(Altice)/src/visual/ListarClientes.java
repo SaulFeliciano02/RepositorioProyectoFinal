@@ -89,7 +89,7 @@ public class ListarClientes extends JDialog {
 					});
 					table.setBackground(Color.WHITE);
 					model = new DefaultTableModel();
-					String[] columnNames = {"Cédula", "Nombre", "Teléfono", "Dirección"};
+					String[] columnNames = {"Cédula", "Nombre", "Teléfono", "Dirección", "Estado"};
 					model.setColumnIdentifiers(columnNames);
 					loadtable();
 					scrollPane.setViewportView(table);
@@ -107,14 +107,21 @@ public class ListarClientes extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					String cedula = txtCedula.getText();
 					Cliente elBuscado = CentralAltice.getInstance().buscarCliente(cedula);
-					model.setRowCount(0);
-					fila[0] = elBuscado.getCedula();
-					fila[1] = elBuscado.getNombre();
-					fila[2] = elBuscado.getTelefono();
-					fila[3] = elBuscado.getDireccion();
-					fila[4] = elBuscado.isEstado();
-					model.addRow(fila);
-					table.setModel(model);
+					if(!txtCedula.getText().equalsIgnoreCase("") && elBuscado!=null)
+					{
+						model.setRowCount(0);
+						fila[0] = elBuscado.getCedula();
+						fila[1] = elBuscado.getNombre();
+						fila[2] = elBuscado.getTelefono();
+						fila[3] = elBuscado.getDireccion();
+						fila[4] = elBuscado.isEstado();
+						model.addRow(fila);
+						table.setModel(model);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Cliente no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			});
 			btnSearch.setBounds(558, 46, 40, 31);
@@ -184,13 +191,7 @@ public class ListarClientes extends JDialog {
 			fila[4] = aux.isEstado();
 			model.addRow(fila);
 		}
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"C\u00E9dula", "Nombre", "Tel\u00E9fono", "Direcci\u00F3n", "Estado"
-			}
-		));
+		table.setModel(model);
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);

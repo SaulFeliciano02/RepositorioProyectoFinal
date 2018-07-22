@@ -60,7 +60,7 @@ public class RegistroCliente extends JDialog {
 			panel.add(lblCdula);
 			
 			txtCedula = new JTextField();
-			txtCedula.setBackground(Color.BLACK);
+			txtCedula.setBackground(Color.LIGHT_GRAY);
 			txtCedula.setBounds(74, 90, 166, 22);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);
@@ -76,7 +76,7 @@ public class RegistroCliente extends JDialog {
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBackground(Color.BLACK);
+			txtNombre.setBackground(Color.LIGHT_GRAY);
 			txtNombre.setBounds(393, 90, 166, 22);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
@@ -91,7 +91,7 @@ public class RegistroCliente extends JDialog {
 			panel.add(lblTelfono);
 			
 			txtTelefono = new JTextField();
-			txtTelefono.setBackground(Color.BLACK);
+			txtTelefono.setBackground(Color.LIGHT_GRAY);
 			txtTelefono.setBounds(74, 217, 166, 22);
 			panel.add(txtTelefono);
 			txtTelefono.setColumns(10);
@@ -106,7 +106,7 @@ public class RegistroCliente extends JDialog {
 			panel.add(lblDireccin);
 			
 			txtDireccion = new JTextField();
-			txtDireccion.setBackground(Color.BLACK);
+			txtDireccion.setBackground(Color.LIGHT_GRAY);
 			txtDireccion.setBounds(393, 217, 166, 22);
 			panel.add(txtDireccion);
 			txtDireccion.setColumns(10);
@@ -121,6 +121,8 @@ public class RegistroCliente extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnRegistrar = new JButton("");
+				btnRegistrar.setForeground(Color.WHITE);
+				btnRegistrar.setBackground(Color.BLACK);
 				btnRegistrar.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				if(miCliente!=null)
 				{
@@ -143,10 +145,18 @@ public class RegistroCliente extends JDialog {
 							String nombre = txtNombre.getText();
 							String telefono = txtTelefono.getText();
 							
-							nuevo = new Cliente(cedula, nombre, direccion, telefono);
-							CentralAltice.getInstance().agregarCliente(nuevo);
-							JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
-							clean();
+							if(CentralAltice.getInstance().chequeoDeCedula(txtCedula.getText()))
+							{
+								nuevo = new Cliente(cedula, nombre, direccion, telefono);
+								CentralAltice.getInstance().agregarCliente(nuevo);
+								JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+								clean();
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "La cédula introducida ya está registrada", "Error", JOptionPane.ERROR_MESSAGE);
+							}
+							
 						}
 						
 						else
@@ -162,6 +172,7 @@ public class RegistroCliente extends JDialog {
 							int indice = CentralAltice.getInstance().getMisClientes().indexOf(miCliente);
 							CentralAltice.getInstance().getMisClientes().set(indice, modificado);
 							JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+							ListarClientes.loadtable();
 							dispose();
 						}
 					}
@@ -172,6 +183,8 @@ public class RegistroCliente extends JDialog {
 			}
 			{
 				JButton btnSalir = new JButton("Salir");
+				btnSalir.setForeground(Color.WHITE);
+				btnSalir.setBackground(Color.BLACK);
 				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				btnSalir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

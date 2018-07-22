@@ -171,4 +171,28 @@ public class CentralAltice {
 		}
 	}
 	
+	public boolean chequeoDeCedula(String cedula)
+	{
+		boolean permiso = true;
+		
+		for (Cliente aux : misClientes) {
+			if(aux.getCedula().equalsIgnoreCase(cedula))
+			{
+				permiso = false;
+			}
+		}
+		
+		if(permiso == true)
+		{
+			for (PersonalAuto personalAuto : miPersonal) {
+				if(personalAuto.getCedula().equalsIgnoreCase(cedula))
+				{
+					permiso = false;
+				}
+			}
+		}
+		
+		return permiso;
+	}
+	
 }
