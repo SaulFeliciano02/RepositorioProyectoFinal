@@ -1,23 +1,16 @@
 package logico;
 
 
-
 public class Comercial extends PersonalAuto {
 
-	/**
-	 * @param cedula
-	 * @param nombre
-	 * @param direccion
-	 * @param telefono
-	 * @param horasextras
-	 * @param impuestos
-	 * @param hrstrabajadas
-	 */
-	public Comercial(String cedula, String nombre, String direccion, String telefono, int horasextras, double impuestos,
-			int hrstrabajadas, String contraseña) {
-		super(cedula, nombre, direccion, telefono, horasextras, impuestos, hrstrabajadas, contraseña);
-		
-		this.sueldo = 15000;
+	public Comercial(String cedula, String nombre, String direccion, String telefono, String contraseña) {
+		super(cedula, nombre, direccion, telefono, contraseña);
+		// TODO Auto-generated constructor stub
+		this.sueldo=15000;
 	}
+	
+	
+
+	
 	
 }

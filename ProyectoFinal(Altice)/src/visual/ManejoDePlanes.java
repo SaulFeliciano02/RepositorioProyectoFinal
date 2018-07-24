@@ -11,22 +11,22 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
-
-import logico.CentralAltice;
-
 import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import logico.CentralAltice;
+
+import planes.Plan;
+
 
 public class ManejoDePlanes extends JDialog {
 
@@ -38,6 +38,7 @@ public class ManejoDePlanes extends JDialog {
 	private String nombreDelPlan;
 	private JButton btnDisponible;
 	private JButton btnNoDisponible;
+
 	
 
 	/**
@@ -48,6 +49,8 @@ public class ManejoDePlanes extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	
+	
 	public ManejoDePlanes() {
 		setFont(new Font("Futura Bk BT", Font.PLAIN, 12));
 		setTitle("Manejo de Planes Altice");
@@ -82,7 +85,15 @@ public class ManejoDePlanes extends JDialog {
 			scrollPane.setBounds(0, 42, 334, 377);
 			panelPlanes.add(scrollPane);
 			{
-				listPlanes = new JList<String>();
+				listPlanes = new JList<>();
+				listPlanes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				
+				 
+				 
+				
+				listPlanes.setModel(modelPlanes);
+				
+				listPlanes.setModel(modelPlanes);
 				listPlanes.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -93,6 +104,7 @@ public class ManejoDePlanes extends JDialog {
 						}
 					}
 				});
+				
 				listPlanes.setFont(new Font("Arial", Font.PLAIN, 14));
 				listPlanes.setSize(332, 379);
 				listPlanes.setBorder(null);
@@ -119,6 +131,7 @@ public class ManejoDePlanes extends JDialog {
 					panelDisponibles.add(scrollPane_1);
 					{
 						listDisponibles = new JList<String>();
+						listDisponibles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 						listDisponibles.addMouseListener(new MouseAdapter() {
 							@Override
 							public void mouseClicked(MouseEvent e) {
@@ -126,6 +139,7 @@ public class ManejoDePlanes extends JDialog {
 								{
 									nombreDelPlan = (String)listDisponibles.getModel().getElementAt(listDisponibles.getSelectedIndex());
 									btnNoDisponible.setEnabled(true);
+									btnDisponible.setEnabled(true);
 								}
 							}
 						});
@@ -137,6 +151,11 @@ public class ManejoDePlanes extends JDialog {
 			}
 			
 			btnDisponible = new JButton(">");
+			btnDisponible.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+			});
 			btnDisponible.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(!nombreDelPlan.equalsIgnoreCase(""))
@@ -148,6 +167,7 @@ public class ManejoDePlanes extends JDialog {
 						btnDisponible.setEnabled(false);
 						btnNoDisponible.setEnabled(false);
 						nombreDelPlan = "";
+						loadPlanes();
 					}
 				}
 			});
@@ -158,6 +178,11 @@ public class ManejoDePlanes extends JDialog {
 			panel.add(btnDisponible);
 			
 			btnNoDisponible = new JButton("<");
+			btnNoDisponible.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+			});
 			btnNoDisponible.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(!nombreDelPlan.equalsIgnoreCase(""))
@@ -169,6 +194,7 @@ public class ManejoDePlanes extends JDialog {
 						btnDisponible.setEnabled(false);
 						btnNoDisponible.setEnabled(false);
 						nombreDelPlan = "";
+						loadPlanes();
 					}
 				}
 			});
@@ -194,28 +220,35 @@ public class ManejoDePlanes extends JDialog {
 					btnGuardar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							
-							CentralAltice.getInstance().getPlanesNoDisponibles().removeAll(CentralAltice.getInstance().getPlanesNoDisponibles());
-							CentralAltice.getInstance().getPlanesDisponibles().removeAll(CentralAltice.getInstance().getPlanesDisponibles());
-							for (int i = 0; i < modelPlanes.size(); i++) {
-								CentralAltice.getInstance().getPlanesNoDisponibles().add(i, (CentralAltice.getInstance().buscarPlan(modelPlanes.getElementAt(i))));
-							}
-							for (int i = 0; i < modelDisponibles.size(); i++) {
-								CentralAltice.getInstance().getPlanesDisponibles().add(i, (CentralAltice.getInstance().buscarPlan(modelDisponibles.getElementAt(i))));
-							}
-							JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
 						}
 					});
 					btnGuardar.setForeground(Color.WHITE);
 					btnGuardar.setBackground(Color.BLACK);
-					btnGuardar.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
+					btnGuardar.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
 					buttonPane.add(btnGuardar);
 				}
-				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
+				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
 				btnSalir.setForeground(Color.WHITE);
 				btnSalir.setBackground(Color.BLACK);
 				btnSalir.setActionCommand("Cancel");
 				buttonPane.add(btnSalir);
 			}
 		}
+		loadPlanes();
 	}
+	
+	private void loadPlanes()
+	{
+		for ( Plan aux : CentralAltice.getInstance().getPlanesNoDisponibles()) {
+			modelPlanes.addElement(aux.getClass().getSimpleName());
+		}
+		listPlanes.setModel(modelPlanes);
+	
+	
+	for ( Plan aux : CentralAltice.getInstance().getPlanesDisponibles()) {
+		modelDisponibles.addElement(aux.getClass().getSimpleName());
+	 }
+	   listDisponibles.setModel(modelDisponibles);
+	 }
+	
 }

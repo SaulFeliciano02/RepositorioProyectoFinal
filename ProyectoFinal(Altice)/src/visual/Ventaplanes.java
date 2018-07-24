@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
@@ -19,26 +21,27 @@ import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
+
+import logico.CentralAltice;
+import logico.Cliente;
 
 public class Ventaplanes extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textNombre;
+	private JTextField textDireccion;
+	private Cliente miCliente;
+	private JFormattedTextField formattedTextTelefono;
+	private JFormattedTextField formattedTextCedula;
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			Ventaplanes dialog = new Ventaplanes();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
@@ -47,6 +50,7 @@ public class Ventaplanes extends JDialog {
 		setTitle("Venta de Planes Altice");
 		setResizable(false);
 		setModal(true);
+		this.miCliente=miCliente;
 		setBounds(100, 100, 740, 520);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,46 +67,70 @@ public class Ventaplanes extends JDialog {
 		lblCedula.setBounds(10, 27, 123, 14);
 		panel.add(lblCedula);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(10, 45, 142, 27);
-		panel.add(formattedTextField);
-		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Ventaplanes.class.getResource("/ImagenesVentanaP/Lupa21x21.png")));
-		btnNewButton.setBounds(155, 45, 40, 29);
-		panel.add(btnNewButton);
-		
-		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setFont(new Font("Arial", Font.BOLD, 13));
-		lblNombre.setBounds(10, 96, 123, 14);
-		panel.add(lblNombre);
-		
-		textField = new JTextField();
-		textField.setBounds(10, 121, 185, 27);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
-		lblTelefono.setFont(new Font("Arial", Font.BOLD, 13));
-		lblTelefono.setBounds(10, 180, 123, 14);
-		panel.add(lblTelefono);
-		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
-		formattedTextField_1.setText("###-###-####");
-		formattedTextField_1.setBounds(10, 205, 185, 27);
-		panel.add(formattedTextField_1);
+		JFormattedTextField formattedTextCedula = new JFormattedTextField();
+		formattedTextCedula.setBounds(10, 45, 142, 27);
+		panel.add(formattedTextCedula);
 		
 		JLabel lblDireccion = new JLabel("Direcci\u00F3n:");
 		lblDireccion.setFont(new Font("Arial", Font.BOLD, 13));
 		lblDireccion.setBounds(10, 254, 123, 14);
 		panel.add(lblDireccion);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(10, 278, 185, 27);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		textDireccion = new JTextField();
+		textDireccion.setEnabled(false);
+		textDireccion.setBounds(10, 278, 185, 27);
+		panel.add(textDireccion);
+		textDireccion.setColumns(10);
 		
-		JTree tree = new JTree();
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setFont(new Font("Arial", Font.BOLD, 13));
+		lblNombre.setBounds(10, 96, 123, 14);
+		panel.add(lblNombre);
+		
+		textNombre = new JTextField();
+		textNombre.setEnabled(false);
+		textNombre.setBounds(10, 121, 185, 27);
+		panel.add(textNombre);
+		textNombre.setColumns(10);
+		
+		JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
+		lblTelefono.setFont(new Font("Arial", Font.BOLD, 13));
+		lblTelefono.setBounds(10, 180, 123, 14);
+		panel.add(lblTelefono);
+		
+		JFormattedTextField formattedTextTelefono = new JFormattedTextField();
+		formattedTextTelefono.setEnabled(false);
+		formattedTextTelefono.setBounds(10, 205, 185, 27);
+		panel.add(formattedTextTelefono);
+		
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Cliente aux = CentralAltice.getInstance().buscarCliente(formattedTextCedula.getText());
+				if(aux != null)
+				{
+					textNombre.setText(aux.getNombre());
+					formattedTextTelefono.setText(aux.getTelefono());
+					textDireccion.setText(aux.getDireccion());
+				}
+				else
+				{
+					textNombre.setEnabled(true);
+					formattedTextTelefono.setEnabled(true);
+					textDireccion.setEnabled(true);
+				}
+				
+			}
+				
+			
+		});
+		btnNewButton.setIcon(new ImageIcon(Ventaplanes.class.getResource("/ImagenesVentanaP/Lupa21x21.png")));
+		btnNewButton.setBounds(155, 45, 40, 29);
+		panel.add(btnNewButton);
+		
+		/*JTree tree = new JTree();
 		tree.setModel(new DefaultTreeModel(
 			new DefaultMutableTreeNode("Planes") {
 				{
@@ -121,27 +149,27 @@ public class Ventaplanes extends JDialog {
 						node_2 = new DefaultMutableTreeNode("Planes Ilimitados");
 							node_2.add(new DefaultMutableTreeNode(""));
 						node_1.add(node_2);
-						add(node_1);
+						getContentPane().add(node_1);
 					node_1 = new DefaultMutableTreeNode("Planes Internet");
 						node_2 = new DefaultMutableTreeNode("Plan Ilimitado");
-					add(new DefaultMutableTreeNode("Ilimitado1"));
-					add(new DefaultMutableTreeNode("Ilimitado2"));
-							add(new DefaultMutableTreeNode("Ilimitado3"));
-						add(new DefaultMutableTreeNode("Ilimitado4"));
-					add(node_2);
-				add(node_1);
+					getContentPane().add(new DefaultMutableTreeNode("Ilimitado1"));
+					getContentPane().add(new DefaultMutableTreeNode("Ilimitado2"));
+							getContentPane().add(new DefaultMutableTreeNode("Ilimitado3"));
+						getContentPane().add(new DefaultMutableTreeNode("Ilimitado4"));
+					getContentPane().add(node_2);
+				getContentPane().add(node_1);
 					node_1 = new DefaultMutableTreeNode("Planes por Capacidad");
-					add(new DefaultMutableTreeNode(""));
-					add(node_1);
+					getContentPane().add(new DefaultMutableTreeNode(""));
+					getContentPane().add(node_1);
 					node_1 = new DefaultMutableTreeNode("Planes combo");
-						add(new DefaultMutableTreeNode(""));
-					add(new DefaultMutableTreeNode(""));
-				add(node_1);
+						getContentPane().add(new DefaultMutableTreeNode(""));
+					getContentPane().add(new DefaultMutableTreeNode(""));
+				getContentPane().add(node_1);
 				}
 			}
 		));
 		tree.setBounds(237, 31, 186, 391);
-		contentPanel.add(tree);
+		contentPanel.add(tree);*/
 		
 		JPanel panelInformacion = new JPanel();
 		panelInformacion.setBackground(Color.WHITE);
