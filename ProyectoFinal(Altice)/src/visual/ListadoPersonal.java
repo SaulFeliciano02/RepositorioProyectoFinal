@@ -13,6 +13,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+import logico.CentralAltice;
+import logico.PersonalAdministra;
+import logico.PersonalAuto;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,19 +29,13 @@ public class ListadoPersonal extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
+	private static DefaultTableModel tablaModelo  = new DefaultTableModel();
+	private static Object fila[];
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListadoPersonal dialog = new ListadoPersonal();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
@@ -92,6 +91,77 @@ public class ListadoPersonal extends JDialog {
 		contentPanel.add(btnSalir);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int aux = comboBox.getSelectedIndex();
+				cargartabla(aux);
+				
+				
+				
+			}
+
+			private void cargartabla(int ind) {
+					
+		
+					tablaModelo.setRowCount(0);
+					fila = new Object[tablaModelo.getColumnCount()];
+						
+					switch(ind) {
+					
+					case 0: {
+					
+						for(PersonalAuto todos : CentralAltice.getInstance().getMiPersonal()) {
+							fila[0] = todos.getCedula();
+							fila[1] = todos.getDireccion();
+							fila[2]= todos.getNombre();
+							fila[3]= todos.getTelefono();
+							
+							tablaModelo.addRow(fila);}}
+						
+					break;
+					
+					case 1: {
+						
+						for(PersonalAuto admin : CentralAltice.getInstance().getMiPersonal()) {
+							if(admin instanceof PersonalAdministra) {
+								fila[0] = admin.getCedula();
+								fila[1] = admin.getDireccion();
+								fila[2]= admin.getNombre();
+								fila[3]= admin.getTelefono();
+								
+								tablaModelo.addRow(fila);}}
+						
+							break;
+					}
+					
+					case 2: {
+						
+						for(PersonalAuto comercial : CentralAltice.getInstance().getMiPersonal()) {
+							if(comercial instanceof PersonalAdministra) {
+								fila[0] = comercial.getCedula();
+								fila[1] = comercial.getDireccion();
+								fila[2]= comercial.getNombre();
+								fila[3]= comercial.getTelefono();
+								
+								tablaModelo.addRow(fila);}}
+						
+							break;}}
+					
+		
+				table.setModel(tablaModelo);
+				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				table.getTableHeader().setReorderingAllowed(false);
+				TableColumnModel tamañoTabla = table.getColumnModel();
+				tamañoTabla.getColumn(0).setPreferredWidth(70);
+				
+				tamañoTabla.getColumn(1).setPreferredWidth(100);
+				tamañoTabla.getColumn(2).setPreferredWidth(100);
+				tamañoTabla.getColumn(3).setPreferredWidth(100);
+				tamañoTabla.getColumn(4).setPreferredWidth(100);
+				
+			}
+		});
 		comboBox.setFont(new Font("Arial", Font.PLAIN, 13));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Comercial", "Administrativo"}));
 		comboBox.setBounds(612, 23, 112, 23);
