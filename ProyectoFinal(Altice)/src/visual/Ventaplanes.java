@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,9 +17,11 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.JTextPane;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -27,6 +30,9 @@ import javax.swing.ImageIcon;
 
 import logico.CentralAltice;
 import logico.Cliente;
+import planes.Plan;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Ventaplanes extends JDialog {
 
@@ -137,8 +143,8 @@ public class Ventaplanes extends JDialog {
 					DefaultMutableTreeNode node_1;
 					DefaultMutableTreeNode node_2;
 					node_1 = new DefaultMutableTreeNode("Planes moviles");
-						node_2 = new DefaultMutableTreeNode("Planes Limitados PRO Friends & Family");
-							node_2.add(new DefaultMutableTreeNode(""));
+						node_2= new DefaultMutableTreeNode("Planes Limitados PRO Friends & Family");
+							node_1.add(new DefaultMutableTreeNode(""));
 						node_1.add(node_2);
 						node_2 = new DefaultMutableTreeNode("Planes Limitados Apps");
 							node_2.add(new DefaultMutableTreeNode(""));
@@ -149,22 +155,22 @@ public class Ventaplanes extends JDialog {
 						node_2 = new DefaultMutableTreeNode("Planes Ilimitados");
 							node_2.add(new DefaultMutableTreeNode(""));
 						node_1.add(node_2);
-						getContentPane().add(node_1);
+						add(node_1);
 					node_1 = new DefaultMutableTreeNode("Planes Internet");
 						node_2 = new DefaultMutableTreeNode("Plan Ilimitado");
-					getContentPane().add(new DefaultMutableTreeNode("Ilimitado1"));
-					getContentPane().add(new DefaultMutableTreeNode("Ilimitado2"));
-							getContentPane().add(new DefaultMutableTreeNode("Ilimitado3"));
-						getContentPane().add(new DefaultMutableTreeNode("Ilimitado4"));
-					getContentPane().add(node_2);
-				getContentPane().add(node_1);
+					add(new DefaultMutableTreeNode("Ilimitado1"));
+					add(new DefaultMutableTreeNode("Ilimitado2"));
+						add(new DefaultMutableTreeNode("Ilimitado3"));
+						add(new DefaultMutableTreeNode("Ilimitado4"));
+					add(node_2);
+				add(node_1);
 					node_1 = new DefaultMutableTreeNode("Planes por Capacidad");
-					getContentPane().add(new DefaultMutableTreeNode(""));
-					getContentPane().add(node_1);
+					add(new DefaultMutableTreeNode(""));
+					add(node_1);
 					node_1 = new DefaultMutableTreeNode("Planes combo");
-						getContentPane().add(new DefaultMutableTreeNode(""));
-					getContentPane().add(new DefaultMutableTreeNode(""));
-				getContentPane().add(node_1);
+						add(new DefaultMutableTreeNode(""));
+					add(new DefaultMutableTreeNode(""));
+				add(node_1);
 				}
 			}
 		));
@@ -186,6 +192,60 @@ public class Ventaplanes extends JDialog {
 		textPane.setBackground(Color.WHITE);
 		textPane.setBounds(27, 59, 231, 297);
 		panelInformacion.add(textPane);
+		
+		
+		JTree tree = new JTree();
+		tree.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("Planes") {
+				{
+					DefaultMutableTreeNode node_1;
+					DefaultMutableTreeNode node_2;
+					node_1 = new DefaultMutableTreeNode("Plenes mov\u00EDles");
+					node_2 = new DefaultMutableTreeNode("Planes Limitados PRO Friends & Family");
+				     node_2.add(new DefaultMutableTreeNode(""));
+				  node_1.add(node_2);
+					     
+					  node_2 = new DefaultMutableTreeNode("Planes Limitados Apps");
+					     node_2.add(new DefaultMutableTreeNode(""));
+					  node_1.add(node_2);
+					  node_2 = new DefaultMutableTreeNode("Planes Prepago");
+					     node_2.add(new DefaultMutableTreeNode(""));
+					  node_1.add(node_2);   
+					  node_2 = new DefaultMutableTreeNode("Planes Ilimitados");
+					     node_2.add(new DefaultMutableTreeNode(""));
+					  node_1.add(node_2);
+					  
+					add(node_1);
+					node_1 = new DefaultMutableTreeNode("Planes Internet");
+					  node_2 = new DefaultMutableTreeNode("Planes Ilimitado");
+				         node_2.add(new DefaultMutableTreeNode("Ilimitado 1"));
+				         node_2.add(new DefaultMutableTreeNode("Ilimitado 2"));
+				         node_2.add(new DefaultMutableTreeNode("Ilimitado 3"));
+				         node_2.add(new DefaultMutableTreeNode("Ilimitado 4"));
+				      node_1.add(node_2);
+				      node_2 = new DefaultMutableTreeNode("Plan por capacidad");
+				         node_2.add(new DefaultMutableTreeNode(""));
+				         node_2.add(new DefaultMutableTreeNode(""));
+				         node_2.add(new DefaultMutableTreeNode(""));
+				         node_2.add(new DefaultMutableTreeNode(""));
+				      node_1.add(node_2);
+					add(node_1);
+					node_1 = new DefaultMutableTreeNode("Plan todo");
+						node_1.add(new DefaultMutableTreeNode("hot dogs"));
+						node_1.add(new DefaultMutableTreeNode("pizza"));
+						node_1.add(new DefaultMutableTreeNode("ravioli"));
+						node_1.add(new DefaultMutableTreeNode("bananas"));
+					add(node_1);
+					
+					
+					
+				}
+			}
+		));
+		tree.setBounds(237, 30, 186, 392);
+		contentPanel.add(tree);
+		
+        
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -215,4 +275,6 @@ public class Ventaplanes extends JDialog {
 			}
 		}
 	}
+	
+	
 }
