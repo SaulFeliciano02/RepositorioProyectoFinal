@@ -1,6 +1,6 @@
 package planes;
 
-public class InternetMovil extends Plan {
+public abstract class InternetMovil extends Plan {
 
 	public InternetMovil() {
 		super();

@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
@@ -21,10 +22,11 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import logico.CentralAltice;
-
+import persistivos.ArchivarCentral;
 import planes.Plan;
 
 
@@ -87,12 +89,7 @@ public class ManejoDePlanes extends JDialog {
 			{
 				listPlanes = new JList<>();
 				listPlanes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				
-				 
-				 
-				
 				listPlanes.setModel(modelPlanes);
-				
 				listPlanes.setModel(modelPlanes);
 				listPlanes.addMouseListener(new MouseAdapter() {
 					@Override
@@ -167,7 +164,6 @@ public class ManejoDePlanes extends JDialog {
 						btnDisponible.setEnabled(false);
 						btnNoDisponible.setEnabled(false);
 						nombreDelPlan = "";
-						loadPlanes();
 					}
 				}
 			});
@@ -194,7 +190,6 @@ public class ManejoDePlanes extends JDialog {
 						btnDisponible.setEnabled(false);
 						btnNoDisponible.setEnabled(false);
 						nombreDelPlan = "";
-						loadPlanes();
 					}
 				}
 			});
@@ -219,7 +214,15 @@ public class ManejoDePlanes extends JDialog {
 					JButton btnGuardar = new JButton("Guardar");
 					btnGuardar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							
+							actualizarArreglosDePlanes();
+							try {
+								ArchivarCentral archivo = new ArchivarCentral();
+								archivo.guardar(CentralAltice.getInstance());
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
 						}
 					});
 					btnGuardar.setForeground(Color.WHITE);
@@ -245,10 +248,23 @@ public class ManejoDePlanes extends JDialog {
 		listPlanes.setModel(modelPlanes);
 	
 	
-	for ( Plan aux : CentralAltice.getInstance().getPlanesDisponibles()) {
-		modelDisponibles.addElement(aux.getClass().getSimpleName());
-	 }
-	   listDisponibles.setModel(modelDisponibles);
-	 }
+		for ( Plan aux : CentralAltice.getInstance().getPlanesDisponibles()) {
+			modelDisponibles.addElement(aux.getClass().getSimpleName());
+		}
+		listDisponibles.setModel(modelDisponibles);
+	}
 	
+	private void actualizarArreglosDePlanes()
+	{
+		CentralAltice.getInstance().getPlanesDisponibles().removeAll(CentralAltice.getInstance().getPlanesDisponibles());
+		CentralAltice.getInstance().getPlanesNoDisponibles().removeAll(CentralAltice.getInstance().getPlanesNoDisponibles());
+		
+		for (int i = 0; i < modelDisponibles.size(); i++) {
+			CentralAltice.getInstance().getPlanesDisponibles().add(i, CentralAltice.getInstance().buscarPlan(modelDisponibles.getElementAt(i).toString()));
+		}
+		
+		for (int i = 0; i < modelPlanes.size(); i++) {
+			CentralAltice.getInstance().getPlanesNoDisponibles().add(i, CentralAltice.getInstance().buscarPlan(modelPlanes.getElementAt(i).toString()));	
+		}
+	}
 }

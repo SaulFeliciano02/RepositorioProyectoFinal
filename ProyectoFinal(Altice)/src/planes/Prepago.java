@@ -2,9 +2,9 @@ package planes;
 
 public class Prepago extends PlanMovil {
 
-	public Prepago(float precioPlan, int cantMinutos) {
-		super(precioPlan);
-		this.cantMinutos = cantMinutos;
+	public Prepago() {
+		super();
+		
 	}
 	
 	protected int cantMinutos;

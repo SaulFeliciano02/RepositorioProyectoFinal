@@ -1,21 +1,10 @@
 package planes;
 
-public class IlimitadoPRO extends PlanMovil {
-
-	public IlimitadoPRO(float precioPlan, String roaming, String cantInternet, int cantMinuto) {
-		super(precioPlan);
-		this.roaming = roaming;
-		this.cantInternet = cantInternet;
-		this.cantMinuto = cantMinuto;
-	}
-	public IlimitadoPRO(float precioPlan) {
-		super(precioPlan);
-		
-	}
+public abstract class IlimitadoPRO extends PlanMovil {
 	
 	protected String roaming = "Roaming a USA incluido";
 	protected String cantInternet = "Ilimitado";
-	protected int cantMinuto;
+	protected int cantMinuto = 100;
 	
 	public String getRoaming() {
 		return roaming;

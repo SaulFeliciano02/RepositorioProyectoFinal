@@ -1,23 +1,52 @@
 package logico;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import persistivos.ArchivarCentral;
+import planes.Altice1;
+import planes.Altice2;
+import planes.Altice3;
+import planes.Altice4;
+import planes.Altice5;
+import planes.Altice6;
+import planes.Ilimitado1;
+import planes.Ilimitado2;
+import planes.Ilimitado3;
+import planes.Ilimitado4;
+import planes.IlimitadoApp;
+import planes.IlimitadoApp2;
+import planes.IlimitadoAppFull;
+import planes.IlimitadoAppPlus;
+import planes.PaqueticoYApp;
 import planes.Plan;
+import planes.ProHD;
+import planes.ProStandard;
+import planes.ProUltraHD;
+import planes.ilimitadoPROUltraHD;
 
-public class CentralAltice {
+public class CentralAltice implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Cliente> misClientes;
 	private ArrayList<PersonalAuto> miPersonal;
 	private ArrayList<Plan> planesNoDisponibles;
 	private ArrayList<Plan> planesDisponibles;
+	private ArrayList<Plan> todosLosPlanes;
 	private static CentralAltice central = null;
 	
-	private CentralAltice() {
+	private CentralAltice(){
 		super();
 		this.misClientes = new ArrayList<>();
 		this.miPersonal = new ArrayList<>();
 		this.planesDisponibles = new ArrayList<>();
 		this.planesNoDisponibles = new ArrayList<>();
+		this.todosLosPlanes = new ArrayList<>();
 	}
 	
 	public static CentralAltice getInstance()
@@ -25,6 +54,7 @@ public class CentralAltice {
 		if (central == null)
 		{
 			central = new CentralAltice();
+			central.agregarLosPlanesAlInicio();
 		}
 		
 		return central;
@@ -120,27 +150,14 @@ public class CentralAltice {
 		boolean encontrado = false;
 		Plan aux = null;
 		
-		while(i<planesDisponibles.size() && !encontrado)
+		while(i<todosLosPlanes.size() && !encontrado)
 		{
-			if(planesDisponibles.get(i).getClass().getSimpleName().equalsIgnoreCase(nombre))
+			if(todosLosPlanes.get(i).getClass().getSimpleName().equalsIgnoreCase(nombre))
 			{
 				encontrado = true;
-				aux = planesDisponibles.get(i);
+				aux = todosLosPlanes.get(i);
 			}
 			i++;
-		}
-		
-		if(aux == null)
-		{
-			while(i<planesNoDisponibles.size() && !encontrado)
-			{
-				if(planesNoDisponibles.get(i).getClass().getSimpleName().equalsIgnoreCase(nombre))
-				{
-					encontrado = true;
-					aux = planesNoDisponibles.get(i);
-				}
-				i++;
-			}
 		}
 		
 		return aux;
@@ -193,6 +210,66 @@ public class CentralAltice {
 		}
 		
 		return permiso;
+	}
+	
+	public void agregarLosPlanesAlInicio()
+	{
+		Plan altice1 = new Altice1();
+		Plan altice2 = new Altice2();
+		Plan altice3 = new Altice3();
+		Plan altice4 = new Altice4();
+		Plan altice5 = new Altice5();
+		Plan altice6 = new Altice6();
+		Plan ilimitado1 = new Ilimitado1();
+		Plan ilimitado2 = new Ilimitado2();
+		Plan ilimitado3 = new Ilimitado3();
+		Plan ilimitado4 = new Ilimitado4();
+		Plan ilimitadoApp = new IlimitadoApp2();
+		Plan ilimitadoAppFull = new IlimitadoAppFull();
+		Plan ilimitadoAppPlus = new IlimitadoAppPlus();
+		Plan ilimitadoProUltraHD = new ilimitadoPROUltraHD();
+		Plan paqueticoYApp = new PaqueticoYApp();
+		Plan proHD = new ProHD();
+		Plan proStandard = new ProStandard();
+		Plan proUltraHD = new ProUltraHD();
+		
+		todosLosPlanes.add(altice1);
+		todosLosPlanes.add(altice2);
+		todosLosPlanes.add(altice3);
+		todosLosPlanes.add(altice4);
+		todosLosPlanes.add(altice5);
+		todosLosPlanes.add(altice6);
+		todosLosPlanes.add(ilimitado1);
+		todosLosPlanes.add(ilimitado2);
+		todosLosPlanes.add(ilimitado3);
+		todosLosPlanes.add(ilimitado4);
+		todosLosPlanes.add(ilimitadoApp);
+		todosLosPlanes.add(ilimitadoAppFull);
+		todosLosPlanes.add(ilimitadoAppPlus);
+		todosLosPlanes.add(ilimitadoProUltraHD);
+		todosLosPlanes.add(paqueticoYApp);
+		todosLosPlanes.add(proHD);
+		todosLosPlanes.add(proStandard);
+		todosLosPlanes.add(proUltraHD);
+		
+		for (Plan aux : todosLosPlanes) {
+			planesNoDisponibles.add(aux);
+		}
+	}
+	
+	public void recuperarMiCentral() throws FileNotFoundException, ClassNotFoundException, IOException
+	{
+		if(central == null)
+		{
+			central = new CentralAltice();
+		}
+		
+		ArchivarCentral archivo = new ArchivarCentral();
+		central = archivo.recuperar();
+	}
+
+	public ArrayList<Plan> getTodosLosPlanes() {
+		return todosLosPlanes;
 	}
 	
 }

@@ -16,11 +16,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 
 import logico.CentralAltice;
+import persistivos.ArchivarCentral;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowStateListener;
+import java.io.IOException;
 import java.text.ParseException;
 import java.awt.event.WindowEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -28,6 +30,7 @@ import java.awt.SystemColor;
 import javax.swing.JSeparator;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends JDialog {
 
@@ -51,6 +54,12 @@ public class VentanaPrincipal extends JDialog {
 			VentanaPrincipal dialog = new VentanaPrincipal();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			try {
+				CentralAltice.getInstance().recuperarMiCentral();
+			} catch (ClassNotFoundException | IOException e1) {
+				JOptionPane.showMessageDialog(null, "Bienvenido por primera vez a nuestro sistema", "Información", JOptionPane.INFORMATION_MESSAGE);
+				e1.printStackTrace();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -576,5 +585,7 @@ public class VentanaPrincipal extends JDialog {
 		btnCerrar.setBounds(791, 8, 38, 23);
 		btnCerrar.setBorderPainted(false);
 		panelCerrar.add(btnCerrar);
+		
+		
 	}
 }

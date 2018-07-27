@@ -2,8 +2,8 @@ package planes;
 
 public class ProStandard extends IlimitadoPRO {
 
-	public ProStandard(float precioPlan, String roaming, String cantInternet, int cantMinuto) {
-		super(precioPlan, roaming, cantInternet, cantMinuto);
+	public ProStandard() {
+		super();
 	
 		this.cantMinuto = 100;
 		this.precioPlan = 1499;

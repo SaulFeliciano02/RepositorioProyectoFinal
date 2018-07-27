@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import logico.CentralAltice;
 import logico.Cliente;
+import persistivos.ArchivarCentral;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class RegistroCliente extends JDialog {
@@ -174,6 +176,15 @@ public class RegistroCliente extends JDialog {
 							JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
 							ListarClientes.loadtable();
 							dispose();
+						}
+						
+						try {
+							CentralAltice.getInstance();
+							ArchivarCentral archivo = new ArchivarCentral();
+							archivo.guardar(CentralAltice.getInstance());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
 					}
 				});

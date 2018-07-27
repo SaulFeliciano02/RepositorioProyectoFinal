@@ -2,19 +2,11 @@ package planes;
 
 public class ilimitadoPROUltraHD extends IlimitadoFamiliaAmigo {
 
-	public ilimitadoPROUltraHD(float precioPlan, String roaming) {
-		super(precioPlan, roaming);
-		
+	public ilimitadoPROUltraHD() {
+		super();
+		this.precioPlan = 3299;
 	}
-
-	public ilimitadoPROUltraHD(float precioPlan) {
-		super(precioPlan);
-		this.precioPlan  =  3499;
 		
-	}
-	
-	
-	
 	
 /*public precioCantLineas(){
 	

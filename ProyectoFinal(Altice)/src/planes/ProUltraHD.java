@@ -2,8 +2,8 @@ package planes;
 
 public class ProUltraHD extends IlimitadoPRO {
 
-	public ProUltraHD(float precioPlan, String roaming, String cantInternet, int cantMinuto) {
-		super(precioPlan, roaming, cantInternet, cantMinuto);
+	public ProUltraHD() {
+		super();
 		
 		this.cantMinuto =100;
 		this.precioPlan = 3299;

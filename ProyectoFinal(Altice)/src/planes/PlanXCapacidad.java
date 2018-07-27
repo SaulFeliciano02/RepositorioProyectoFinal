@@ -1,6 +1,6 @@
 package planes;
 
-public class PlanXCapacidad extends InternetMovil {
+public abstract class PlanXCapacidad extends InternetMovil {
 
 	public PlanXCapacidad() {
 		super();

@@ -1,12 +1,13 @@
 package planes;
 
-public class Plan {
+import java.io.Serializable;
 
-	public Plan() {
-		super();
-		this.precioPlan = 0;
-	}
+public abstract class Plan implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected float precioPlan;
 
 	public float getPrecioPlan() {

@@ -1,9 +1,9 @@
 package planes;
 
 public class IlimitadoApp2 extends IlimitadoApp {
-
-	public IlimitadoApp2(float precioPlan, String minuto, String roaming) {
-		super(precioPlan, minuto, roaming);
+	
+	public IlimitadoApp2() {
+		super();
 		
 		this.precioPlan = 399;
 		this.portabilidad = 100;

@@ -1,20 +1,11 @@
 package planes;
 
-public class IlimitadoFamiliaAmigo extends PlanMovil {
+public abstract class IlimitadoFamiliaAmigo extends PlanMovil {
 
-	public IlimitadoFamiliaAmigo(float precioPlan, String roaming) {
-		super(precioPlan);
-		this.roaming = roaming;
-	}
-
-
-	public IlimitadoFamiliaAmigo(float precioPlan) {
-		super(precioPlan);
-		
-	}
 	
-	private String roaming = "Roaming USA incluido";
-
+	protected String roaming = "Roaming USA incluido";
+	protected String minutos = "+300 minutos";
+	
 	public String getRoaming() {
 		return roaming;
 	}

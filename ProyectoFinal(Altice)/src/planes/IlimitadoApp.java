@@ -1,11 +1,9 @@
 package planes;
 
-public class IlimitadoApp extends PlanMovil {
+public abstract class IlimitadoApp extends PlanMovil {
 
-	public IlimitadoApp(float precioPlan, String minuto, String roaming) {
-		super(precioPlan);
-		this.minuto = minuto;
-		this.roaming = roaming;
+	public IlimitadoApp() {
+		super();
 		
 	}
 	
