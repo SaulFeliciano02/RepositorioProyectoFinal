@@ -4,22 +4,15 @@ public abstract class PlanXCapacidad extends InternetMovil {
 
 	public PlanXCapacidad() {
 		super();
-		this.internetAdicional = 0;
+		
 	}
 
 	
-	protected int internetAdicional;
+	protected String internetAdicional;
 
 
-	public int getInternetAdicional() {
+	public String getInternetAdicional() {
 		return internetAdicional;
 	}
-
-
-	public void setInternetAdicional(int internetAdicional) {
-		this.internetAdicional = internetAdicional;
-	}
-	
-	
 
 }

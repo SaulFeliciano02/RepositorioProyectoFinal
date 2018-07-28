@@ -200,8 +200,14 @@ public class VentanaPrincipal extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				CentralAltice.getInstance().agregarFacturaDelMes();
-				
-				
+				try {
+					ArchivarCentral archivo = new ArchivarCentral();
+					archivo.guardar(CentralAltice.getInstance());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
 				
 			}
 		});
@@ -229,7 +235,7 @@ public class VentanaPrincipal extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					
 					
-					RegistroCliente mostrarVentanaC = new RegistroCliente("", null);
+					RegistroCliente mostrarVentanaC = new RegistroCliente("Registrar Cliente", null);
 					mostrarVentanaC.setModal(true);
 					mostrarVentanaC.setLocationRelativeTo(null);
 					mostrarVentanaC.setVisible(true);

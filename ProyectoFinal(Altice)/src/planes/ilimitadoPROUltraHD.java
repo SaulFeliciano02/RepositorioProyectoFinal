@@ -7,12 +7,4 @@ public class ilimitadoPROUltraHD extends IlimitadoFamiliaAmigo {
 		this.precioPlan = 3299;
 	}
 		
-	
-/*public precioCantLineas(){
-	
-	return precioLinea
-	
-	} */
-	
-
 }

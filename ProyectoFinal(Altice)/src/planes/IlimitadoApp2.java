@@ -6,15 +6,7 @@ public class IlimitadoApp2 extends IlimitadoApp {
 		super();
 		
 		this.precioPlan = 399;
-		this.portabilidad = 100;
-		this.bonoInternet = 100;
-		this.cantInternet = calcularInternet();
 		
 	}
-		
-	
-	/*public float 
-	 * calculoPrecioPlan(): return precioTotal;
-	 */
 
 }

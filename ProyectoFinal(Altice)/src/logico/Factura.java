@@ -41,6 +41,10 @@ public class Factura implements Serializable {
 		return estado;
 	}
 	
+	public Date getFecha() {
+		return fecha;
+	}
+
 	public void calcularMontoTotal()
 	{
 		montoTotal = planSeleccionado.getPrecioPlan() + itbis() + miCliente.calcularMora();

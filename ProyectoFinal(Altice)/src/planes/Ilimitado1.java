@@ -6,6 +6,7 @@ public class Ilimitado1 extends PlanIlimitado {
 		super();
 		this.precioPlan = 799;
 		this.precioPlanConPospago = 719;
+		velocidad = "1Mbps";
 	}
 
 	

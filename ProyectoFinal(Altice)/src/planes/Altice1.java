@@ -7,7 +7,7 @@ public class Altice1 extends PlanXCapacidad {
 		
 		this.precioPlan = 790;
 		this.precioPlanConPospago = 711;
-		this.internetAdicional = 5;
+		this.internetAdicional = "5GB";
 		
 	}
 

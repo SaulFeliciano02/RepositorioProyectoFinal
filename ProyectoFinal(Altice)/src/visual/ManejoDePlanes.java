@@ -78,7 +78,7 @@ public class ManejoDePlanes extends JDialog {
 				JLabel lblPlanes = new JLabel("Planes");
 				lblPlanes.setFont(new Font("Arial", Font.PLAIN, 25));
 				lblPlanes.setForeground(Color.WHITE);
-				lblPlanes.setBounds(12, 25, 91, 19);
+				lblPlanes.setBounds(12, 18, 91, 19);
 				panelPlanes.add(lblPlanes);
 			}
 			
@@ -98,6 +98,7 @@ public class ManejoDePlanes extends JDialog {
 						{
 							nombreDelPlan = (String)listPlanes.getModel().getElementAt(listPlanes.getSelectedIndex());
 							btnDisponible.setEnabled(true);
+							btnNoDisponible.setEnabled(false);
 						}
 					}
 				});
@@ -118,7 +119,7 @@ public class ManejoDePlanes extends JDialog {
 					JLabel lblDisponibles = new JLabel("Disponibles");
 					lblDisponibles.setForeground(Color.WHITE);
 					lblDisponibles.setFont(new Font("Arial", Font.PLAIN, 25));
-					lblDisponibles.setBounds(12, 24, 141, 19);
+					lblDisponibles.setBounds(12, 13, 141, 29);
 					panelDisponibles.add(lblDisponibles);
 				}
 				{
@@ -136,7 +137,7 @@ public class ManejoDePlanes extends JDialog {
 								{
 									nombreDelPlan = (String)listDisponibles.getModel().getElementAt(listDisponibles.getSelectedIndex());
 									btnNoDisponible.setEnabled(true);
-									btnDisponible.setEnabled(true);
+									btnDisponible.setEnabled(false);
 								}
 							}
 						});

@@ -8,12 +8,6 @@ public class IlimitadoAppFull extends IlimitadoApp {
 		super();
 		
 		this.precioPlan = 999;
-		this.portabilidad = 1000;
-		this.cantInternet = calcularInternet();
 	}
 	
-	/*public float 
-	 * calculoPrecioPlan(): return precioTotal;
-	 */
-
 }

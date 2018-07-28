@@ -143,6 +143,7 @@ public class ListarClientes extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.setEnabled(false);
 				btnModificar.setForeground(Color.WHITE);
 				btnModificar.setBackground(Color.BLACK);
 				btnModificar.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));

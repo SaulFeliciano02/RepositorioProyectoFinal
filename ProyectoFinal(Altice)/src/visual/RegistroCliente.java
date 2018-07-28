@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import logico.CentralAltice;
 import logico.Cliente;
@@ -20,18 +21,19 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
+import javax.swing.JFormattedTextField;
 
 public class RegistroCliente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCedula;
 	private JTextField txtNombre;
-	private JTextField txtTelefono;
 	private JTextField txtDireccion;
 	private Cliente miCliente;
 	private JButton btnRegistrar;
-	
+	private JFormattedTextField formattedtxtTelefono;
 
 	/**
 	 * Launch the application.
@@ -91,15 +93,9 @@ public class RegistroCliente extends JDialog {
 			lblTelfono.setFont(new Font("Arial", Font.PLAIN, 18));
 			lblTelfono.setBounds(74, 188, 90, 16);
 			panel.add(lblTelfono);
-			
-			txtTelefono = new JTextField();
-			txtTelefono.setBackground(Color.LIGHT_GRAY);
-			txtTelefono.setBounds(74, 217, 166, 22);
-			panel.add(txtTelefono);
-			txtTelefono.setColumns(10);
 			if(miCliente!=null)
 			{
-				txtTelefono.setText(miCliente.getTelefono());
+				formattedtxtTelefono.setText(miCliente.getTelefono());
 			}
 			
 			JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
@@ -112,6 +108,18 @@ public class RegistroCliente extends JDialog {
 			txtDireccion.setBounds(393, 217, 166, 22);
 			panel.add(txtDireccion);
 			txtDireccion.setColumns(10);
+			
+			MaskFormatter mascara = null;
+			try {
+				mascara = new MaskFormatter("(###)-###-####");
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			formattedtxtTelefono = new JFormattedTextField(mascara);
+			formattedtxtTelefono.setBackground(Color.LIGHT_GRAY);
+			formattedtxtTelefono.setBounds(74, 217, 166, 22);
+			panel.add(formattedtxtTelefono);
 			if(miCliente!=null)
 			{
 				txtDireccion.setText(miCliente.getDireccion());
@@ -145,7 +153,7 @@ public class RegistroCliente extends JDialog {
 							String cedula = txtCedula.getText();
 							String direccion = txtDireccion.getText();
 							String nombre = txtNombre.getText();
-							String telefono = txtTelefono.getText();
+							String telefono = formattedtxtTelefono.getText();
 							
 							if(CentralAltice.getInstance().chequeoDeCedula(txtCedula.getText()))
 							{
@@ -168,7 +176,7 @@ public class RegistroCliente extends JDialog {
 							String cedula = txtCedula.getText();
 							String direccion = txtDireccion.getText();
 							String nombre = txtNombre.getText();
-							String telefono = txtTelefono.getText();
+							String telefono = formattedtxtTelefono.getText();
 							
 							modificado = new Cliente(cedula, nombre, direccion, telefono);
 							int indice = CentralAltice.getInstance().getMisClientes().indexOf(miCliente);
@@ -213,6 +221,6 @@ public class RegistroCliente extends JDialog {
 		txtCedula.setText("");
 		txtDireccion.setText("");
 		txtNombre.setText("");
-		txtTelefono.setText("");
+		formattedtxtTelefono.setText("");
 	}
 }

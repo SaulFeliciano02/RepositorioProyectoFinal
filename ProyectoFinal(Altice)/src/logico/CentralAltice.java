@@ -178,13 +178,17 @@ public class CentralAltice implements Serializable{
 		
 		for (Cliente aux : misClientes) {
 			
-			nuevaFac = new Factura(aux, aux.getPlanesDisponibles());
+			if(aux.getPlanesDisponibles()!=null)
+			{
+				nuevaFac = new Factura(aux, aux.getPlanesDisponibles());
 			
-			nuevaFac.calcularMontoTotal();
+				nuevaFac.calcularMontoTotal();
 			
-			aux.getMisFacturas().add(nuevaFac);
+				aux.getMisFacturas().add(nuevaFac);
 			
-			aux.CalcularDeudaTotal();
+				aux.CalcularDeudaTotal();
+			}
+			
 		}
 	}
 	
