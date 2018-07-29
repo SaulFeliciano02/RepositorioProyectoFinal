@@ -105,6 +105,87 @@ public class VentanaPrincipal extends JDialog {
 		label_2.setBounds(33, 339, 204, 14);
 		panelAltice.add(label_2);
 		
+		panelConsulta = new JPanel();
+		panelConsulta.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
+		panelConsulta.setBounds(0, 0, 270, 603);
+		contentPanel.add(panelConsulta);
+		panelConsulta.setLayout(null);
+		
+		JLabel lblConsulta = new JLabel("Consulta");
+		lblConsulta.setFont(new Font("Arial", Font.BOLD, 22));
+		lblConsulta.setBounds(83, 21, 108, 20);
+		panelConsulta.add(lblConsulta);
+		
+		JMenuItem mntmIngresoAnualDe = new JMenuItem("Ingreso anual de Clientes");
+		mntmIngresoAnualDe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GraficaClientesPorMes gra = new GraficaClientesPorMes();
+				gra.setLocationRelativeTo(null);
+				gra.setVisible(true);
+			}
+		});
+		mntmIngresoAnualDe.setFont(new Font("Arial", Font.PLAIN, 16));
+		mntmIngresoAnualDe.setBounds(28, 144, 218, 24);
+		panelConsulta.add(mntmIngresoAnualDe);
+		
+		JSeparator separator_6 = new JSeparator();
+		separator_6.setBounds(12, 220, 246, 2);
+		panelConsulta.add(separator_6);
+		{
+			panelCliente = new JPanel();
+			panelCliente.setBounds(0, 0, 270, 603);
+			panelCliente.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
+			contentPanel.add(panelCliente);
+			panelCliente.setLayout(null);
+			
+			JLabel lblInicio = new JLabel("Cliente");
+			lblInicio.setBounds(104, 21, 85, 26);
+			lblInicio.setFont(new Font("Arial", Font.BOLD, 22));
+			panelCliente.add(lblInicio);
+			
+			JSeparator separator = new JSeparator();
+			separator.setBounds(23, 221, 237, 2);
+			panelCliente.add(separator);
+			
+			JMenuItem mntmRegistrarCliente = new JMenuItem("Registrar Cliente");
+			mntmRegistrarCliente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					
+					RegistroCliente mostrarVentanaC = new RegistroCliente("Registrar Cliente", null);
+					mostrarVentanaC.setModal(true);
+					mostrarVentanaC.setLocationRelativeTo(null);
+					mostrarVentanaC.setVisible(true);
+					 
+			
+					
+				}
+			});
+			mntmRegistrarCliente.setFont(new Font("Arial", Font.PLAIN, 16));
+			mntmRegistrarCliente.setBounds(34, 143, 155, 22);
+			panelCliente.add(mntmRegistrarCliente);
+			
+			JMenuItem mntmListarCliente = new JMenuItem("Listar Cliente");
+			mntmListarCliente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					
+					
+					ListarClientes mostrarVentanaL = new ListarClientes();
+					mostrarVentanaL.setModal(true);
+					mostrarVentanaL.setLocationRelativeTo(null);
+					mostrarVentanaL.setVisible(true);
+					
+					
+					
+					
+				}
+			});
+			mntmListarCliente.setFont(new Font("Arial", Font.PLAIN, 16));
+			mntmListarCliente.setBounds(34, 277, 129, 22);
+			panelCliente.add(mntmListarCliente);
+		}
+		
 		panelPersonalA = new JPanel();
 		panelPersonalA.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
 		panelPersonalA.setBounds(0, 0, 270, 603);
@@ -214,60 +295,6 @@ public class VentanaPrincipal extends JDialog {
 		mntmFacturacinDelMes.setFont(new Font("Arial", Font.PLAIN, 16));
 		mntmFacturacinDelMes.setBounds(51, 278, 178, 22);
 		panelFactura.add(mntmFacturacinDelMes);
-		{
-			panelCliente = new JPanel();
-			panelCliente.setBounds(0, 0, 270, 603);
-			panelCliente.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
-			contentPanel.add(panelCliente);
-			panelCliente.setLayout(null);
-			
-			JLabel lblInicio = new JLabel("Cliente");
-			lblInicio.setBounds(104, 21, 85, 26);
-			lblInicio.setFont(new Font("Arial", Font.BOLD, 22));
-			panelCliente.add(lblInicio);
-			
-			JSeparator separator = new JSeparator();
-			separator.setBounds(23, 221, 237, 2);
-			panelCliente.add(separator);
-			
-			JMenuItem mntmRegistrarCliente = new JMenuItem("Registrar Cliente");
-			mntmRegistrarCliente.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					
-					RegistroCliente mostrarVentanaC = new RegistroCliente("Registrar Cliente", null);
-					mostrarVentanaC.setModal(true);
-					mostrarVentanaC.setLocationRelativeTo(null);
-					mostrarVentanaC.setVisible(true);
-					 
-			
-					
-				}
-			});
-			mntmRegistrarCliente.setFont(new Font("Arial", Font.PLAIN, 16));
-			mntmRegistrarCliente.setBounds(34, 143, 155, 22);
-			panelCliente.add(mntmRegistrarCliente);
-			
-			JMenuItem mntmListarCliente = new JMenuItem("Listar Cliente");
-			mntmListarCliente.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					
-					
-					ListarClientes mostrarVentanaL = new ListarClientes();
-					mostrarVentanaL.setModal(true);
-					mostrarVentanaL.setLocationRelativeTo(null);
-					mostrarVentanaL.setVisible(true);
-					
-					
-					
-					
-				}
-			});
-			mntmListarCliente.setFont(new Font("Arial", Font.PLAIN, 16));
-			mntmListarCliente.setBounds(34, 277, 129, 22);
-			panelCliente.add(mntmListarCliente);
-		}
 		
 		panelPlanes = new JPanel();
 		panelPlanes.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
@@ -343,17 +370,6 @@ public class VentanaPrincipal extends JDialog {
 		mntmNewMenuItem_1.setFont(new Font("Arial", Font.PLAIN, 16));
 		mntmNewMenuItem_1.setBounds(35, 398, 129, 22);
 		panelPlanes.add(mntmNewMenuItem_1);
-		
-		panelConsulta = new JPanel();
-		panelConsulta.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
-		panelConsulta.setBounds(0, 0, 270, 603);
-		contentPanel.add(panelConsulta);
-		panelConsulta.setLayout(null);
-		
-		JLabel lblConsulta = new JLabel("Consulta");
-		lblConsulta.setFont(new Font("Arial", Font.BOLD, 22));
-		lblConsulta.setBounds(83, 21, 108, 20);
-		panelConsulta.add(lblConsulta);
 		
 		panelMenu = new JPanel();
 		panelMenu.setBounds(269, 39, 839, 564);

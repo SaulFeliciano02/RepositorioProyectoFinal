@@ -1,16 +1,23 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import planes.Plan;
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Plan planesDisponibles;
 	private ArrayList<Factura> misFacturas;
 	private boolean estado;
 	private float deudaTotal;
+	private Calendar fechaDeIngreso;
 	
 	/**
 	 * @param cedula
@@ -28,6 +35,14 @@ public class Cliente extends Persona {
 		this.deudaTotal=0;
 		this.misFacturas = new ArrayList<>();
 		this.planesDisponibles = null;
+		this.fechaDeIngreso = Calendar.getInstance();
+	}
+
+	
+
+
+	public Calendar getFechaDeIngreso() {
+		return fechaDeIngreso;
 	}
 
 
