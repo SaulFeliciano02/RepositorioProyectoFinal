@@ -84,6 +84,57 @@ public class VentanaPrincipal extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
+		panelPlanes = new JPanel();
+		panelPlanes.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
+		panelPlanes.setBounds(0, 0, 270, 603);
+		contentPanel.add(panelPlanes);
+		panelPlanes.setLayout(null);
+		
+		JLabel lblPlanes_1 = new JLabel("Planes");
+		lblPlanes_1.setFont(new Font("Arial", Font.BOLD, 22));
+		lblPlanes_1.setBounds(92, 21, 78, 20);
+		panelPlanes.add(lblPlanes_1);
+		
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setBounds(20, 232, 223, 2);
+		panelPlanes.add(separator_3);
+		
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setBounds(20, 347, 223, 2);
+		panelPlanes.add(separator_4);
+		
+		JMenuItem mntmVentaDePlanes = new JMenuItem("Venta de planes");
+		mntmVentaDePlanes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Ventaplanes mostrarVentanaP = new Ventaplanes();
+				mostrarVentanaP.setModal(true);
+				mostrarVentanaP.setLocationRelativeTo(null);
+				mostrarVentanaP.setVisible(true);
+				
+			}
+		});
+		mntmVentaDePlanes.setFont(new Font("Arial", Font.PLAIN, 16));
+		mntmVentaDePlanes.setBounds(35, 151, 158, 22);
+		panelPlanes.add(mntmVentaDePlanes);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Manejo de planes\r\n");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ManejoDePlanes mostrarVentanaM = new ManejoDePlanes();
+				mostrarVentanaM.setModal(true);
+				mostrarVentanaM.setLocationRelativeTo(null);
+				mostrarVentanaM.setVisible(true);
+				
+				
+				
+			}
+		});
+		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 16));
+		mntmNewMenuItem.setBounds(35, 278, 158, 22);
+		panelPlanes.add(mntmNewMenuItem);
+		
 		panelAltice = new JPanel();
 		panelAltice.setBounds(0, 0, 270, 603);
 		contentPanel.add(panelAltice);
@@ -212,7 +263,7 @@ public class VentanaPrincipal extends JDialog {
 				
 				
 				
-				RegistrarPersonal VentanaComercial = new RegistrarPersonal();
+				RegistrarPersonal VentanaComercial = new RegistrarPersonal(null);
 				VentanaComercial.setModal(true);
 				VentanaComercial.setLocationRelativeTo(null);
 				VentanaComercial.setVisible(true);
@@ -295,81 +346,6 @@ public class VentanaPrincipal extends JDialog {
 		mntmFacturacinDelMes.setFont(new Font("Arial", Font.PLAIN, 16));
 		mntmFacturacinDelMes.setBounds(51, 278, 178, 22);
 		panelFactura.add(mntmFacturacinDelMes);
-		
-		panelPlanes = new JPanel();
-		panelPlanes.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
-		panelPlanes.setBounds(0, 0, 270, 603);
-		contentPanel.add(panelPlanes);
-		panelPlanes.setLayout(null);
-		
-		JLabel lblPlanes_1 = new JLabel("Planes");
-		lblPlanes_1.setFont(new Font("Arial", Font.BOLD, 22));
-		lblPlanes_1.setBounds(92, 21, 78, 20);
-		panelPlanes.add(lblPlanes_1);
-		
-		JSeparator separator_3 = new JSeparator();
-		separator_3.setBounds(20, 232, 223, 2);
-		panelPlanes.add(separator_3);
-		
-		JSeparator separator_4 = new JSeparator();
-		separator_4.setBounds(20, 347, 223, 2);
-		panelPlanes.add(separator_4);
-		
-		JMenuItem mntmVentaDePlanes = new JMenuItem("Venta de planes");
-		mntmVentaDePlanes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				Ventaplanes mostrarVentanaP = new Ventaplanes();
-				mostrarVentanaP.setModal(true);
-				mostrarVentanaP.setLocationRelativeTo(null);
-				mostrarVentanaP.setVisible(true);
-				
-			}
-		});
-		mntmVentaDePlanes.setFont(new Font("Arial", Font.PLAIN, 16));
-		mntmVentaDePlanes.setBounds(35, 151, 158, 22);
-		panelPlanes.add(mntmVentaDePlanes);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Manejo de planes\r\n");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				ManejoDePlanes mostrarVentanaM = new ManejoDePlanes();
-				mostrarVentanaM.setModal(true);
-				mostrarVentanaM.setLocationRelativeTo(null);
-				mostrarVentanaM.setVisible(true);
-				
-				
-				
-			}
-		});
-		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 16));
-		mntmNewMenuItem.setBounds(35, 278, 158, 22);
-		panelPlanes.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Gr\u00E1fica");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				/*
-				 * MOSTRAR VENTANA DE GRAFICA
-				 * 
-				 * 
-				Ventaplanes mostrarVentanaP = new Ventaplanes();
-				mostrarVentanaP.setModal(true);
-				mostrarVentanaP.setLocationRelativeTo(null);
-				mostrarVentanaP.setVisible(true);
-				 
-				 
-				 */
-				
-			}
-			
-			
-		});
-		mntmNewMenuItem_1.setFont(new Font("Arial", Font.PLAIN, 16));
-		mntmNewMenuItem_1.setBounds(35, 398, 129, 22);
-		panelPlanes.add(mntmNewMenuItem_1);
 		
 		panelMenu = new JPanel();
 		panelMenu.setBounds(269, 39, 839, 564);

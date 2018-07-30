@@ -25,29 +25,37 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
+
+
+
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
 
 public class RegistrarPersonal extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCedula;
 	private JTextField txtNombreyApellido;
-	private JTextField txtTelefono;
-	private JTextField txtDireccion;
-	private JTextField txtSueldo;
+	private JTextField txtDireccion, txtSueldo;
 	JRadioButton rdbtnAministrativo;
 	JRadioButton rdbtnComercial_1;
 	JPanel panelRdbtn;
 	ButtonGroup grupoBotones;
 	private PersonalAuto personales; 
-	private JPasswordField txtContraseña;
-	private JPasswordField txtConfirmarC;
+	private JPasswordField txtContraseña, txtConfirmarC;
 	private JCheckBox chckbxVerContraseña;
 	private char cogerInformacion; 
+	JFormattedTextField formattedTelefono, formattedCedula;
+	private char[] CogerPasswordC, cogerPasswordConfirm;
+	private PersonalAuto modificar;
+	JButton btnRegistrar;
+	
+	
 	
 
 	/**
@@ -58,14 +66,28 @@ public class RegistrarPersonal extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegistrarPersonal() {
-		setTitle("Registrar Personal");
+	public RegistrarPersonal(PersonalAuto regPersonal) {
+		
 		setResizable(false);
+		
+		modificar = regPersonal;
+		setTitle("");
+		
+		if(modificar == null) {
+			setTitle("Registrar personal autorizado");}
+		else {
+			setTitle("Modificar personal autorizado");
+			
+		}
+		
+		
+		
 		setModal(true);
 		setBounds(100, 100, 648, 381);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
@@ -82,14 +104,8 @@ public class RegistrarPersonal extends JDialog {
 			lblCedula.setBounds(27, 126, 46, 14);
 			panel.add(lblCedula);
 			
-			txtCedula = new JTextField();
-			txtCedula.setForeground(Color.BLACK);
-			txtCedula.setBackground(Color.LIGHT_GRAY);
-			txtCedula.setBounds(27, 151, 160, 20);
-			panel.add(txtCedula);
-			txtCedula.setColumns(10);
 			
-			JLabel lblNombreYApellido = new JLabel("Nombre(s) y/ apellido(s):");
+			JLabel lblNombreYApellido = new JLabel("Nombre(s) y/o apellido(s):");
 			lblNombreYApellido.setFont(new Font("Arial", Font.PLAIN, 13));
 			lblNombreYApellido.setBounds(224, 126, 152, 14);
 			panel.add(lblNombreYApellido);
@@ -100,18 +116,14 @@ public class RegistrarPersonal extends JDialog {
 			txtNombreyApellido.setBounds(224, 151, 235, 20);
 			panel.add(txtNombreyApellido);
 			txtNombreyApellido.setColumns(10);
+			if(personales != null) {
+				txtNombreyApellido.setText(personales.getNombre());
+			}
 			
 			JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
 			lblTelefono.setFont(new Font("Arial", Font.PLAIN, 13));
 			lblTelefono.setBounds(474, 126, 65, 14);
 			panel.add(lblTelefono);
-			
-			txtTelefono = new JTextField();
-			txtTelefono.setBackground(Color.LIGHT_GRAY);
-			txtTelefono.setForeground(Color.BLACK);
-			txtTelefono.setBounds(475, 151, 142, 20);
-			panel.add(txtTelefono);
-			txtTelefono.setColumns(10);
 			
 			JLabel lblDireccion = new JLabel("Direcci\u00F3n:");
 			lblDireccion.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -124,6 +136,9 @@ public class RegistrarPersonal extends JDialog {
 			txtDireccion.setBounds(27, 225, 165, 20);
 			panel.add(txtDireccion);
 			txtDireccion.setColumns(10);
+			if(personales != null) {
+				txtDireccion.setText(personales.getDireccion());
+			}
 			
 			JLabel lblSueldo = new JLabel("Sueldo:");
 			lblSueldo.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -136,6 +151,9 @@ public class RegistrarPersonal extends JDialog {
 			txtSueldo.setBounds(224, 225, 83, 20);
 			panel.add(txtSueldo);
 			txtSueldo.setColumns(10);
+			if(personales != null) {
+				txtSueldo.setText(Float.toString((float) personales.getSueldo()));
+			}
 			
 			JLabel lblContrasena = new JLabel("Contrase\u00F1a:");
 			lblContrasena.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -232,7 +250,7 @@ public class RegistrarPersonal extends JDialog {
 			panel.add(lblDatosDelPersonal);
 			
 			JSeparator separator = new JSeparator();
-			separator.setBounds(374, 87, 109, 4);
+			separator.setBounds(378, 87, 109, 4);
 			panel.add(separator);
 			
 			txtContraseña = new JPasswordField();
@@ -240,12 +258,15 @@ public class RegistrarPersonal extends JDialog {
 			txtContraseña.setBackground(Color.LIGHT_GRAY);
 			txtContraseña.setBounds(317, 225, 142, 20);
 			panel.add(txtContraseña);
+			cogerInformacion = txtContraseña.getEchoChar();
+			
 			
 			txtConfirmarC = new JPasswordField();
 			txtConfirmarC.setForeground(Color.BLACK);
 			txtConfirmarC.setBackground(Color.LIGHT_GRAY);
-			txtConfirmarC.setBounds(474, 225, 143, 20);
+			txtConfirmarC.setBounds(474, 225, 148, 20);
 			panel.add(txtConfirmarC);
+			cogerInformacion = txtConfirmarC.getEchoChar();
 			
 			chckbxVerContraseña = new JCheckBox("Ver contrase\u00F1a");
 			chckbxVerContraseña.addActionListener(new ActionListener() {
@@ -280,6 +301,47 @@ public class RegistrarPersonal extends JDialog {
 			label.setIcon(new ImageIcon(RegistrarPersonal.class.getResource("/ImagenesVentanaP/Visible png 3.png")));
 			label.setBounds(474, 270, 28, 14);
 			panel.add(label);
+			try
+			{
+			    MaskFormatter mascara = new MaskFormatter("( ### ) - ### - ####");
+			    formattedTelefono = new JFormattedTextField(mascara);
+			    
+			}
+			catch (Exception e)
+			{
+			    e.printStackTrace();
+			}
+			
+		
+			formattedTelefono.setBackground(Color.LIGHT_GRAY);
+			formattedTelefono.setBounds(471, 151, 148, 20);
+			panel.add(formattedTelefono);
+			if(personales != null) {
+				formattedTelefono.setText(personales.getTelefono());
+				
+			}
+
+			
+			try
+			{
+			    MaskFormatter mascara = new MaskFormatter("###-#######-#");
+			    formattedCedula = new JFormattedTextField(mascara);
+			    formattedCedula.setForeground(Color.BLACK);
+			    
+			}
+			catch (Exception e)
+			{
+			    e.printStackTrace();
+			}
+			
+			formattedCedula.setBackground(Color.LIGHT_GRAY);
+			formattedCedula.setBounds(27, 151, 165, 20);
+			panel.add(formattedCedula);
+			if(modificar != null) {
+				formattedCedula.setText(modificar.getCedula());
+				formattedCedula.setEnabled(false);
+			}
+			
 		}
 		
 		
@@ -294,112 +356,133 @@ public class RegistrarPersonal extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar = new JButton("");
+				if(modificar != null) {
+					btnRegistrar.setText("Modificar");}
+				else {
+					btnRegistrar.setText("Registrar");
+				}
+				
+				
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 						
+						//TODO MODIFICAR Y LISTAR ESTA MIELDA
 						
-							if(txtCedula.getText().isEmpty()||txtConfirmarC.getText().isEmpty()||txtContraseña.getText().isEmpty()||
-									txtDireccion.getText().isEmpty()||txtNombreyApellido.getText().isEmpty()||txtSueldo.getText().isEmpty()
-									||txtTelefono.getText().isEmpty()) {
-								
-								JOptionPane.showMessageDialog(null, "Rellenar todos los campos", "Estado de ejecución", JOptionPane.ERROR_MESSAGE);
+						
+						String cedula = formattedCedula.getText();
+						String telefono = formattedTelefono.getText();
+						String nombre = txtNombreyApellido.getText();
+						String direccion = txtDireccion.getText();
+						String contraseña = txtContraseña.getPassword().toString();
+						String contraseñaConfirmar  = txtConfirmarC.getPassword().toString();
+						
+						
+						
+						float sueldo = 0;
+						if(!txtSueldo.getText().equalsIgnoreCase(""))
+						{
+							sueldo = Float.parseFloat(txtSueldo.getText());
+						}
+						
+					if(modificar == null) {
+						
+						if(Arrays.equals(txtContraseña.getPassword(), txtConfirmarC.getPassword()) && confirmarCampos() && CentralAltice.getInstance().chequeoDeCedula(cedula)) {
 							
+							if(rdbtnAministrativo.isSelected()) {
+								
+								PersonalAuto personalA = new PersonalAdministra(cedula, nombre, direccion, telefono, contraseñaConfirmar, sueldo);																
+								CentralAltice.getInstance().agregarPersonal(personalA);								
 								
 							}
 							
-							//TODO Poner en un buble esta condicion, para que siga pidiendo las contraseñas.
-							else {
-								
-								if((txtContraseña.getText().equals(txtConfirmarC.getText())==false)) {
-									
-									txtContraseña.setBackground(Color.RED);
-									txtConfirmarC.setBackground(Color.RED);
-									JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Información de ejecución", JOptionPane.ERROR_MESSAGE);
-									txtContraseña.setText("");
-									txtConfirmarC.setText("");
-										
-									}
-								
-								
-								if(!CentralAltice.getInstance().chequeoDeCedula(txtCedula.getText())) {
-									
-									txtCedula.setBackground(Color.RED);
-									JOptionPane.showMessageDialog(null, "La cédula ya existe en el registro", "Información de ejecución", JOptionPane.ERROR_MESSAGE);
-									txtCedula.setText("");
-									
-								}
-								
-								
-								else {
-									
-									if(personales == null) {
-										
-										if(rdbtnAministrativo.isSelected()) {
-											
-											String cedula = txtCedula.getText();
-											String confirmarC = txtConfirmarC.getText();
-											String contraseña = txtContraseña.getText();
-											String direccion = txtDireccion.getText();
-											String nombre = txtNombreyApellido.getText();
-											Float sueldo = Float.parseFloat(txtSueldo.getText());
-											String telefono = txtTelefono.getText();
-											
+							if(rdbtnComercial_1.isSelected()) {
+								PersonalAuto personalC = new Comercial(cedula, nombre, direccion, telefono, contraseñaConfirmar, sueldo);
+								CentralAltice.getInstance().agregarPersonal(personalC);
+															
+							}
+							
+							JOptionPane.showMessageDialog(null, "¡Personal registrado!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							
+							grupoBotones.clearSelection();
 
-											PersonalAuto registraP = new PersonalAdministra(cedula, nombre, direccion, telefono, contraseña, sueldo);
-											CentralAltice.getInstance().agregarPersonal(registraP);
-											clean();	
-											grupoBotones.clearSelection();
-										}
-										
-										
-										
-										if (personales==null) {
-											if(rdbtnComercial_1.isSelected()) {
-												
-												String cedula = txtCedula.getText();
-												String confirmarC = txtConfirmarC.getText();
-												String contraseña = txtContraseña.getText();
-												String direccion = txtDireccion.getText();
-												String nombre = txtNombreyApellido.getText();
-												Float sueldo = Float.parseFloat(txtSueldo.getText());
-												String telefono = txtTelefono.getText();
-												
-												PersonalAuto registrarComercial = new Comercial(cedula, nombre, direccion, telefono, contraseña, sueldo);
-												CentralAltice.getInstance().agregarPersonal(registrarComercial);
-												clean();
-												grupoBotones.clearSelection();
-												
-												} } }
-									
-												}
-										
-
-								}
-								
-								
-								
-											
-					}
-
-								
+							clean();
+						
+						}						
 				
-
-					private void clean() {
-						txtCedula.setText("");
-						txtConfirmarC.setText("");
-						txtContraseña.setText("");
-						txtDireccion.setText("");
-						txtNombreyApellido.setText("");
-						txtSueldo.setText("");
-						txtTelefono.setText("");
-						txtContraseña.setBackground(Color.BLACK);
-						txtConfirmarC.setBackground(Color.BLACK);
-						txtCedula.setBackground(Color.BLACK);
+						else {
+							
+							
+							if(!Arrays.equals(txtContraseña.getPassword(), txtConfirmarC.getPassword())) {
+								
+								txtConfirmarC.setBackground(new Color(250, 60, 60));
+								txtContraseña.setBackground(new Color(250, 60, 60));
+								
+								JOptionPane.showMessageDialog(null, "Las contraseñas son distintas", "Error", JOptionPane.ERROR_MESSAGE);
+								txtConfirmarC.setText("");
+								txtContraseña.setText("");
+								
+							}
+								
+							if(!(CentralAltice.getInstance().chequeoDeCedula(formattedCedula.getText()))) {
+								
+								formattedCedula.setBackground(new Color(250, 60, 60));
+								JOptionPane.showMessageDialog(null, "La cédula ya está registrada", "Error", JOptionPane.ERROR_MESSAGE);
+								formattedCedula.setText("");}}
+							
+											
+						}
+					else {
+						
+						if(Arrays.equals(txtContraseña.getPassword(), txtConfirmarC.getPassword()) && confirmarCampos()) {
+							
+							PersonalAuto personal = regPersonal;
+							
+							if(rdbtnAministrativo.isSelected()) {
+								
+								personal = new PersonalAdministra(cedula, nombre, direccion, telefono, contraseñaConfirmar, sueldo);																
+								int indice = CentralAltice.getInstance().getMiPersonal().indexOf(regPersonal);								
+								CentralAltice.getInstance().getMiPersonal().set(indice, personal);
+								ListadoPersonal.cargartabla(0);
+								dispose();								
+								
+							}
+							if(rdbtnComercial_1.isSelected()) {
+								personal = new Comercial(cedula, nombre, direccion, telefono, contraseñaConfirmar, sueldo);
+								int indice = CentralAltice.getInstance().getMiPersonal().indexOf(regPersonal);								
+								CentralAltice.getInstance().getMiPersonal().set(indice, personal);
+								ListadoPersonal.cargartabla(0);
+								dispose();	
+															
+							}	
+							
+						}
+						
+						else {
+							
+							
+							if(!Arrays.equals(txtContraseña.getPassword(), txtConfirmarC.getPassword())) {
+								
+								txtConfirmarC.setBackground(new Color(250, 60, 60));
+								txtContraseña.setBackground(new Color(250, 60, 60));
+								
+								JOptionPane.showMessageDialog(null, "Las contraseñas son distintas", "Error", JOptionPane.ERROR_MESSAGE);
+								txtConfirmarC.setText("");
+								txtContraseña.setText("");
+								
+							}
+								
+							}
 						
 						
 					}
+
+						
+					}
+						
+					
+				
 					
 					
 				});
@@ -412,6 +495,8 @@ public class RegistrarPersonal extends JDialog {
 					}
 					
 				});
+				
+				
 				btnRegistrar.setForeground(Color.WHITE);
 				btnRegistrar.setBackground(Color.BLACK);
 				btnRegistrar.setActionCommand("OK");
@@ -448,5 +533,86 @@ public class RegistrarPersonal extends JDialog {
 	}
 		
 }
+
+
+	private void clean() {
+		formattedCedula.setText("");
+		txtConfirmarC.setText("");
+		txtContraseña.setText("");
+		txtDireccion.setText("");
+		txtNombreyApellido.setText("");
+		txtSueldo.setText("");
+		formattedTelefono.setText("");
+		txtContraseña.setBackground(Color.LIGHT_GRAY);
+		txtConfirmarC.setBackground(Color.LIGHT_GRAY);
+		formattedCedula.setBackground(Color.LIGHT_GRAY);
+		
+		
+	}
+
+
+	public boolean confirmarCampos() {
+		
+		boolean bandera = true;
+		
+		if(formattedCedula.getText().equals("")) {
+			
+			bandera= false;
+			
+		}
+		
+		if(txtContraseña.getPassword().length  == 0) {
+			
+			bandera = false;
+		}
+		
+		if(txtConfirmarC.getPassword().length == 0) {
+			
+			bandera = false;
+		}
+		
+		
+		if(txtDireccion.getText().isEmpty()) {
+			
+			bandera = false;
+			
+		}
+		
+		if(txtNombreyApellido.getText().isEmpty()) {
+			
+			bandera = false;
+			
+		}
+		
+		if(txtSueldo.getText().equalsIgnoreCase("")) {
+			
+			bandera= false;
+			
+		}
+		
+		
+		if(formattedTelefono.getText().equalsIgnoreCase("")) {
+			
+			bandera= false;
+			
+		}
+		
+		
+		if(!rdbtnAministrativo.isSelected() && !rdbtnComercial_1.isSelected())
+		{
+			
+			bandera = false;
+			
+		}
+		
+		if(!bandera)
+		{
+			JOptionPane.showMessageDialog(null, "Llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		return bandera;
+		
+		
+	}
 }
 
