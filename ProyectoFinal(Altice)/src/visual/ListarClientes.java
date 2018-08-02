@@ -69,7 +69,7 @@ public class ListarClientes extends JDialog {
 			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(2, 100, 688, 359);
+				scrollPane.setBounds(2, 81, 688, 378);
 				scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 				panel.add(scrollPane);
 				{
@@ -97,12 +97,12 @@ public class ListarClientes extends JDialog {
 			}
 			
 			txtCedula = new JTextField();
-			txtCedula.setBounds(333, 46, 218, 31);
+			txtCedula.setBounds(333, 46, 218, 22);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);
 			
 			JButton btnSearch = new JButton("");
-			btnSearch.setIcon(new ImageIcon(ListarClientes.class.getResource("/ImagenesVentanaP/icons8-b\u00FAsqueda-27.png")));
+			btnSearch.setIcon(new ImageIcon(ListarClientes.class.getResource("/ImagenesVentanaP/LupaNegra21x21.png")));
 			btnSearch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String cedula = txtCedula.getText();
@@ -124,16 +124,16 @@ public class ListarClientes extends JDialog {
 					}
 				}
 			});
-			btnSearch.setBounds(558, 46, 40, 31);
+			btnSearch.setBounds(558, 45, 40, 25);
 			panel.add(btnSearch);
 			
 			JLabel lblCdula = new JLabel("C\u00E9dula:");
 			lblCdula.setFont(new Font("Arial", Font.BOLD, 14));
-			lblCdula.setBounds(437, 13, 73, 16);
+			lblCdula.setBounds(507, 17, 73, 16);
 			panel.add(lblCdula);
 			
 			JSeparator separator = new JSeparator();
-			separator.setBounds(323, 37, 317, 2);
+			separator.setBounds(333, 37, 265, 2);
 			panel.add(separator);
 		}
 		{

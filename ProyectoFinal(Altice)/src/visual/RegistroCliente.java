@@ -28,12 +28,12 @@ import javax.swing.JFormattedTextField;
 public class RegistroCliente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCedula;
 	private JTextField txtNombre;
 	private JTextField txtDireccion;
 	private Cliente miCliente;
 	private JButton btnRegistrar;
 	private JFormattedTextField formattedtxtTelefono;
+	private JFormattedTextField formattedCedula;
 
 	/**
 	 * Launch the application.
@@ -41,6 +41,7 @@ public class RegistroCliente extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws ParseException 
 	 */
 	public RegistroCliente(String title, Cliente miCliente) {
 		setResizable(false);
@@ -62,16 +63,10 @@ public class RegistroCliente extends JDialog {
 			lblCdula.setFont(new Font("Arial", Font.PLAIN, 18));
 			lblCdula.setBounds(74, 55, 80, 22);
 			panel.add(lblCdula);
-			
-			txtCedula = new JTextField();
-			txtCedula.setBackground(Color.LIGHT_GRAY);
-			txtCedula.setBounds(74, 90, 166, 22);
-			panel.add(txtCedula);
-			txtCedula.setColumns(10);
 			if(miCliente!=null)
 			{
-				txtCedula.setText(miCliente.getCedula());
-				txtCedula.setEnabled(false);
+				formattedCedula.setText(miCliente.getCedula());
+				formattedCedula.setEnabled(false);
 			}
 			
 			JLabel lblNombre = new JLabel("Nombre:");
@@ -120,6 +115,18 @@ public class RegistroCliente extends JDialog {
 			formattedtxtTelefono.setBackground(Color.LIGHT_GRAY);
 			formattedtxtTelefono.setBounds(74, 217, 166, 22);
 			panel.add(formattedtxtTelefono);
+			
+			MaskFormatter maskcedula = null;
+			try {
+				maskcedula = new MaskFormatter("###-#######-#");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			formattedCedula = new JFormattedTextField(maskcedula);
+			formattedCedula.setBackground(Color.LIGHT_GRAY);
+			formattedCedula.setBounds(74, 90, 166, 22);
+			panel.add(formattedCedula);
 			if(miCliente!=null)
 			{
 				txtDireccion.setText(miCliente.getDireccion());
@@ -145,57 +152,91 @@ public class RegistroCliente extends JDialog {
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						if(miCliente==null)
+						if(confirmarCampos())
 						{
-							
-							Cliente nuevo = null;
-							
-							String cedula = txtCedula.getText();
-							String direccion = txtDireccion.getText();
-							String nombre = txtNombre.getText();
-							String telefono = formattedtxtTelefono.getText();
-							
-							if(CentralAltice.getInstance().chequeoDeCedula(txtCedula.getText()))
+							if(miCliente==null)
 							{
-								nuevo = new Cliente(cedula, nombre, direccion, telefono);
-								CentralAltice.getInstance().agregarCliente(nuevo);
-								JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
-								clean();
+								
+								Cliente nuevo = null;
+								
+								String cedula = formattedCedula.getText();
+								String direccion = txtDireccion.getText();
+								String nombre = txtNombre.getText();
+								String telefono = formattedtxtTelefono.getText();
+								
+								if(CentralAltice.getInstance().chequeoDeCedula(formattedCedula.getText()))
+								{
+									nuevo = new Cliente(cedula, nombre, direccion, telefono);
+									CentralAltice.getInstance().agregarCliente(nuevo);
+									JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+									clean();
+								}
+								else
+								{
+									JOptionPane.showMessageDialog(null, "La cédula introducida ya está registrada", "Error", JOptionPane.ERROR_MESSAGE);
+								}
+								
 							}
+							
 							else
 							{
-								JOptionPane.showMessageDialog(null, "La cédula introducida ya está registrada", "Error", JOptionPane.ERROR_MESSAGE);
+								Cliente modificado = null;
+								
+								String cedula = formattedCedula.getText();
+								String direccion = txtDireccion.getText();
+								String nombre = txtNombre.getText();
+								String telefono = formattedtxtTelefono.getText();
+								
+								modificado = new Cliente(cedula, nombre, direccion, telefono);
+								int indice = CentralAltice.getInstance().getMisClientes().indexOf(miCliente);
+								CentralAltice.getInstance().getMisClientes().set(indice, modificado);
+								JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+								ListarClientes.loadtable();
+								dispose();
 							}
 							
+							try {
+								CentralAltice.getInstance();
+								ArchivarCentral archivo = new ArchivarCentral();
+								archivo.guardar(CentralAltice.getInstance());
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+							formattedCedula.setBackground(Color.LIGHT_GRAY);
+							txtDireccion.setBackground(Color.LIGHT_GRAY);
+							txtNombre.setBackground(Color.LIGHT_GRAY);
+							formattedtxtTelefono.setBackground(Color.LIGHT_GRAY);
 						}
 						
 						else
 						{
-							Cliente modificado = null;
+							if(formattedCedula.getText().equalsIgnoreCase("   -       - "))
+							{
+								formattedCedula.setBackground(new Color(250, 60, 60));
+							}
 							
-							String cedula = txtCedula.getText();
-							String direccion = txtDireccion.getText();
-							String nombre = txtNombre.getText();
-							String telefono = formattedtxtTelefono.getText();
+							if(txtDireccion.getText().equalsIgnoreCase(""))
+							{
+								txtDireccion.setBackground(new Color(250, 60, 60));
+							}
 							
-							modificado = new Cliente(cedula, nombre, direccion, telefono);
-							int indice = CentralAltice.getInstance().getMisClientes().indexOf(miCliente);
-							CentralAltice.getInstance().getMisClientes().set(indice, modificado);
-							JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
-							ListarClientes.loadtable();
-							dispose();
+							if(txtNombre.getText().equalsIgnoreCase(""))
+							{
+								txtNombre.setBackground(new Color(250, 60, 60));
+							}
+							
+							if(formattedtxtTelefono.getText().equalsIgnoreCase("(   )-   -    "))
+							{
+								formattedtxtTelefono.setBackground(new Color(250, 60, 60));
+							}
+								
+							JOptionPane.showMessageDialog(null, "Debe llenar los campos del Cliente", "Error", JOptionPane.ERROR_MESSAGE);
 						}
-						
-						try {
-							CentralAltice.getInstance();
-							ArchivarCentral archivo = new ArchivarCentral();
-							archivo.guardar(CentralAltice.getInstance());
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+					
 						}
-					}
-				});
+				});		
 				btnRegistrar.setActionCommand("OK");
 				buttonPane.add(btnRegistrar);
 				getRootPane().setDefaultButton(btnRegistrar);
@@ -218,9 +259,36 @@ public class RegistroCliente extends JDialog {
 
 
 	private void clean() {
-		txtCedula.setText("");
+		formattedCedula.setText("");
 		txtDireccion.setText("");
 		txtNombre.setText("");
 		formattedtxtTelefono.setText("");
+	}
+	
+	private boolean confirmarCampos()
+	{
+		boolean bandera = true;
+		
+		if(formattedCedula.getText().equalsIgnoreCase("   -       - "))
+		{
+			bandera = false;
+		}
+		
+		if(txtDireccion.getText().equalsIgnoreCase(""))
+		{
+			bandera = false;
+		}
+		
+		if(txtNombre.getText().equalsIgnoreCase(""))
+		{
+			bandera = false;
+		}
+		
+		if(formattedtxtTelefono.getText().equalsIgnoreCase("(   )-   -    "))
+		{
+			bandera = false;
+		}
+		
+		return bandera;
 	}
 }

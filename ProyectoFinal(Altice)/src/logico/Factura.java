@@ -1,6 +1,7 @@
 package logico;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import planes.Plan;
@@ -15,14 +16,14 @@ public class Factura implements Serializable {
 	private Plan planSeleccionado;
 	private float montoTotal;
 	private boolean estado;
-	private Date fecha;
+	private Calendar fecha;
 	
 	public Factura(Cliente miCliente, Plan planSeleccionado) {
 		super();
 		this.miCliente = miCliente;
 		this.planSeleccionado = planSeleccionado;
 		this.estado = false; //False = adeudado, True = saldado
-		this.fecha = new Date();
+		this.fecha = Calendar.getInstance();
 	}
 
 	public Cliente getMiCliente() {
@@ -41,8 +42,12 @@ public class Factura implements Serializable {
 		return estado;
 	}
 	
-	public Date getFecha() {
+	public Calendar getFecha() {
 		return fecha;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	public void calcularMontoTotal()

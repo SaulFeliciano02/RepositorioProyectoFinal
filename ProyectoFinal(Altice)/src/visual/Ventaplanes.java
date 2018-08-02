@@ -40,16 +40,21 @@ import persistivos.ArchivarCentral;
 import planes.IlimitadoApp;
 import planes.IlimitadoFamiliaAmigo;
 import planes.IlimitadoPRO;
+import planes.InalámbricoHogar;
 import planes.InternetMovil;
 import planes.Plan;
 import planes.PlanIlimitado;
 import planes.PlanMovil;
 import planes.PlanXCapacidad;
+import planes.PlanesBasicos;
+import planes.PlanesFull;
+import planes.PlanesTriplePlay;
 import planes.ilimitadoPROUltraHD;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -95,7 +100,14 @@ public class Ventaplanes extends JDialog {
 		lblCedula.setBounds(10, 27, 123, 14);
 		panel.add(lblCedula);
 		
-		formattedTextCedula = new JFormattedTextField();
+		MaskFormatter mascaraCedula = null;
+		try {
+			mascaraCedula = new MaskFormatter("###-#######-#");
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		formattedTextCedula = new JFormattedTextField(mascaraCedula);
 		formattedTextCedula.setBounds(10, 45, 142, 27);
 		panel.add(formattedTextCedula);
 		
@@ -142,7 +154,7 @@ public class Ventaplanes extends JDialog {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(!formattedTextCedula.getText().equalsIgnoreCase(""))
+				if(!formattedTextCedula.getText().equalsIgnoreCase("   -       - "))
 				{
 					Cliente aux = CentralAltice.getInstance().buscarCliente(formattedTextCedula.getText());
 					formattedTextCedula.setBackground(Color.WHITE);
@@ -170,7 +182,7 @@ public class Ventaplanes extends JDialog {
 			
 		});
 		btnSearch.setIcon(new ImageIcon(Ventaplanes.class.getResource("/ImagenesVentanaP/LupaNegra21x21.png")));
-		btnSearch.setBounds(155, 44, 40, 27);
+		btnSearch.setBounds(155, 45, 40, 27);
 		panel.add(btnSearch);
 		
 		JPanel panelInformacion = new JPanel();
@@ -200,6 +212,7 @@ public class Ventaplanes extends JDialog {
 		treePlanes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+								
 				DefaultMutableTreeNode selected = (DefaultMutableTreeNode) treePlanes.getSelectionPath().getLastPathComponent();
 
 				if(selected.isLeaf() && (CentralAltice.getInstance().buscarPlan(selected.toString()) instanceof PlanMovil))
@@ -227,6 +240,26 @@ public class Ventaplanes extends JDialog {
 					btnAdquirir.setEnabled(true);
 				}
 				
+				if(selected.isLeaf() && (CentralAltice.getInstance().buscarPlan(selected.toString()) instanceof PlanesTriplePlay))
+				{
+					Plan aux = (CentralAltice.getInstance().buscarPlan(selected.toString()));
+					textPaneInformation.setText("Canales: " + ((PlanesTriplePlay) aux).getCanales()
+							+ "\n\nVelocidad: " + ((PlanesTriplePlay) aux).getVelocidad()
+							+ "\n\nMinutos: " + ((PlanesTriplePlay) aux).getMinutos()
+							+ "\n\nPrecio: " + aux.getPrecioPlan()); 
+					btnAdquirir.setEnabled(true);
+				}
+				
+				if(selected.isLeaf() && (CentralAltice.getInstance().buscarPlan(selected.toString()) instanceof InalámbricoHogar))
+				{
+					Plan aux = (CentralAltice.getInstance().buscarPlan(selected.toString()));
+					textPaneInformation.setText("Canales: " + ((InalámbricoHogar) aux).getCanales()
+							+ "\n\nVelocidad: " + ((InalámbricoHogar) aux).getVelocidad()
+							+ "\n\nMinutos: " + ((InalámbricoHogar) aux).getMinutos()
+							+ "\n\nPrecio: " + aux.getPrecioPlan()); 
+					btnAdquirir.setEnabled(true);
+				}
+				
 				if(!selected.isLeaf())
 				{
 					btnAdquirir.setEnabled(false);
@@ -245,7 +278,7 @@ public class Ventaplanes extends JDialog {
 				btnAdquirir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						if(!formattedTextCedula.getText().equalsIgnoreCase(""))
+						if(!formattedTextCedula.getText().equalsIgnoreCase("   -       - "))
 						{
 							Cliente aux = CentralAltice.getInstance().buscarCliente(formattedTextCedula.getText());
 							
@@ -309,23 +342,34 @@ public class Ventaplanes extends JDialog {
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Planes");
 		DefaultMutableTreeNode planesMoviles = new DefaultMutableTreeNode("Planes Móviles");
 		DefaultMutableTreeNode internetMovil = new DefaultMutableTreeNode("Internet Móvil");
+		DefaultMutableTreeNode planesHogar = new DefaultMutableTreeNode("Planes Hogar");
 		DefaultTreeModel model = new DefaultTreeModel(root);
 		model.setRoot(root);
 		
 		model.insertNodeInto(planesMoviles, root, root.getChildCount());
 		model.insertNodeInto(internetMovil, root, root.getChildCount());
+		model.insertNodeInto(planesHogar, root, root.getChildCount());
 		
 		DefaultMutableTreeNode ilimitadoPro = new DefaultMutableTreeNode("Ilimitado Pro");
 		DefaultMutableTreeNode ilimitadoF = new DefaultMutableTreeNode("Ilimitado Friends&Family");
 		DefaultMutableTreeNode ilimitadoApp = new DefaultMutableTreeNode("Ilimitado Apps");
 		DefaultMutableTreeNode ilimitadoInternet = new DefaultMutableTreeNode("Internet Ilimitado");
 		DefaultMutableTreeNode planesXCapacidad = new DefaultMutableTreeNode("Planes por Capacidad");
+		DefaultMutableTreeNode planesTriplePlay = new DefaultMutableTreeNode("Planes Triple Play");
+		DefaultMutableTreeNode inalambricoH = new DefaultMutableTreeNode("Inalámbrico Hogar");
+		DefaultMutableTreeNode planesB = new DefaultMutableTreeNode("Planes Básicos");
+		DefaultMutableTreeNode planesF = new DefaultMutableTreeNode("Planes Full");
 		
 		model.insertNodeInto(ilimitadoPro, planesMoviles, planesMoviles.getChildCount());
 		model.insertNodeInto(ilimitadoF, planesMoviles, planesMoviles.getChildCount());
 		model.insertNodeInto(ilimitadoApp, planesMoviles, planesMoviles.getChildCount());
 		model.insertNodeInto(ilimitadoInternet, internetMovil, internetMovil.getChildCount());
 		model.insertNodeInto(planesXCapacidad, internetMovil, internetMovil.getChildCount());
+		model.insertNodeInto(planesTriplePlay, planesHogar, planesHogar.getChildCount());
+		model.insertNodeInto(inalambricoH, planesHogar, planesHogar.getChildCount());
+		model.insertNodeInto(planesB, inalambricoH, inalambricoH.getChildCount());
+		model.insertNodeInto(planesF, inalambricoH, inalambricoH.getChildCount());
+		
 		
 		for (Plan aux : planesDis) {
 			if(aux instanceof IlimitadoPRO)
@@ -352,6 +396,21 @@ public class Ventaplanes extends JDialog {
 			{
 				DefaultMutableTreeNode nuevoPlan = new DefaultMutableTreeNode(aux.getClass().getSimpleName());
 				model.insertNodeInto(nuevoPlan, planesXCapacidad, planesXCapacidad.getChildCount());
+			}
+			if(aux instanceof PlanesBasicos)
+			{
+				DefaultMutableTreeNode nuevoPlan = new DefaultMutableTreeNode(aux.getClass().getSimpleName());
+				model.insertNodeInto(nuevoPlan, planesB, planesB.getChildCount());
+			}
+			if(aux instanceof PlanesFull)
+			{
+				DefaultMutableTreeNode nuevoPlan = new DefaultMutableTreeNode(aux.getClass().getSimpleName());
+				model.insertNodeInto(nuevoPlan, planesF, planesF.getChildCount());
+			}
+			if(aux instanceof PlanesTriplePlay)
+			{
+				DefaultMutableTreeNode nuevoPlan = new DefaultMutableTreeNode(aux.getClass().getSimpleName());
+				model.insertNodeInto(nuevoPlan, planesTriplePlay, planesTriplePlay.getChildCount());
 			}
 		}
 		

@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -24,6 +25,7 @@ import logico.Cliente;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ListasFactura extends JDialog {
 
@@ -32,7 +34,7 @@ public class ListasFactura extends JDialog {
 	private static DefaultTableModel modoTabla  = new DefaultTableModel();
 	private static CentralAltice listarCliente;
 	private static Object fila[];
-	private JTable table;
+	private static JTable table;
 
 
 	/**
@@ -46,14 +48,14 @@ public class ListasFactura extends JDialog {
 	public ListasFactura() {
 		setResizable(false);
 		setTitle("Lista de facturas");
-		setBounds(100, 100, 767, 408);
+		setBounds(100, 100, 767, 462);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 72, 737, 251);
+		scrollPane.setBounds(12, 72, 737, 306);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -137,6 +139,8 @@ public class ListasFactura extends JDialog {
 		contentPane.add(separator);
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.setForeground(Color.WHITE);
+		btnSalir.setBackground(Color.BLACK);
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -148,7 +152,7 @@ public class ListasFactura extends JDialog {
 		btnSalir.addMouseListener(new MouseAdapter() {
 			
 		});
-		btnSalir.setBounds(627, 336, 89, 23);
+		btnSalir.setBounds(630, 391, 89, 23);
 		contentPane.add(btnSalir);
 		
 		
@@ -157,7 +161,7 @@ public class ListasFactura extends JDialog {
 		
 	}
 
-	private void cargartabla() {
+	public static void cargartabla() {
 		
 	
 		modoTabla.setRowCount(0);
@@ -165,7 +169,7 @@ public class ListasFactura extends JDialog {
 		for (Cliente cli: CentralAltice.getInstance().getMisClientes())
 		{
 			for (int i = 0; i < cli.getMisFacturas().size(); i++) {
-				fila[0] = cli.getMisFacturas().get(i).getFecha();
+				fila[0] = cli.getMisFacturas().get(i).getFecha().get(Calendar.MONTH)+1 + "/" + cli.getMisFacturas().get(i).getFecha().get(Calendar.DAY_OF_MONTH) + "/" + cli.getMisFacturas().get(i).getFecha().get(Calendar.YEAR);
 				fila[1] = cli.getNombre();
 				fila[2] = cli.getCedula();
 				if(cli.getPlanesDisponibles()!=null)

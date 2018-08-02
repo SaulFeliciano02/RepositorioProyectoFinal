@@ -133,16 +133,17 @@ public class Cliente extends Persona implements Serializable{
 		
 	
 	
-	public void saldarmontopendiente(float pagar)
+	public void saldarmontopendiente()
 	{
 		
-		if(deudaTotal!=0 && pagar<=deudaTotal)
+		if(deudaTotal!=0)
 		{
-			deudaTotal-=pagar;
+			deudaTotal=0;
+										
+			setEstado(true);
 			
-			if(deudaTotal==0){
-				
-				setEstado(true);;
+			for (Factura factura : misFacturas) {
+				factura.setEstado(true);
 			}
 		}
 	}

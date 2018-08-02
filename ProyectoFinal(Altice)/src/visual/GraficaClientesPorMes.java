@@ -136,8 +136,8 @@ public class GraficaClientesPorMes extends JFrame {
 	        btnSearch.setBounds(833, 433, 40, 22);
 	        panel.add(btnSearch);
 	        
-	        JFreeChart chart=ChartFactory.createLineChart("Ingreso anual de Clientes",
-	                "Año","Registros",line_chart_dataset,PlotOrientation.VERTICAL,
+	        JFreeChart chart=ChartFactory.createLineChart("Ingreso anual de clientes",
+	                "","Registros",line_chart_dataset,PlotOrientation.VERTICAL,
 	                true,true,false);
 	        panel.setLayout(null);
 	        	        	      

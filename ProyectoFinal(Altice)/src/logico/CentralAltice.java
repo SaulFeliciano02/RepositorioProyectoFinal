@@ -23,9 +23,19 @@ import planes.IlimitadoAppFull;
 import planes.IlimitadoAppPlus;
 import planes.PaqueticoYApp;
 import planes.Plan;
+import planes.PlanBasico1MBPS;
+import planes.PlanBasico3MBPS;
+import planes.PlanBasico5MBPS;
+import planes.PlanFull1MBPS;
+import planes.PlanFull5MBPS;
 import planes.ProHD;
 import planes.ProStandard;
 import planes.ProUltraHD;
+import planes.TriplePlayBasico;
+import planes.TriplePlayMax;
+import planes.TriplePlayMaxPlus;
+import planes.TriplePlayPlus;
+import planes.TriplePlaySuperior;
 import planes.ilimitadoPROUltraHD;
 
 public class CentralAltice implements Serializable{
@@ -164,14 +174,14 @@ public class CentralAltice implements Serializable{
 		return aux;
 	}
 	
-	public void IngresarDinero(String cedula, float monto)
+	/*public void IngresarDinero(String cedula, float monto)
 	{
 		
 		Cliente aux = buscarCliente(cedula);
 		
 		aux.saldarmontopendiente(monto);
 		
-	}
+	}*/
 	
 	public void agregarFacturaDelMes()
 	{
@@ -237,6 +247,16 @@ public class CentralAltice implements Serializable{
 		Plan proHD = new ProHD();
 		Plan proStandard = new ProStandard();
 		Plan proUltraHD = new ProUltraHD();
+		Plan basico1 = new PlanBasico1MBPS();
+		Plan basico3 = new PlanBasico3MBPS();
+		Plan basico5 = new PlanBasico5MBPS();
+		Plan planFull1 = new PlanFull1MBPS();
+		Plan planFull5 = new PlanFull5MBPS();
+		Plan tpBasico = new TriplePlayBasico();
+		Plan tpMax = new TriplePlayMax();
+		Plan tpMaxPlus = new TriplePlayMaxPlus();
+		Plan tpPlus = new TriplePlayPlus();
+		Plan tpSuperior = new TriplePlaySuperior();
 		
 		todosLosPlanes.add(altice1);
 		todosLosPlanes.add(altice2);
@@ -256,6 +276,16 @@ public class CentralAltice implements Serializable{
 		todosLosPlanes.add(proHD);
 		todosLosPlanes.add(proStandard);
 		todosLosPlanes.add(proUltraHD);
+		todosLosPlanes.add(basico1);
+		todosLosPlanes.add(basico3);
+		todosLosPlanes.add(basico5);
+		todosLosPlanes.add(planFull1);
+		todosLosPlanes.add(planFull5);
+		todosLosPlanes.add(tpBasico);
+		todosLosPlanes.add(tpMax);
+		todosLosPlanes.add(tpMaxPlus);
+		todosLosPlanes.add(tpPlus);
+		todosLosPlanes.add(tpSuperior);
 		
 		for (Plan aux : todosLosPlanes) {
 			planesNoDisponibles.add(aux);

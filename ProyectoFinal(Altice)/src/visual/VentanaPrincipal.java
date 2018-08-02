@@ -28,6 +28,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.SystemColor;
 import javax.swing.JSeparator;
+import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -54,6 +55,7 @@ public class VentanaPrincipal extends JDialog {
 			VentanaPrincipal dialog = new VentanaPrincipal();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
 			try {
 				CentralAltice.getInstance().recuperarMiCentral();
 			} catch (ClassNotFoundException | IOException e1) {
@@ -67,8 +69,12 @@ public class VentanaPrincipal extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws UnsupportedLookAndFeelException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws ClassNotFoundException 
 	 */
-	public VentanaPrincipal() {
+	public VentanaPrincipal() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		addWindowStateListener(new WindowStateListener() {
 			public void windowStateChanged(WindowEvent e) {
 				
@@ -78,62 +84,12 @@ public class VentanaPrincipal extends JDialog {
 		setResizable(false);
 		setUndecorated(true);
 		setBounds(108, 108, 1108, 603);
+		UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
 		getContentPane().setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-		panelPlanes = new JPanel();
-		panelPlanes.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
-		panelPlanes.setBounds(0, 0, 270, 603);
-		contentPanel.add(panelPlanes);
-		panelPlanes.setLayout(null);
-		
-		JLabel lblPlanes_1 = new JLabel("Planes");
-		lblPlanes_1.setFont(new Font("Arial", Font.BOLD, 22));
-		lblPlanes_1.setBounds(92, 21, 78, 20);
-		panelPlanes.add(lblPlanes_1);
-		
-		JSeparator separator_3 = new JSeparator();
-		separator_3.setBounds(20, 232, 223, 2);
-		panelPlanes.add(separator_3);
-		
-		JSeparator separator_4 = new JSeparator();
-		separator_4.setBounds(20, 347, 223, 2);
-		panelPlanes.add(separator_4);
-		
-		JMenuItem mntmVentaDePlanes = new JMenuItem("Venta de planes");
-		mntmVentaDePlanes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				Ventaplanes mostrarVentanaP = new Ventaplanes();
-				mostrarVentanaP.setModal(true);
-				mostrarVentanaP.setLocationRelativeTo(null);
-				mostrarVentanaP.setVisible(true);
-				
-			}
-		});
-		mntmVentaDePlanes.setFont(new Font("Arial", Font.PLAIN, 16));
-		mntmVentaDePlanes.setBounds(35, 151, 158, 22);
-		panelPlanes.add(mntmVentaDePlanes);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Manejo de planes\r\n");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				ManejoDePlanes mostrarVentanaM = new ManejoDePlanes();
-				mostrarVentanaM.setModal(true);
-				mostrarVentanaM.setLocationRelativeTo(null);
-				mostrarVentanaM.setVisible(true);
-				
-				
-				
-			}
-		});
-		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 16));
-		mntmNewMenuItem.setBounds(35, 278, 158, 22);
-		panelPlanes.add(mntmNewMenuItem);
 		
 		panelAltice = new JPanel();
 		panelAltice.setBounds(0, 0, 270, 603);
@@ -182,6 +138,18 @@ public class VentanaPrincipal extends JDialog {
 		JSeparator separator_6 = new JSeparator();
 		separator_6.setBounds(12, 220, 246, 2);
 		panelConsulta.add(separator_6);
+		
+		JMenuItem mntmFacturaciEstimadaVs = new JMenuItem("Facturaci\u00F3 estimada VS real");
+		mntmFacturaciEstimadaVs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GraficaGanaciaEstVsGananciaReal gra = new GraficaGanaciaEstVsGananciaReal();
+				gra.setLocationRelativeTo(null);
+				gra.setVisible(true);
+			}
+		});
+		mntmFacturaciEstimadaVs.setFont(new Font("Arial", Font.PLAIN, 16));
+		mntmFacturaciEstimadaVs.setBounds(24, 285, 234, 24);
+		panelConsulta.add(mntmFacturaciEstimadaVs);
 		{
 			panelCliente = new JPanel();
 			panelCliente.setBounds(0, 0, 270, 603);
@@ -236,6 +204,138 @@ public class VentanaPrincipal extends JDialog {
 			mntmListarCliente.setBounds(34, 277, 129, 22);
 			panelCliente.add(mntmListarCliente);
 		}
+		
+		panelFactura = new JPanel();
+		panelFactura.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
+		panelFactura.setBounds(0, 0, 270, 603);
+		contentPanel.add(panelFactura);
+		panelFactura.setLayout(null);
+		
+		JLabel lblFactura_1 = new JLabel("Factura");
+		lblFactura_1.setFont(new Font("Arial", Font.BOLD, 22));
+		lblFactura_1.setBounds(87, 21, 93, 20);
+		panelFactura.add(lblFactura_1);
+		
+		JSeparator separator_5 = new JSeparator();
+		separator_5.setBounds(20, 232, 223, 2);
+		panelFactura.add(separator_5);
+		
+		JMenuItem mntmListarFactura = new JMenuItem("Listar factura");
+		mntmListarFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				ListasFactura VentanaListaFactura = new ListasFactura();
+				VentanaListaFactura.setModal(true);
+				VentanaListaFactura.setLocationRelativeTo(null);
+				VentanaListaFactura.setVisible(true);
+				
+				
+				
+			}
+		});
+		mntmListarFactura.setFont(new Font("Arial", Font.PLAIN, 16));
+		mntmListarFactura.setBounds(51, 157, 129, 22);
+		panelFactura.add(mntmListarFactura);
+		
+		JMenuItem mntmFacturacinDelMes = new JMenuItem("Facturaci\u00F3n del mes");
+		mntmFacturacinDelMes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int dialogResult = JOptionPane.showConfirmDialog (null, "¿Seguro de realizar dicha operación?", "¡Atención!", JOptionPane.YES_NO_OPTION);
+				
+				if(dialogResult == JOptionPane.YES_OPTION){
+					
+					CentralAltice.getInstance().agregarFacturaDelMes();
+					try {
+						ArchivarCentral archivo = new ArchivarCentral();
+						archivo.guardar(CentralAltice.getInstance());
+						JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}
+					
+			}
+		});
+		mntmFacturacinDelMes.setFont(new Font("Arial", Font.PLAIN, 16));
+		mntmFacturacinDelMes.setBounds(51, 278, 178, 22);
+		panelFactura.add(mntmFacturacinDelMes);
+		
+		JSeparator separator_7 = new JSeparator();
+		separator_7.setBounds(20, 345, 223, 2);
+		panelFactura.add(separator_7);
+		
+		JMenuItem mntmPagoDeFactura = new JMenuItem("Pago de factura");
+		mntmPagoDeFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EntrarClientePago pag = null;
+				try {
+					pag = new EntrarClientePago();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				pag.setModal(true);
+				pag.setLocationRelativeTo(null);
+				pag.setVisible(true);
+			}
+		});
+		mntmPagoDeFactura.setFont(new Font("Arial", Font.PLAIN, 16));
+		mntmPagoDeFactura.setBounds(51, 399, 151, 24);
+		panelFactura.add(mntmPagoDeFactura);
+		
+		panelPlanes = new JPanel();
+		panelPlanes.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
+		panelPlanes.setBounds(0, 0, 270, 603);
+		contentPanel.add(panelPlanes);
+		panelPlanes.setLayout(null);
+		
+		JLabel lblPlanes_1 = new JLabel("Planes");
+		lblPlanes_1.setFont(new Font("Arial", Font.BOLD, 22));
+		lblPlanes_1.setBounds(92, 21, 78, 20);
+		panelPlanes.add(lblPlanes_1);
+		
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setBounds(20, 232, 223, 2);
+		panelPlanes.add(separator_3);
+		
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setBounds(20, 347, 223, 2);
+		panelPlanes.add(separator_4);
+		
+		JMenuItem mntmVentaDePlanes = new JMenuItem("Venta de planes");
+		mntmVentaDePlanes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Ventaplanes mostrarVentanaP = new Ventaplanes();
+				mostrarVentanaP.setModal(true);
+				mostrarVentanaP.setLocationRelativeTo(null);
+				mostrarVentanaP.setVisible(true);
+				
+			}
+		});
+		mntmVentaDePlanes.setFont(new Font("Arial", Font.PLAIN, 16));
+		mntmVentaDePlanes.setBounds(35, 151, 158, 22);
+		panelPlanes.add(mntmVentaDePlanes);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Manejo de planes\r\n");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ManejoDePlanes mostrarVentanaM = new ManejoDePlanes();
+				mostrarVentanaM.setModal(true);
+				mostrarVentanaM.setLocationRelativeTo(null);
+				mostrarVentanaM.setVisible(true);
+				
+				
+				
+			}
+		});
+		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 16));
+		mntmNewMenuItem.setBounds(35, 278, 158, 22);
+		panelPlanes.add(mntmNewMenuItem);
 		
 		panelPersonalA = new JPanel();
 		panelPersonalA.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
@@ -293,59 +393,6 @@ public class VentanaPrincipal extends JDialog {
 		mntmListar.setFont(new Font("Arial", Font.PLAIN, 16));
 		mntmListar.setBounds(52, 279, 147, 22);
 		panelPersonalA.add(mntmListar);
-		
-		panelFactura = new JPanel();
-		panelFactura.setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
-		panelFactura.setBounds(0, 0, 270, 603);
-		contentPanel.add(panelFactura);
-		panelFactura.setLayout(null);
-		
-		JLabel lblFactura_1 = new JLabel("Factura");
-		lblFactura_1.setFont(new Font("Arial", Font.BOLD, 22));
-		lblFactura_1.setBounds(87, 21, 93, 20);
-		panelFactura.add(lblFactura_1);
-		
-		JSeparator separator_5 = new JSeparator();
-		separator_5.setBounds(20, 232, 223, 2);
-		panelFactura.add(separator_5);
-		
-		JMenuItem mntmListarFactura = new JMenuItem("Listar factura");
-		mntmListarFactura.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				ListasFactura VentanaListaFactura = new ListasFactura();
-				VentanaListaFactura.setModal(true);
-				VentanaListaFactura.setLocationRelativeTo(null);
-				VentanaListaFactura.setVisible(true);
-				
-				
-				
-			}
-		});
-		mntmListarFactura.setFont(new Font("Arial", Font.PLAIN, 16));
-		mntmListarFactura.setBounds(51, 157, 129, 22);
-		panelFactura.add(mntmListarFactura);
-		
-		JMenuItem mntmFacturacinDelMes = new JMenuItem("Facturaci\u00F3n del mes");
-		mntmFacturacinDelMes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				CentralAltice.getInstance().agregarFacturaDelMes();
-				try {
-					ArchivarCentral archivo = new ArchivarCentral();
-					archivo.guardar(CentralAltice.getInstance());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
-				
-			}
-		});
-		mntmFacturacinDelMes.setFont(new Font("Arial", Font.PLAIN, 16));
-		mntmFacturacinDelMes.setBounds(51, 278, 178, 22);
-		panelFactura.add(mntmFacturacinDelMes);
 		
 		panelMenu = new JPanel();
 		panelMenu.setBounds(269, 39, 839, 564);
@@ -544,6 +591,8 @@ public class VentanaPrincipal extends JDialog {
 		panelMenu.add(lblConsultas);
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.setBackground(Color.BLACK);
+		btnSalir.setForeground(Color.WHITE);
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
