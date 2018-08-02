@@ -44,24 +44,34 @@ public class LoginComercial extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
+		JLabel lblA = new JLabel("");
+		lblA.setIcon(new ImageIcon("C:\\Users\\Ironelis\\Desktop\\Universidad\\1er a\u00F1o\\1 A\u00D1O\\PROGRAMACI\u00D3N I\\Proyecto Final ProI\\Iconos ventana\\icons8-usuario-cedula.png"));
+		lblA.setBounds(109, 209, 31, 37);
+		contentPanel.add(lblA);
+		
+		JButton btnRegistrarse = new JButton("Registrarse");
+		btnRegistrarse.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnRegistrarse.setBounds(166, 392, 117, 23);
+		contentPanel.add(btnRegistrarse);
+		
 		txtContraseña = new JPasswordField();
-		txtContraseña.setBounds(140, 367, 162, 20);
+		txtContraseña.setBounds(140, 333, 162, 22);
 		contentPanel.add(txtContraseña);
-		cogerinformacion = txtContraseña.getEchoChar();
+		cogerinformacion = txtContraseña.getEchoChar(); 
 		
 		JLabel lblIcono = new JLabel("");
 		lblIcono.setIcon(new ImageIcon(LoginComercial.class.getResource("/ImagenesVentanaP/icons8-grupo-de-usuarios-hombre-y-mujer-90.png")));
-		lblIcono.setBounds(80, 90, 121, 99);
+		lblIcono.setBounds(98, 11, 121, 105);
 		contentPanel.add(lblIcono);
 		
 		JLabel lblCdula = new JLabel("C\u00E9dula");
 		lblCdula.setForeground(Color.BLACK);
 		lblCdula.setFont(new Font("Arial", Font.BOLD, 22));
-		lblCdula.setBounds(140, 252, 83, 26);
+		lblCdula.setBounds(137, 177, 83, 26);
 		contentPanel.add(lblCdula);
 		
 		txtCedula = new JTextField();
-		txtCedula.setBounds(140, 277, 162, 22);
+		txtCedula.setBounds(140, 214, 162, 22);
 		contentPanel.add(txtCedula);
 		txtCedula.setColumns(10);
 		
@@ -69,7 +79,7 @@ public class LoginComercial extends JDialog {
 		lblContrasea.setBackground(Color.WHITE);
 		lblContrasea.setFont(new Font("Arial", Font.BOLD, 22));
 		lblContrasea.setForeground(Color.BLACK);
-		lblContrasea.setBounds(140, 317, 126, 37);
+		lblContrasea.setBounds(140, 285, 126, 37);
 		contentPanel.add(lblContrasea);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -86,7 +96,9 @@ public class LoginComercial extends JDialog {
 		btnIniciarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//
+				//VentanaPrincipal ventanaP= new  VentanaPrincipal();
+				//ventanaP.setVisible(true);
+				//setLocationRelativeTo(null);
 				
 				
 				
@@ -99,17 +111,17 @@ public class LoginComercial extends JDialog {
 		JLabel lblComercial_1 = new JLabel("REGISTRO");
 		lblComercial_1.setForeground(Color.WHITE);
 		lblComercial_1.setFont(new Font("Futura Bk BT", Font.BOLD, 22));
-		lblComercial_1.setBounds(210, 137, 127, 28);
+		lblComercial_1.setBounds(211, 57, 127, 28);
 		contentPanel.add(lblComercial_1);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(LoginComercial.class.getResource("/ImagenesVentanaP/RegistrarPersonal1.png")));
-		label.setBounds(180, 108, 162, 81);
+		label.setBounds(190, 30, 162, 81);
 		contentPanel.add(label);
 		
 		JLabel iconCandado = new JLabel("");
 		iconCandado.setIcon(new ImageIcon(LoginComercial.class.getResource("/ImagenesVentanaP/icons8-privacidad-24.png")));
-		iconCandado.setBounds(111, 365, 46, 22);
+		iconCandado.setBounds(109, 331, 46, 22);
 		contentPanel.add(iconCandado);
 		
 		
@@ -138,22 +150,17 @@ public class LoginComercial extends JDialog {
 		});
 		chckboxVerContraseña.setBackground(SystemColor.menu);
 		chckboxVerContraseña.setFont(new Font("Arial", Font.PLAIN, 13));
-		chckboxVerContraseña.setBounds(177, 397, 126, 23);
+		chckboxVerContraseña.setBounds(156, 362, 126, 23);
 		contentPanel.add(chckboxVerContraseña);
 		
 		JLabel ImagenAlticeFondo = new JLabel("");
 		ImagenAlticeFondo.setIcon(new ImageIcon(LoginComercial.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
-		ImagenAlticeFondo.setBounds(-33, -1, 559, 567);
+		ImagenAlticeFondo.setBounds(-41, 0, 559, 567);
 		contentPanel.add(ImagenAlticeFondo);
 		
 		JLabel iconVisible = new JLabel("");
 		iconVisible.setIcon(new ImageIcon(LoginComercial.class.getResource("/ImagenesVentanaP/Visible png 3.png")));
-		iconVisible.setBounds(148, 401, 31, 14);
+		iconVisible.setBounds(119, 371, 31, 14);
 		contentPanel.add(iconVisible);
-		
-		JLabel lblComercial = new JLabel("Comercial");
-		lblComercial.setFont(new Font("Futura Md BT", Font.PLAIN, 13));
-		lblComercial.setBounds(180, 15, 75, 14);
-		contentPanel.add(lblComercial);
 	}
 }
