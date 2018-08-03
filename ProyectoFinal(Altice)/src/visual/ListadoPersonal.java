@@ -35,6 +35,8 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import java.awt.Toolkit;
+import java.awt.Color;
 
 public class ListadoPersonal extends JDialog {
 	
@@ -67,6 +69,7 @@ public class ListadoPersonal extends JDialog {
 	 * @return 
 	 */
 	public ListadoPersonal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListadoPersonal.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setResizable(false);
 		setModal(true);
 		setTitle("Listar Personal");
@@ -90,6 +93,7 @@ public class ListadoPersonal extends JDialog {
 					}
 					
 					comboBox = new JComboBox();
+					comboBox.setFont(new Font("Arial", Font.PLAIN, 13));
 					comboBox.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 						
@@ -214,7 +218,7 @@ public class ListadoPersonal extends JDialog {
 						
 						else {
 							
-							JOptionPane.showMessageDialog(null, "No se ha encontrado el personal", "Busqueda de personal", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Personal no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 						
 						}
 						
@@ -232,6 +236,8 @@ public class ListadoPersonal extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.setForeground(Color.WHITE);
+				btnModificar.setBackground(Color.BLACK);
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -249,19 +255,21 @@ public class ListadoPersonal extends JDialog {
 					}
 				});
 				btnModificar.setEnabled(false);
-				btnModificar.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnModificar.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);
 			}
 			{
 				JButton btnSalir = new JButton("Salir\r\n");
+				btnSalir.setForeground(Color.WHITE);
+				btnSalir.setBackground(Color.BLACK);
 				btnSalir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
-				btnSalir.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
 				btnSalir.setActionCommand("Cancel");
 				buttonPane.add(btnSalir);
 			}

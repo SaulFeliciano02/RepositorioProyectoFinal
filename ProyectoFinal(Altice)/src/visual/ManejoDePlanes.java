@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import logico.CentralAltice;
 import persistivos.ArchivarCentral;
 import planes.Plan;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 
 public class ManejoDePlanes extends JDialog {
@@ -54,6 +56,7 @@ public class ManejoDePlanes extends JDialog {
 	
 	
 	public ManejoDePlanes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ManejoDePlanes.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setFont(new Font("Futura Bk BT", Font.PLAIN, 12));
 		setTitle("Manejo de Planes Altice");
 		setResizable(false);
@@ -76,7 +79,7 @@ public class ManejoDePlanes extends JDialog {
 			panelPlanes.setLayout(null);
 			{
 				JLabel lblPlanes = new JLabel("Planes");
-				lblPlanes.setFont(new Font("Arial", Font.PLAIN, 25));
+				lblPlanes.setFont(new Font("Arial", Font.PLAIN, 23));
 				lblPlanes.setForeground(Color.WHITE);
 				lblPlanes.setBounds(12, 18, 91, 19);
 				panelPlanes.add(lblPlanes);
@@ -118,7 +121,7 @@ public class ManejoDePlanes extends JDialog {
 				{
 					JLabel lblDisponibles = new JLabel("Disponibles");
 					lblDisponibles.setForeground(Color.WHITE);
-					lblDisponibles.setFont(new Font("Arial", Font.PLAIN, 25));
+					lblDisponibles.setFont(new Font("Arial", Font.PLAIN, 23));
 					lblDisponibles.setBounds(12, 13, 141, 29);
 					panelDisponibles.add(lblDisponibles);
 				}
@@ -148,7 +151,8 @@ public class ManejoDePlanes extends JDialog {
 				}
 			}
 			
-			btnDisponible = new JButton(">");
+			btnDisponible = new JButton("");
+			btnDisponible.setIcon(new ImageIcon(ManejoDePlanes.class.getResource("/ImagenesVentanaP/disponibleAi.png")));
 			btnDisponible.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -171,10 +175,11 @@ public class ManejoDePlanes extends JDialog {
 			btnDisponible.setEnabled(false);
 			btnDisponible.setForeground(Color.WHITE);
 			btnDisponible.setBackground(Color.BLACK);
-			btnDisponible.setBounds(380, 175, 76, 36);
+			btnDisponible.setBounds(379, 215, 76, 36);
 			panel.add(btnDisponible);
 			
-			btnNoDisponible = new JButton("<");
+			btnNoDisponible = new JButton("");
+			btnNoDisponible.setIcon(new ImageIcon(ManejoDePlanes.class.getResource("/ImagenesVentanaP/rechazado.png")));
 			btnNoDisponible.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -197,7 +202,7 @@ public class ManejoDePlanes extends JDialog {
 			btnNoDisponible.setEnabled(false);
 			btnNoDisponible.setForeground(Color.WHITE);
 			btnNoDisponible.setBackground(Color.BLACK);
-			btnNoDisponible.setBounds(380, 335, 76, 36);
+			btnNoDisponible.setBounds(381, 283, 76, 36);
 			panel.add(btnNoDisponible);
 		}
 		{
@@ -228,10 +233,10 @@ public class ManejoDePlanes extends JDialog {
 					});
 					btnGuardar.setForeground(Color.WHITE);
 					btnGuardar.setBackground(Color.BLACK);
-					btnGuardar.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
+					btnGuardar.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 					buttonPane.add(btnGuardar);
 				}
-				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
+				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				btnSalir.setForeground(Color.WHITE);
 				btnSalir.setBackground(Color.BLACK);
 				btnSalir.setActionCommand("Cancel");

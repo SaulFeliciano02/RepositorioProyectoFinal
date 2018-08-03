@@ -4,7 +4,7 @@ public abstract class PersonalAuto extends Persona {
 	
 	protected double sueldo=0;
 	
-	protected String contraseña;
+	protected char[] contraseña;
 
 	/**
 	 * @param cedula
@@ -35,22 +35,21 @@ public abstract class PersonalAuto extends Persona {
 	 */
 	
 	public PersonalAuto(String cedula, String nombre, String direccion, String telefono,
-			 String contraseña, float sueldo) {
+			 char[] contraseñaConfirmar, float sueldo) {
 		super(cedula, nombre, direccion, telefono);
 		
 		this.sueldo = 0;
 	}
 
-	
 	public void setSueldo(double sueldo) {
 		this.sueldo = sueldo;
 	}
 
-	public void setContraseña(String contraseña) {
+	public void setContraseña(char[] contraseña) {
 		this.contraseña = contraseña;
 	}
 
-	public String getContraseña() {
+	public char[] getContraseña() {
 		return contraseña;
 	}
 

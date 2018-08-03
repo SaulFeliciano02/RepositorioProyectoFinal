@@ -24,6 +24,7 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class EntrarClientePago extends JDialog {
 
@@ -40,6 +41,7 @@ public class EntrarClientePago extends JDialog {
 	 * @throws ParseException 
 	 */
 	public EntrarClientePago() throws ParseException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(EntrarClientePago.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setTitle("Buscar cliente");
 		setModal(true);
 		setResizable(false);
@@ -56,7 +58,7 @@ public class EntrarClientePago extends JDialog {
 		
 		MaskFormatter mask = new MaskFormatter("###-#######-#");
 		JFormattedTextField formattedCedula = new JFormattedTextField(mask);
-		formattedCedula.setBounds(71, 83, 192, 22);
+		formattedCedula.setBounds(71, 72, 192, 22);
 		contentPanel.add(formattedCedula);
 		{
 			JPanel buttonPane = new JPanel();
@@ -67,7 +69,7 @@ public class EntrarClientePago extends JDialog {
 				JButton btnBuscar = new JButton("Buscar");
 				btnBuscar.setForeground(Color.WHITE);
 				btnBuscar.setBackground(Color.BLACK);
-				btnBuscar.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
+				btnBuscar.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				btnBuscar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String cedula = formattedCedula.getText();						
@@ -108,7 +110,7 @@ public class EntrarClientePago extends JDialog {
 				JButton btnSalir = new JButton("Salir");
 				btnSalir.setForeground(Color.WHITE);
 				btnSalir.setBackground(Color.BLACK);
-				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
+				btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 				btnSalir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

@@ -307,4 +307,42 @@ public class CentralAltice implements Serializable{
 		return todosLosPlanes;
 	}
 	
+	public PersonalAuto iniciarSeccion(char[] contraseña, String cedula)
+	{
+		PersonalAuto myUser = null;
+		int i = 0;
+		boolean encontrado = false;
+		
+		while (i<getMiPersonal().size() && !encontrado) {
+			
+			if(getMiPersonal().get(i).getCedula().equalsIgnoreCase(cedula) && compararContraseñas(getMiPersonal().get(i).getContraseña(), contraseña))
+			{
+				myUser = getMiPersonal().get(i);
+				encontrado = true;
+			}
+			
+			i++;
+		}				
+		
+		return myUser;
+	}
+	
+	public boolean compararContraseñas(char[] miContraseña, char[] contraseñaEscrita)
+	{
+		boolean bandera = true;
+		int i = 0;
+		
+		while (i<contraseñaEscrita.length && bandera) {
+			
+			if(contraseñaEscrita[i] != miContraseña[i])
+			{
+				bandera = false;
+			}
+			
+			i++;
+		}
+		
+		return bandera;
+	}
+	
 }

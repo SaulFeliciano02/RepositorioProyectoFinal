@@ -33,6 +33,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 
 public class CreateFactura extends JDialog {
@@ -63,6 +65,7 @@ public class CreateFactura extends JDialog {
 	 * @throws ClassNotFoundException 
 	 */
 	public CreateFactura(Cliente miCliente) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, ParseException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CreateFactura.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setResizable(false);
 		this.miCliente = miCliente;
 		UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
@@ -110,7 +113,7 @@ public class CreateFactura extends JDialog {
 				panel.add(buttonPane);
 				{
 					JButton btnPagar = new JButton("Pagar");										
-					btnPagar.setBounds(307, 5, 95, 29);
+					btnPagar.setBounds(336, 0, 95, 29);
 					btnPagar.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 					btnPagar.setForeground(Color.WHITE);
 					btnPagar.setBackground(Color.BLACK);
@@ -141,7 +144,7 @@ public class CreateFactura extends JDialog {
 							dispose();
 						}
 					});
-					btnSalir.setBounds(412, 5, 77, 29);
+					btnSalir.setBounds(443, 0, 77, 29);
 					btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
 					btnSalir.setForeground(Color.WHITE);
 					btnSalir.setBackground(Color.BLACK);
@@ -317,6 +320,11 @@ public class CreateFactura extends JDialog {
 			JSeparator separator_2 = new JSeparator();
 			separator_2.setBounds(332, 193, 195, 2);
 			panel.add(separator_2);
+			
+			JLabel lblLogo = new JLabel("");
+			lblLogo.setIcon(new ImageIcon(CreateFactura.class.getResource("/ImagenesVentanaP/AlticeFactura mas grande1.png")));
+			lblLogo.setBounds(428, 0, 357, 408);
+			panel.add(lblLogo);
 			
 		}
 	}

@@ -26,6 +26,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class ListasFactura extends JDialog {
 
@@ -46,16 +47,17 @@ public class ListasFactura extends JDialog {
 	 * Create the frame.
 	 */
 	public ListasFactura() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListasFactura.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setResizable(false);
 		setTitle("Lista de facturas");
-		setBounds(100, 100, 767, 462);
+		setBounds(100, 100, 767, 498);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 72, 737, 306);
+		scrollPane.setBounds(12, 91, 737, 323);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -80,12 +82,12 @@ public class ListasFactura extends JDialog {
 		scrollPane.setViewportView(table);
 		
 		JLabel lblIntroducirCedula = new JLabel("Introducir c\u00E9dula");
-		lblIntroducirCedula.setFont(new Font("Arial", Font.BOLD, 11));
-		lblIntroducirCedula.setBounds(409, 11, 104, 14);
+		lblIntroducirCedula.setFont(new Font("Arial", Font.BOLD, 14));
+		lblIntroducirCedula.setBounds(622, 32, 139, 14);
 		contentPane.add(lblIntroducirCedula);
 		
 		txtCedula = new JTextField();
-		txtCedula.setBounds(380, 39, 168, 20);
+		txtCedula.setBounds(547, 56, 154, 22);
 		contentPane.add(txtCedula);
 		txtCedula.setColumns(10);
 		
@@ -131,11 +133,11 @@ public class ListasFactura extends JDialog {
 			}
 		});
 		btnSearch.setIcon(new ImageIcon(ListasFactura.class.getResource("/ImagenesVentanaP/LupaNegra21x21.png")));
-		btnSearch.setBounds(558, 38, 41, 23);
+		btnSearch.setBounds(708, 55, 41, 23);
 		contentPane.add(btnSearch);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(316, 30, 283, 2);
+		separator.setBounds(547, 50, 202, 3);
 		contentPane.add(separator);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -152,7 +154,7 @@ public class ListasFactura extends JDialog {
 		btnSalir.addMouseListener(new MouseAdapter() {
 			
 		});
-		btnSalir.setBounds(630, 391, 89, 23);
+		btnSalir.setBounds(660, 427, 89, 23);
 		contentPane.add(btnSalir);
 		
 		

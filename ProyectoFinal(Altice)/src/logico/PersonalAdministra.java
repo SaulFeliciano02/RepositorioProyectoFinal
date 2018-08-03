@@ -14,11 +14,11 @@ public class PersonalAdministra extends PersonalAuto {
 	 * @param hrstrabajadas
 	 */
 	
-	public PersonalAdministra(String cedula, String nombre, String direccion, String telefono,  String contraseña, float sueldo) {
-		super(cedula, nombre, direccion, telefono,  contraseña, 0);
+	public PersonalAdministra(String cedula, String nombre, String direccion, String telefono,  char[] contraseñaConfirmar, float sueldo) {
+		super(cedula, nombre, direccion, telefono,  contraseñaConfirmar, 0);
 		
 		this.sueldo = sueldo;
-		this.contraseña = contraseña;
+		this.contraseña = contraseñaConfirmar;
 	}
 	
 	

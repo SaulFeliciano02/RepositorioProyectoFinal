@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JFormattedTextField;
+import java.awt.Toolkit;
 
 public class RegistroCliente extends JDialog {
 
@@ -44,11 +45,12 @@ public class RegistroCliente extends JDialog {
 	 * @throws ParseException 
 	 */
 	public RegistroCliente(String title, Cliente miCliente) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroCliente.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setResizable(false);
 		setModal(true);
 		this.miCliente = miCliente;
 		setTitle(title);
-		setBounds(100, 100, 673, 402);
+		setBounds(100, 100, 654, 364);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -62,12 +64,7 @@ public class RegistroCliente extends JDialog {
 			JLabel lblCdula = new JLabel("C\u00E9dula:");
 			lblCdula.setFont(new Font("Arial", Font.PLAIN, 18));
 			lblCdula.setBounds(74, 55, 80, 22);
-			panel.add(lblCdula);
-			if(miCliente!=null)
-			{
-				formattedCedula.setText(miCliente.getCedula());
-				formattedCedula.setEnabled(false);
-			}
+			panel.add(lblCdula);			
 			
 			JLabel lblNombre = new JLabel("Nombre:");
 			lblNombre.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -87,11 +84,7 @@ public class RegistroCliente extends JDialog {
 			JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
 			lblTelfono.setFont(new Font("Arial", Font.PLAIN, 18));
 			lblTelfono.setBounds(74, 188, 90, 16);
-			panel.add(lblTelfono);
-			if(miCliente!=null)
-			{
-				formattedtxtTelefono.setText(miCliente.getTelefono());
-			}
+			panel.add(lblTelfono);			
 			
 			JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
 			lblDireccin.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -103,6 +96,10 @@ public class RegistroCliente extends JDialog {
 			txtDireccion.setBounds(393, 217, 166, 22);
 			panel.add(txtDireccion);
 			txtDireccion.setColumns(10);
+			if(miCliente!=null)
+			{
+				txtDireccion.setText(miCliente.getDireccion());
+			}
 			
 			MaskFormatter mascara = null;
 			try {
@@ -115,6 +112,10 @@ public class RegistroCliente extends JDialog {
 			formattedtxtTelefono.setBackground(Color.LIGHT_GRAY);
 			formattedtxtTelefono.setBounds(74, 217, 166, 22);
 			panel.add(formattedtxtTelefono);
+			if(miCliente!=null)
+			{
+				formattedtxtTelefono.setText(miCliente.getTelefono());
+			}
 			
 			MaskFormatter maskcedula = null;
 			try {
@@ -129,8 +130,10 @@ public class RegistroCliente extends JDialog {
 			panel.add(formattedCedula);
 			if(miCliente!=null)
 			{
-				txtDireccion.setText(miCliente.getDireccion());
+				formattedCedula.setText(miCliente.getCedula());
+				formattedCedula.setEnabled(false);
 			}
+			
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -169,11 +172,13 @@ public class RegistroCliente extends JDialog {
 									nuevo = new Cliente(cedula, nombre, direccion, telefono);
 									CentralAltice.getInstance().agregarCliente(nuevo);
 									JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+									formattedCedula.setBackground(Color.LIGHT_GRAY);
 									clean();
 								}
 								else
 								{
-									JOptionPane.showMessageDialog(null, "La cédula introducida ya está registrada", "Error", JOptionPane.ERROR_MESSAGE);
+									formattedCedula.setBackground(new Color(250, 60, 60));
+									JOptionPane.showMessageDialog(null, "La cédula introducida ya está registrada", "Error", JOptionPane.ERROR_MESSAGE);								
 								}
 								
 							}
@@ -203,15 +208,15 @@ public class RegistroCliente extends JDialog {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-							
-							formattedCedula.setBackground(Color.LIGHT_GRAY);
+														
 							txtDireccion.setBackground(Color.LIGHT_GRAY);
 							txtNombre.setBackground(Color.LIGHT_GRAY);
 							formattedtxtTelefono.setBackground(Color.LIGHT_GRAY);
 						}
 						
 						else
-						{
+						{							
+							
 							if(formattedCedula.getText().equalsIgnoreCase("   -       - "))
 							{
 								formattedCedula.setBackground(new Color(250, 60, 60));

@@ -13,6 +13,7 @@ import logico.CentralAltice;
 import logico.Comercial;
 import logico.PersonalAdministra;
 import logico.PersonalAuto;
+import persistivos.ArchivarCentral;
 
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Arrays;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -206,7 +208,7 @@ public class RegistrarPersonal extends JDialog {
 			rdbtnAministrativo.setFont(new Font("Arial", Font.PLAIN, 13));
 			
 			rdbtnComercial_1 = new JRadioButton("Comercial");
-			rdbtnComercial_1.setBounds(127, 7, 83, 23);
+			rdbtnComercial_1.setBounds(127, 7, 95, 23);
 			panelRdbtn.add(rdbtnComercial_1);
 			rdbtnComercial_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -375,8 +377,8 @@ public class RegistrarPersonal extends JDialog {
 						String telefono = formattedTelefono.getText();
 						String nombre = txtNombreyApellido.getText();
 						String direccion = txtDireccion.getText();
-						String contraseña = txtContraseña.getPassword().toString();
-						String contraseñaConfirmar  = txtConfirmarC.getPassword().toString();
+						char[] contraseña = txtContraseña.getPassword();
+						char[] contraseñaConfirmar  = txtConfirmarC.getPassword();
 						
 						
 						
@@ -403,9 +405,18 @@ public class RegistrarPersonal extends JDialog {
 															
 							}
 							
-							JOptionPane.showMessageDialog(null, "¡Personal registrado!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
 							
-							grupoBotones.clearSelection();
+							grupoBotones.clearSelection();	
+							
+							try {
+								CentralAltice.getInstance();
+								ArchivarCentral archivo = new ArchivarCentral();
+								archivo.guardar(CentralAltice.getInstance());
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 
 							clean();
 						
@@ -429,7 +440,7 @@ public class RegistrarPersonal extends JDialog {
 								
 								formattedCedula.setBackground(new Color(250, 60, 60));
 								JOptionPane.showMessageDialog(null, "La cédula ya está registrada", "Error", JOptionPane.ERROR_MESSAGE);
-								formattedCedula.setText("");}}
+								}}
 							
 											
 						}
@@ -457,6 +468,15 @@ public class RegistrarPersonal extends JDialog {
 															
 							}	
 							
+							try {
+								CentralAltice.getInstance();
+								ArchivarCentral archivo = new ArchivarCentral();
+								archivo.guardar(CentralAltice.getInstance());
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
 						}
 						
 						else {
@@ -473,13 +493,12 @@ public class RegistrarPersonal extends JDialog {
 								
 							}
 								
-							}
+						}
 						
 						
 					}
-
-						
-					}
+	
+				}
 						
 					
 				

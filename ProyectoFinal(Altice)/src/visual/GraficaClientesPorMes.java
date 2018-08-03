@@ -34,6 +34,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import java.awt.Font;
 
 public class GraficaClientesPorMes extends JFrame {
 
@@ -54,6 +56,7 @@ public class GraficaClientesPorMes extends JFrame {
 	 * @throws IOException 
 	 */
 	public GraficaClientesPorMes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GraficaClientesPorMes.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setTitle("Clientes registrados en el a\u00F1o");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,6 +76,7 @@ public class GraficaClientesPorMes extends JFrame {
 		 	
 	        
 	        cbxVisualizar = new JComboBox();
+	        cbxVisualizar.setFont(new Font("Arial", Font.PLAIN, 13));
 	        cbxVisualizar.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
 	        		if(cbxVisualizar.getSelectedIndex()==0)
@@ -88,13 +92,13 @@ public class GraficaClientesPorMes extends JFrame {
 	        cbxVisualizar.setForeground(Color.WHITE);
 	        cbxVisualizar.setBackground(new Color(64, 64, 64));
 	        cbxVisualizar.setModel(new DefaultComboBoxModel(new String[] {"Anual", "Seleccionar a\u00F1o"}));
-	        cbxVisualizar.setBounds(585, 433, 130, 22);
+	        cbxVisualizar.setBounds(607, 433, 130, 22);
 	        panel.add(cbxVisualizar);
 	        
 	        spnAnio = new JSpinner();
 	        spnAnio.setEnabled(false);
 	        spnAnio.setModel(new SpinnerNumberModel(2018, 2018, 2022, 1));	     
-	        spnAnio.setBounds(727, 433, 94, 22);
+	        spnAnio.setBounds(749, 433, 94, 22);
 	        JSpinner.NumberEditor de_spnAnio = new JSpinner.NumberEditor(spnAnio, "####");
 	        spnAnio.setEditor(de_spnAnio);
 	        panel.add(spnAnio);
@@ -133,7 +137,7 @@ public class GraficaClientesPorMes extends JFrame {
 	        	}
 	        });
 	        btnSearch.setIcon(new ImageIcon(GraficaClientesPorMes.class.getResource("/ImagenesVentanaP/LupaNegra21x21.png")));
-	        btnSearch.setBounds(833, 433, 40, 22);
+	        btnSearch.setBounds(855, 433, 40, 22);
 	        panel.add(btnSearch);
 	        
 	        JFreeChart chart=ChartFactory.createLineChart("Ingreso anual de clientes",

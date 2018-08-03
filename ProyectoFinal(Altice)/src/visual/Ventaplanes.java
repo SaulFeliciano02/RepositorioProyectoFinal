@@ -57,6 +57,7 @@ import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.awt.Toolkit;
 
 public class Ventaplanes extends JDialog {
 
@@ -80,6 +81,7 @@ public class Ventaplanes extends JDialog {
 	 * Create the dialog.
 	 */
 	public Ventaplanes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ventaplanes.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setTitle("Venta de Planes Altice");
 		setResizable(false);
 		setModal(true);
@@ -303,7 +305,7 @@ public class Ventaplanes extends JDialog {
 						else
 						{
 							formattedTextCedula.setBackground(new Color(250, 60, 60));
-							JOptionPane.showMessageDialog(null, "Debe llenar los campos del Cliente", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Debe llenar los campos del cliente", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 						
 					}

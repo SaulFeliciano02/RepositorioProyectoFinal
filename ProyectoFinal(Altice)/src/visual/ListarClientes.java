@@ -24,23 +24,26 @@ import javax.swing.table.DefaultTableModel;
 
 import logico.CentralAltice;
 import logico.Cliente;
+import logico.PersonalAuto;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.ListSelectionModel;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 
 public class ListarClientes extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private static JTable table;
-	private static JButton btnModificar;
 	private static DefaultTableModel model;
 	private static Object fila[];
 	private String cedula;
 	private JTextField txtCedula;
+	private JButton btnModificar;
 
 	/**
 	 * Launch the application.
@@ -50,11 +53,12 @@ public class ListarClientes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarClientes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarClientes.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setFont(new Font("Futura Bk BT", Font.PLAIN, 12));
 		setTitle("Listado de Clientes");
 		setResizable(false);
 		setModal(true);
-		setBounds(100, 100, 700, 537);
+		setBounds(100, 100, 767, 498);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.LIGHT_GRAY);
 		contentPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -63,13 +67,13 @@ public class ListarClientes extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			panel.setBorder(null);
 			panel.setBackground(new Color(240, 240, 240));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(2, 81, 688, 378);
+				scrollPane.setBounds(12, 91, 737, 311);
 				scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 				panel.add(scrollPane);
 				{
@@ -97,7 +101,7 @@ public class ListarClientes extends JDialog {
 			}
 			
 			txtCedula = new JTextField();
-			txtCedula.setBounds(333, 46, 218, 22);
+			txtCedula.setBounds(543, 54, 154, 22);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);
 			
@@ -124,58 +128,53 @@ public class ListarClientes extends JDialog {
 					}
 				}
 			});
-			btnSearch.setBounds(558, 45, 40, 25);
+			btnSearch.setBounds(709, 54, 40, 25);
 			panel.add(btnSearch);
 			
-			JLabel lblCdula = new JLabel("C\u00E9dula:");
+			JLabel lblCdula = new JLabel("C\u00E9dula");
 			lblCdula.setFont(new Font("Arial", Font.BOLD, 14));
-			lblCdula.setBounds(507, 17, 73, 16);
+			lblCdula.setBounds(700, 29, 73, 16);
 			panel.add(lblCdula);
 			
 			JSeparator separator = new JSeparator();
-			separator.setBounds(333, 37, 265, 2);
+			separator.setBounds(543, 49, 206, 2);
 			panel.add(separator);
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(new Color(240, 240, 240));
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				btnModificar = new JButton("Modificar");
-				btnModificar.setEnabled(false);
-				btnModificar.setForeground(Color.WHITE);
-				btnModificar.setBackground(Color.BLACK);
-				btnModificar.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
-				btnModificar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if (!cedula.equalsIgnoreCase(""))
-						{
-							Cliente aux = CentralAltice.getInstance().buscarCliente(cedula);
-							RegistroCliente reg = new RegistroCliente("Modificar Cliente", aux);
-							reg.setModal(true);
-							reg.setVisible(true);
-							btnModificar.setEnabled(false);
-						}
+			
+			JButton btnSalir = new JButton("Salir");
+			btnSalir.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			btnSalir.setForeground(Color.WHITE);
+			btnSalir.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
+			btnSalir.setBackground(Color.BLACK);
+			btnSalir.setActionCommand("Cancel");
+			btnSalir.setBounds(680, 415, 65, 31);
+			panel.add(btnSalir);
+			
+			btnModificar = new JButton("Modificar");
+			btnModificar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					if(!cedula.equalsIgnoreCase("")) {
+						
+						Cliente modifica = CentralAltice.getInstance().buscarCliente(cedula);
+						RegistroCliente listado = new RegistroCliente("Modificar", modifica);
+						listado.setLocationRelativeTo(null);
+						listado.setVisible(true);
+						listado.setModal(true);
+						btnModificar.setEnabled(false);
 					}
-				});
-				btnModificar.setActionCommand("OK");
-				buttonPane.add(btnModificar);
-				getRootPane().setDefaultButton(btnModificar);
-			}
-			{
-				JButton cancelButton = new JButton("Salir");
-				cancelButton.setBackground(Color.BLACK);
-				cancelButton.setForeground(Color.WHITE);
-				cancelButton.setFont(new Font("Futura Bk BT", Font.PLAIN, 16));
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+				}
+			});
+			btnModificar.setForeground(Color.WHITE);
+			btnModificar.setFont(new Font("Futura Bk BT", Font.PLAIN, 18));
+			btnModificar.setEnabled(false);
+			btnModificar.setBackground(Color.BLACK);
+			btnModificar.setActionCommand("OK");
+			btnModificar.setBounds(570, 415, 105, 31);
+			panel.add(btnModificar);
 		}
 	}
 

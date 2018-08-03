@@ -19,6 +19,7 @@ import logico.Cliente;
 import logico.Factura;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class GraficaGanaciaEstVsGananciaReal extends JFrame {
 
@@ -34,6 +35,7 @@ public class GraficaGanaciaEstVsGananciaReal extends JFrame {
 	 * Create the frame.
 	 */
 	public GraficaGanaciaEstVsGananciaReal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GraficaGanaciaEstVsGananciaReal.class.getResource("/ImagenesVentanaP/A de altice png1.png")));
 		setTitle("Ganancia estimada por mes");
 		setBackground(Color.WHITE);
 		setResizable(false);
